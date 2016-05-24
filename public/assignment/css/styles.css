@@ -1,4 +1,6 @@
-input.form-control, textarea.form-control, select.form-control {
+input.form-control,
+textarea.form-control,
+select.form-control {
     margin-bottom: 5px;
 }
 
@@ -6,11 +8,6 @@ body {
     padding-top: 60px;
     padding-bottom: 60px;
 }
-
-/*span.glyphicon {
-    margin-left: 15px;
-    margin-right: 15px;
-}*/
 
 p.navbar-text.pull-right {
     margin-right: 15px;
