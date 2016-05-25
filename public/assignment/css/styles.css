@@ -26,3 +26,7 @@ p.navbar-text.pull-left {
     border-bottom-left-radius: 8px;
     opacity: 0.8;
 }
+
+.md-scroll-mask {
+    position: initial;
+}
