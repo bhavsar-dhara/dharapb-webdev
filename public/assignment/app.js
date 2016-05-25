@@ -4,5 +4,5 @@
 
 // IIFE (immediately invoked function expression)
 (function () {
-    angular.module("WebAppMaker", []);    
+    angular.module("WebAppMaker", ["ngRoute"]);
 })();
