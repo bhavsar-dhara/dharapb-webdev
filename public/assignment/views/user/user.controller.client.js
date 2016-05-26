@@ -4,7 +4,8 @@
 (function () {
     angular
         .module("WebAppMaker")
-        .controller("LoginController", LoginController);
+        .controller("LoginController", LoginController)
+        .controller("ProfileController", ProfileController);
 
     var users = [
         {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
@@ -13,19 +14,30 @@
         {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
     ];
 
-    function LoginController() {
+    function ProfileController($routeParams) {
+        var vm = this;
+
+        // var uid = $routeParams['uid'];
+        var uid = $routeParams.uid;
+
+        for (var i in users) {
+            if(users[i]._id === uid) {
+                vm.user = users[i];
+            }
+        }
+    }
+
+    function LoginController($location) {
         var vm = this; // viewModel = vm
 
         vm.login = function(username, password) {
-            for(var i in users) {
+            for (var i in users) {
                 if(users[i].username === username && users[i].password === password) {
-                    console.log("YAY");
+                    $location.url("/profile/"+users[i]._id);
                 } else {
-                    console.log("NO User");
                     vm.error = "User not found.";
                 }
             }
-            console.log(username);
         }
     }
 })();

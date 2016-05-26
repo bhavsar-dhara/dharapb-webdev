@@ -16,6 +16,9 @@
     </div>
 </nav>
 <div class="container">
+
+    <!--{{model.user}}-->
+
     <div class="alert alert-success alert-dismissible" role="alert">
         <button type="button"
                 class="close"
@@ -35,7 +38,8 @@
             <label for="username">
                 Username
             </label>
-            <input type="text"
+            <input ng-model="model.user.username"
+                   type="text"
                    class="form-control"
                    id="username"
                    placeholder="username">
@@ -44,7 +48,8 @@
             <label for="email">
                 Email
             </label>
-            <input type="email"
+            <input ng-model="model.user.email"
+                   type="email"
                    class="form-control"
                    id="email"
                    placeholder="alice@wonderland.com">
@@ -53,7 +58,8 @@
             <label for="firstName">
                 First Name
             </label>
-            <input type="text"
+            <input ng-model="model.user.firstName"
+                   type="text"
                    class="form-control"
                    id="firstName"
                    placeholder="Alice">
@@ -62,7 +68,8 @@
             <label for="lastName">
                 Last Name
             </label>
-            <input type="text"
+            <input ng-model="model.user.lastName"
+                   type="text"
                    class="form-control"
                    id="lastName"
                    placeholder="Wonderland">
