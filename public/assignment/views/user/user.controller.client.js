@@ -43,6 +43,7 @@
             for (var i in users) {
                 if(users[i].username === username && users[i].password === password) {
                     $location.url("/user/"+users[i]._id);
+                    break;
                 } else {
                     vm.error = "User not found.";
                 }
