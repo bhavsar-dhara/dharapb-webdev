@@ -15,10 +15,41 @@
     
     function UserService() {
         var api = {
-            findUserByUserNameAndPassword: findUserByUserNameAndPassword
+            createUser: createUser,
+            findUserByUserNameAndPassword: findUserByUserNameAndPassword,
+            findUserById: findUserById,
+            updateUser: updateUser,
+            deleteUser: deleteUser
         };
         return api;
-        
+
+        function createUser(newUser) {
+            
+        }
+
+        function deleteUser(uid) {
+
+        }
+
+        function updateUser(uid, newUser) {
+            for (var i in users) {
+                if(users[i]._id === uid) {
+                    users[i].firstName = newUser.firstName;
+                    users[i].lastName = newUser.lastName;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function findUserById(uid) {
+            for (var i in users) {
+                if(users[i]._id === uid) {
+                    return users[i];
+                }
+            }
+        }
+
         function findUserByUserNameAndPassword(username, password) {
             for (var i in users) {
                 if(users[i].username === username && users[i].password === password) {

@@ -6,24 +6,19 @@
         .module("WebAppMaker")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($routeParams) {
+    function ProfileController($routeParams, UserService) {
         var vm = this;
-        // vm.updateUser = updateUser;
-        //
-        // var uid = $routeParams.uid;
-        // var index = -1;
-        //
-        // for (var i in users) {
-        //     if(users[i]._id === uid) {
-        //         vm.user = users[i];
-        //         index = i;
-        //     }
-        // }
-        //
-        // function updateUser(newUser) {
-        //     console.log(newUser);
-        //     users[index].firstName = newUser.firstName;
-        //     users[index].lastName = newUser.lastName;
-        // }
+        vm.updateUser = updateUser;
+        
+        var uid = $routeParams.uid;
+        
+        function init() {
+            vm.user = UserService.findUserById(uid);
+        }
+        init();
+        
+        function updateUser(newUser) {
+            UserService.updateUser(uid, newUser);
+        }
     }
 })();
