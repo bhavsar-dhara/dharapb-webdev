@@ -13,7 +13,7 @@
                 New Website
             </a>
             <p class="navbar-text pull-right">
-                <a href="#/website-list"
+                <a ng-click="model.createWebsite(name, description)"
                    class="navbar-link">
                         <span class="glyphicon glyphicon-ok">
                         </span>
@@ -26,14 +26,16 @@
     <label for="name">
         Name
     </label>
-    <input type="text"
+    <input ng-model="name"
+           type="text"
            class="form-control"
            id="name"
            placeholder="Google">
     <label for="description">
         Description
     </label>
-    <textarea rows=4
+    <textarea ng-model="description"
+              rows=4
               class="form-control"
               id="description"
               placeholder="Google is used mainly to search for information from the internet."></textarea>

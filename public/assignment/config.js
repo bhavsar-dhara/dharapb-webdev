@@ -26,14 +26,20 @@
                 controller: "ProfileController",
                 controllerAs: "model"
             })
-            .when("/website-list", {
-                templateUrl: "views/website/website-list.view.client.html"
+            .when("/user/:uid/website", {
+                templateUrl: "views/website/website-list.view.client.html",
+                controller: "WebsiteListController",
+                controllerAs: "model"
             })
-            .when("/website-new", {
-                templateUrl: "views/website/website-new.view.client.html"
+            .when("/user/:uid/website/new", {
+                templateUrl: "views/website/website-new.view.client.html",
+                controller: "NewWebsiteController",
+                controllerAs: "model"
             })
-            .when("/website-edit", {
-                templateUrl: "views/website/website-edit.view.client.html"
+            .when("/user/:uid/website/:wid", {
+                templateUrl: "views/website/website-edit.view.client.html",
+                controller: "EditWebsiteController",
+                controllerAs: "model"
             })
             .when("/page-list", {
                 templateUrl: "views/page/page-list.view.client.html"

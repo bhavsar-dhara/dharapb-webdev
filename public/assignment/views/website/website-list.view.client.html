@@ -6,7 +6,7 @@
                 Websites
             </a>
             <p class="navbar-text pull-right">
-                <a href="#/website-new"
+                <a href="#/user/{{model.uid}}/website/new"
                    class="navbar-link">
                         <span class="glyphicon glyphicon-plus">
                         </span>
@@ -18,51 +18,11 @@
 <div class="container">
     <ul id="website-list"
         class="list-group">
-        <li class="list-group-item">
+        <li ng-repeat="website in model.websites" class="list-group-item">
             <a href="#/page-list">
-                Lorem Ipsum
+                {{website.name}}
             </a>
-            <a href="#/website-edit"
-               class="pull-right">
-                <span class="glyphicon glyphicon-cog">
-                </span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#/page-list">
-                Blogging App
-            </a>
-            <a href="#/website-edit"
-               class="pull-right">
-                <span class="glyphicon glyphicon-cog">
-                </span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#/page-list">
-                Address Book App
-            </a>
-            <a href="#/website-edit"
-               class="pull-right">
-                <span class="glyphicon glyphicon-cog">
-                </span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#/page-list">
-                Script Testing App
-            </a>
-            <a href="#/website-edit"
-               class="pull-right">
-                <span class="glyphicon glyphicon-cog">
-                </span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#/page-list">
-                Blogger
-            </a>
-            <a href="#/website-edit"
+            <a href="#/user/{{website.developerId}}/website/{{website._id}}"
                class="pull-right">
                 <span class="glyphicon glyphicon-cog">
                 </span>
