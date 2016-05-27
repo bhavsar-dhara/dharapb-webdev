@@ -18,21 +18,14 @@
     function WebsiteService() {
         var api = {
             createWebsite: createWebsite,
-            findWebsitesForUserId: findWebsitesForUserId,
+            findWebsitesByUser: findWebsitesByUser,
+            findWebsiteById: findWebsiteById,
+            updateWebsite: updateWebsite,
             deleteWebsite: deleteWebsite
         };
         return api;
 
-        function deleteWebsite(websiteId) {
-            for (var i in websites) {
-                if(websites[i]._id === websiteId) {
-                    websites.splice(i, 1);
-                    return true;
-                }
-            }
-            return false;
-        }
-
+        // userId, website --> arguments
         function createWebsite(developerId, name, desc) {
             var newWebsite = {
                 _id: (new Date()).getTime()+"",
@@ -44,7 +37,18 @@
             return newWebsite;
         }
 
-        function findWebsitesForUserId(uid) {
+        function findWebsitesByUser(userId) {
+            var resultSet = [];
+            for (var i in websites) {
+                if(websites[i].developerId === userId) {
+                    resultSet.push(websites[i]);
+                }
+            }
+            return resultSet;
+        }
+
+        function findWebsiteById(websiteId) {
+            // TODO
             var resultSet = [];
             for (var i in websites) {
                 if(websites[i].developerId === uid) {
@@ -52,6 +56,27 @@
                 }
             }
             return resultSet;
+        }
+
+        function updateWebsite(websiteId, website) {
+            // TODO
+            var resultSet = [];
+            for (var i in websites) {
+                if(websites[i].developerId === uid) {
+                    resultSet.push(websites[i]);
+                }
+            }
+            return resultSet;
+        }
+
+        function deleteWebsite(websiteId) {
+            for (var i in websites) {
+                if(websites[i]._id === websiteId) {
+                    websites.splice(i, 1);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 })();

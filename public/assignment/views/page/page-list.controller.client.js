@@ -4,9 +4,9 @@
 (function () {
     angular
         .module("WebAppMaker")
-        .controller("WebsiteListController", WebsiteListController);
+        .controller("PageListController", PageListController);
     
-    function WebsiteListController($routeParams, WebsiteService) {
+    function PageListController($routeParams, PageService) {
         var vm = this;
         vm.uid = $routeParams.uid;
 

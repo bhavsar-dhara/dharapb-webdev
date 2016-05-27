@@ -16,24 +16,48 @@
     function UserService() {
         var api = {
             createUser: createUser,
-            findUserByUserNameAndPassword: findUserByUserNameAndPassword,
             findUserById: findUserById,
+            findUserByUsername: findUserByUsername,
+            findUserByCredentials: findUserByCredentials,
             updateUser: updateUser,
             deleteUser: deleteUser
         };
         return api;
 
-        function createUser(newUser) {
+        function createUser(user) {
             
         }
 
-        function deleteUser(uid) {
-
+        function findUserById(userId) {
+            for (var i in users) {
+                if(users[i]._id === userId) {
+                    return users[i];
+                }
+            }
+            return null;
         }
 
-        function updateUser(uid, newUser) {
+        function findUserByUsername(username) {
             for (var i in users) {
-                if(users[i]._id === uid) {
+                if(users[i].username === username) {
+                    return users[i];
+                }
+            }
+            return null;
+        }
+
+        function findUserByCredentials(username, password) {
+            for (var i in users) {
+                if(users[i].username === username && users[i].password === password) {
+                    return users[i];
+                }
+            }
+            return null;
+        }
+
+        function updateUser(userId, newUser) {
+            for (var i in users) {
+                if(users[i]._id === userId) {
                     users[i].firstName = newUser.firstName;
                     users[i].lastName = newUser.lastName;
                     return true;
@@ -42,21 +66,8 @@
             return false;
         }
 
-        function findUserById(uid) {
-            for (var i in users) {
-                if(users[i]._id === uid) {
-                    return users[i];
-                }
-            }
-        }
+        function deleteUser(uid) {
 
-        function findUserByUserNameAndPassword(username, password) {
-            for (var i in users) {
-                if(users[i].username === username && users[i].password === password) {
-                    return users[i];
-                }
-            }
-            return null;
         }
     }
 })();

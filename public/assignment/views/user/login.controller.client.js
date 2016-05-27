@@ -10,7 +10,7 @@
         var vm = this; // viewModel = vm
 
         vm.login = function(username, password) {
-            var user = UserService.findUserByUserNameAndPassword(username, password);
+            var user = UserService.findUserByCredentials(username, password);
             if (user) {
                 $location.url("/user/" + user._id);
             } else {
