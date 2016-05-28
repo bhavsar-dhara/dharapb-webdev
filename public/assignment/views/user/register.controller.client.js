@@ -9,7 +9,6 @@
     function RegisterController($location, UserService) {
         var vm = this;
         var uid = (new Date()).getTime()+"";
-        // console.log("uid = " + uid);
         vm.createUser = createUser;
 
         function createUser(user) {
@@ -17,14 +16,11 @@
                 user._id = uid;
                 var newUser = UserService.createUser(user);
                 if (newUser) {
-                    // console.log("user registered");
-                    $location.url("/user/"+uid)
+                    $location.url("/user/"+newUser._id);
                 } else {
-                    // console.log("user not registered");
                     vm.error = "Unable to register user";
                 }
             } else {
-                // console.log("password mismatch");
                 vm.error = "Passwords don't match";
             }
         }
