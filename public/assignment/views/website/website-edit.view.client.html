@@ -2,18 +2,18 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#/website-list"
+                <a href="#/user/{{model.uid}}/website"
                    class="navbar-link">
                         <span class="glyphicon glyphicon-chevron-left">
                         </span>
                 </a>
             </p>
             <a class="navbar-brand"
-               href="#/website-edit">
+               href="#/user/{{model.uid}}/website/{{model.websiteId}}">
                 Edit Website
             </a>
             <p class="navbar-text pull-right">
-                <a href="#/website-list"
+                <a ng-click="model.updateWebsite(model.website)"
                    class="navbar-link">
                         <span class="glyphicon glyphicon-ok">
                         </span>
@@ -28,7 +28,8 @@
             <label for="website-name">
                 Website Name
             </label>
-            <input type="text"
+            <input ng-model="model.website.name"
+                   type="text"
                    class="form-control"
                    id="website-name"
                    placeholder="Name"
@@ -38,7 +39,8 @@
             <label for="website-description">
                 Website Description
             </label>
-            <textarea rows=4
+            <textarea ng-model="model.website.description"
+                      rows=4
                       class="form-control"
                       id="website-description"
                       placeholder="Description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
@@ -58,7 +60,7 @@
                     </span>
             </p>
             <p class="navbar-text pull-right">
-                <a href="#/user">
+                <a href="#/user/{{model.uid}}">
                     <span class="glyphicon glyphicon-user">
                     </span>
                 </a>
