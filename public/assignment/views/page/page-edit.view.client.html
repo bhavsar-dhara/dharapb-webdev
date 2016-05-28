@@ -2,18 +2,18 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#/page-list"
+                <a href="#/user/{{model.uid}}/website/{{model.websiteId}}/page"
                    class="navbar-link">
                         <span class="glyphicon glyphicon-chevron-left">
                         </span>
                 </a>
             </p>
             <a class="navbar-brand"
-               href="#/page-edit">
+               href="#/user/{{model.uid}}/website/{{model.websiteId}}/page/{{model.pageId}}">
                 Edit Page
             </a>
             <p class="navbar-text pull-right">
-                <a href="#/page-list"
+                <a ng-click="model.updatePage(model.page)"
                    class="navbar-link">
                         <span class="glyphicon glyphicon-ok">
                         </span>
@@ -23,30 +23,40 @@
     </div>
 </nav>
 <div class="container">
-    <label for="name">
-        Name
-    </label>
-    <input type="text"
-           class="form-control"
-           id="name"
-           placeholder="Page Name"
-           value="Lorem Ipsum Page">
-    <label for="title">
-        Title
-    </label>
-    <input type="text"
-           class="form-control"
-           id="title"
-           placeholder="Page Title">
-    <a class="btn btn-danger btn-block"
-       href="#/page-list"
-       role="button">Delete</a>
+    <form>
+        <div class="form-group">
+            <label for="name">
+                Name
+            </label>
+            <input ng-model="model.page.name"
+                   type="text"
+                   class="form-control"
+                   id="name"
+                   placeholder="Page Name"
+                   value="Lorem Ipsum Page">
+        </div>
+        <div class="form-group">
+            <label for="title">
+                Title
+            </label>
+            <input ng-model="model.page.title"
+                   type="text"
+                   class="form-control"
+                   id="title"
+                   placeholder="Page Title">
+        </div>
+    </form>
+    <a ng-click="model.deletePage(model.page._id)"
+       class="btn btn-danger btn-block"
+       role="button">
+        Delete
+    </a>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
         <div class="row">
             <p class="navbar-text pull-right">
-                <a href="#/user">
+                <a href="#/user/{{model.uid}}">
                     <span class="glyphicon glyphicon-user">
                     </span>
                 </a>

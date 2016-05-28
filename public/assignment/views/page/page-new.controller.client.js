@@ -9,14 +9,20 @@
     function NewPageController($routeParams, $location, PageService) {
         var vm = this;
         vm.uid = $routeParams.uid;
-        vm.createWebsite = createWebsite;
+        vm.websiteId = $routeParams.wid;
+        vm.createPage = createPage;
 
-        function createWebsite(name, description) {
-            var newWebsite = WebsiteService.createWebsite(vm.uid, name, description);
-            if (newWebsite) {
-                $location.url("/user/"+vm.uid+"/website")
+        function createPage(name, title) {
+            var page = {
+                _id: (new Date()).getTime()+"",
+                name: name,
+                title: title
+            };
+            var newPage = PageService.createPage(vm.websiteId, page);
+            if (newPage) {
+                $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page")
             } else {
-                vm.error = "Unable to create website";
+                vm.error = "Unable to create page";
             }
         }
     }

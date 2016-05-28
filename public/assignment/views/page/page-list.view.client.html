@@ -2,18 +2,18 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#/website-list"
+                <a href="#/user/{{model.uid}}/website"
                    class="navbar-link">
                         <span class="glyphicon glyphicon-chevron-left">
                         </span>
                 </a>
             </p>
             <a class="navbar-brand"
-               href="#/page-list">
+               href="#/user/{{model.uid}}/website/{{model.websiteId}}/page">
                 Pages
             </a>
             <p class="navbar-text pull-right">
-                <a href="#/page-new"
+                <a href="#/user/{{model.uid}}/website/{{model.websiteId}}/page/new"
                    class="navbar-link">
                         <span class="glyphicon glyphicon-plus">
                         </span>
@@ -25,51 +25,11 @@
 <div class="container">
     <ul id="page-list"
         class="list-group">
-        <li class="list-group-item">
+        <li ng-repeat="page in model.pages" class="list-group-item">
             <a href="#/widget-list">
-                Lorem Ipsum Page
+                {{page.name}}
             </a>
-            <a href="#/page-edit"
-               class="pull-right">
-                <span class="glyphicon glyphicon-cog">
-                </span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#/widget-list">
-                Home Page
-            </a>
-            <a href="#/page-edit"
-               class="pull-right">
-                <span class="glyphicon glyphicon-cog">
-                </span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#/widget-list">
-                About Page
-            </a>
-            <a href="#/page-edit"
-               class="pull-right">
-                <span class="glyphicon glyphicon-cog">
-                </span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#/widget-list">
-                Product List
-            </a>
-            <a href="#/page-edit"
-               class="pull-right">
-                <span class="glyphicon glyphicon-cog">
-                </span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="#/widget-list">
-                Acknowledgement Page
-            </a>
-            <a href="#/page-edit"
+            <a href="#/user/{{model.uid}}/website/{{page.websiteId}}/page/{{page._id}}"
                class="pull-right">
                 <span class="glyphicon glyphicon-cog">
                 </span>
@@ -81,7 +41,7 @@
     <div class="container">
         <div class="row">
             <p class="navbar-text pull-right">
-                <a href="#/user">
+                <a href="#/user/{{model.uid}}">
                     <span class="glyphicon glyphicon-user">
                     </span>
                 </a>

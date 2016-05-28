@@ -23,15 +23,19 @@
         return api;
 
         function createPage(websiteId, page) {
-            
+            page.websiteId = websiteId;
+            pages.push(page);
+            return page;
         }
 
         function findPageByWebsiteId(websiteId) {
+            var resultSet = [];
             for (var i in pages) {
                 if(pages[i].websiteId === websiteId) {
-                    return pages[i];
+                    resultSet.push(pages[i]);
                 }
             }
+            return resultSet;
         }
 
         function findPageById(pageId) {
@@ -47,6 +51,7 @@
             for (var i in pages) {
                 if(pages[i]._id === pageId) {
                     pages[i].name = page.name;
+                    pages[i].title = page.title;
                     return true;
                 }
             }
@@ -54,7 +59,13 @@
         }
 
         function deletePage(pageId) {
-
+            for (var i in pages) {
+                if(pages[i]._id === pageId) {
+                    pages.splice(i, 1);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 })();
