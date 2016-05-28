@@ -6,19 +6,27 @@
         .module("WebAppMaker")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController($routeParams, UserService) {
+    function RegisterController($location, UserService) {
         var vm = this;
-        vm.updateUser = updateUser;
+        var uid = (new Date()).getTime()+"";
+        // console.log("uid = " + uid);
+        vm.createUser = createUser;
 
-        var uid = $routeParams.uid;
-
-        function init() {
-            vm.user = UserService.findUserById(uid);
-        }
-        init();
-
-        function updateUser(newUser) {
-            UserService.updateUser(uid, newUser);
+        function createUser(user) {
+            if(vm.password2 === user.password) {
+                user._id = uid;
+                var newUser = UserService.createUser(user);
+                if (newUser) {
+                    // console.log("user registered");
+                    $location.url("/user/"+uid)
+                } else {
+                    // console.log("user not registered");
+                    vm.error = "Unable to register user";
+                }
+            } else {
+                // console.log("password mismatch");
+                vm.error = "Passwords don't match";
+            }
         }
     }
 })();

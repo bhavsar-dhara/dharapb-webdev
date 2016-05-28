@@ -25,7 +25,8 @@
         return api;
 
         function createUser(user) {
-            
+            users.push(user);
+            return user;
         }
 
         function findUserById(userId) {
@@ -66,8 +67,14 @@
             return false;
         }
 
-        function deleteUser(uid) {
-
+        function deleteUser(userId) {
+            for (var i in users) {
+                if(users[i]._id === userId) {
+                    users.splice(i, 1);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 })();

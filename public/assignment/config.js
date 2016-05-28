@@ -19,7 +19,9 @@
                 controllerAs: "model"
             })
             .when("/register", {
-                templateUrl: "views/user/register.view.client.html"
+                templateUrl: "views/user/register.view.client.html",
+                controller: "RegisterController",
+                controllerAs: "model"
             })
             .when("/user/:uid", {
                 templateUrl: "views/user/profile.view.client.html",
@@ -41,20 +43,24 @@
                 controller: "EditWebsiteController",
                 controllerAs: "model"
             })
-            .when("/page-list", {
+            .when("/user/:uid/website/:wid/page", {
                 templateUrl: "views/page/page-list.view.client.html"
             })
-            .when("/page-new", {
+            .when("/user/:uid/website/:wid/page/new", {
                 templateUrl: "views/page/page-new.view.client.html"
             })
-            .when("/page-edit", {
+            .when("/user/:uid/website/:wid/page/:pid", {
                 templateUrl: "views/page/page-edit.view.client.html"
             })
-            .when("/widget-list", {
+            .when("/user/:uid/website/:wid/page/:pid/widget", {
                 templateUrl: "views/widget/widget-list.view.client.html"
             })
-            .when("/widget-chooser", {
+            .when("/user/:uid/website/:wid/page/:pid/widget/new", {
                 templateUrl: "views/widget/widget-chooser.view.client.html"
+            })
+            .when("/user/:uid/website/:wid/page/:pid/widget/:wgid", {
+                // TODO
+                templateUrl: "views/widget/widget-edit.view.client.html"
             })
             .when("/widget-header", {
                 templateUrl: "views/widget/widget-header.view.client.html"
