@@ -6,7 +6,7 @@
         .module("WebAppMaker")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($routeParams, UserService) {
+    function ProfileController($routeParams, $location, UserService) {
         var vm = this;
         vm.updateUser = updateUser;
         
@@ -18,7 +18,12 @@
         init();
         
         function updateUser(newUser) {
-            UserService.updateUser(uid, newUser);
+            if (UserService.updateUser(uid, newUser)) {
+                $location.url("/user/"+uid);
+                vm.success = "success";
+            } else {
+                vm.error = "User not found";
+            }
         }
     }
 })();
