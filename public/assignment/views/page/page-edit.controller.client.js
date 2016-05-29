@@ -30,7 +30,7 @@
         function deletePage() {
             var newPage = PageService.deletePage(vm.pageId);
             if (newPage) {
-                $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page")
+                $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page");
             } else {
                 vm.error = "Unable to delete page";
             }

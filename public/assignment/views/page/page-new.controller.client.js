@@ -20,7 +20,7 @@
             };
             var newPage = PageService.createPage(vm.websiteId, page);
             if (newPage) {
-                $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page")
+                $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page");
             } else {
                 vm.error = "Unable to create page";
             }
