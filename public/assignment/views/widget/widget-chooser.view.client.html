@@ -9,7 +9,7 @@
                 </a>
             </p>
             <a class="navbar-brand"
-               href="#/widget-chooser">
+               href="#/user/{{model.uid}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
                 Choose Widget
             </a>
         </div>
@@ -19,7 +19,7 @@
     <ul id="page-list"
         class="list-group">
         <li class="list-group-item">
-            <a href="#/widget-header">
+            <a ng-click="model.createHeader()">
                 Header
             </a>
         </li>
@@ -29,6 +29,7 @@
             </a>
         </li>
         <li class="list-group-item">
+            <!--ng-click="model.createHtml()"-->
             <a href="">
                 HTML
             </a>
@@ -49,12 +50,12 @@
             </a>
         </li>
         <li class="list-group-item">
-            <a href="#/widget-image">
+            <a ng-click="model.createImage()">
                 Image
             </a>
         </li>
         <li class="list-group-item">
-            <a href="#/widget-youtube">
+            <a ng-click="model.createYouTube()">
                 YouTube
             </a>
         </li>

@@ -13,7 +13,7 @@
                 Widgets
             </a>
             <p class="navbar-text pull-right">
-                <a href="#/widget-chooser"
+                <a href="#/user/{{model.uid}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new"
                    class="navbar-link">
                         <span class="glyphicon glyphicon-plus">
                         </span>
@@ -25,7 +25,7 @@
 <div class="container">
     <div ng-repeat="widget in model.widgets" class="jga-widget">
         <div class="jga-widget-tool">
-            <a href="#">
+            <a href="#/user/{{model.uid}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
             <span class="glyphicon glyphicon-align-justify"></span>
@@ -58,98 +58,6 @@
             </div>
         </div>
     </div>
-
-    <div class="jga-widget">
-        <div class="jga-widget-tool">
-            <a href="#/widget-header">
-                <span class="glyphicon glyphicon-cog">
-                </span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify">
-            </span>
-        </div>
-        <h1>
-            GIZMODO
-        </h1>
-    </div>
-    <div class="jga-widget">
-        <div class="jga-widget-tool">
-            <a href="#/widget-header">
-                <span class="glyphicon glyphicon-cog">
-                </span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify">
-            </span>
-        </div>
-        <h3>
-            2018 Jeep Wrangler turbo spotted being tested
-        </h3>
-    </div>
-    <div class="jga-widget">
-        <div class="jga-widget-tool">
-            <a href="#/widget-image">
-                <span class="glyphicon glyphicon-cog">
-                </span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify">
-            </span>
-        </div>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/2010_Jeep_Wrangler_Islander.jpeg"
-             width="100%">
-    </div>
-    <div class="jga-widget">
-        <div class="jga-widget-tool">
-            <a href="">
-                <span class="glyphicon glyphicon-cog">
-                </span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify">
-            </span>
-        </div>
-        <p>
-            Reports that the 2018 Jeep Wrangler will be offered with a 2.0-liter four-cylinder turbocharged engine have
-            been given a boost.
-        </p>
-        <p>
-            <a href="http://www.jlwranglerforums.com/forums/showthread.php?27-JL-Wrangler-2-0-Liter-Hurricane-Engine-FIRST-photos"
-               target="_blank">
-                JLWranglerForums.com
-            </a>
-            has posted photos of a prototype Wrangler with its hood open that appear to show a motor equipped with a
-            turbo and its associated intake system.
-        </p>
-    </div>
-    <div class="jga-widget">
-        <div class="jga-widget-tool">
-            <a href="#/widget-youtube">
-                <span class="glyphicon glyphicon-cog">
-                </span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify">
-            </span>
-        </div>
-        <iframe width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/wWjBipdqYYI"
-                frameborder="0"
-                allowfullscreen>
-        </iframe>
-    </div>
-    <div class="jga-widget">
-        <div class="jga-widget-tool">
-            <a href="">
-                <span class="glyphicon glyphicon-cog">
-                </span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify">
-            </span>
-        </div>
-        <p>
-            There’s also no word on when it will be officially revealed, but it will most likely debut at the 2017
-            Detroit Auto Show in January, with sales following later in the year.
-        </p>
-    </div>
-
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">

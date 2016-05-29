@@ -9,12 +9,11 @@
                 </a>
             </p>
             <a class="navbar-brand"
-               href="#/widget-image">
+               href="#/user/{{model.uid}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}">
                 Widget Edit
             </a>
-            <!-- TODO updateWidget -->
             <p class="navbar-text pull-right">
-                <a href="#/user/{{model.uid}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+                <a ng-click="model.updateWidget()"
                    class="navbar-link">
                         <span class="glyphicon glyphicon-ok">
                         </span>
@@ -24,53 +23,63 @@
     </div>
 </nav>
 <div class="container">
-    <label for="name">
-        Name
-    </label>
-    <input type="text"
-           class="form-control"
-           id="name"
-           placeholder="Image Name"
-           value="">
-    <label for="text">
-        Text
-    </label>
-    <input type="text"
-           class="form-control"
-           id="text"
-           placeholder="Image Text"
-           value="">
-    <label for="url">
-        URL
-    </label>
-    <input type="url"
-           class="form-control"
-           id="url"
-           placeholder="Image URL"
-           value="https://www.youtube.com/embed/wWjBipdqYYI">
-    <label for="width">
-        Width
-    </label>
-    <input type="text"
-           class="form-control"
-           id="width"
-           placeholder="Image Width"
-           value="100%">
-    <label for="upload">
-        Upload
-    </label>
-    <input type="file"
-           class="form-control"
-           id="upload"
-           value="100%">
+    <form>
+        <div class="form-group">
+            <label for="name">
+                Name
+            </label>
+            <input ng-model="model.widget.name"
+                   type="text"
+                   class="form-control"
+                   id="name"
+                   placeholder="Image Name">
+        </div>
+        <div class="form-group">
+            <label for="text">
+                Text
+            </label>
+            <input ng-model="model.widget.text"
+                   type="text"
+                   class="form-control"
+                   id="text"
+                   placeholder="Image Text">
+        </div>
+        <div class="form-group">
+            <label for="url">
+                URL
+            </label>
+            <input ng-model="model.widget.url"
+                   type="url"
+                   class="form-control"
+                   id="url"
+                   placeholder="http://lorempixel.com/400/200/">
+        </div>
+        <div class="form-group">
+            <label for="width">
+                Width
+            </label>
+            <input ng-model="model.widget.width"
+                   type="text"
+                   class="form-control"
+                   id="width"
+                   placeholder="100%">
+        </div>
+        <div class="form-group">
+            <label for="upload">
+                Upload
+            </label>
+            <input type="file"
+                   class="form-control"
+                   id="upload">
+        </div>
+    </form>
     <a class="btn btn-primary btn-block"
-       href="#/user/{{model.uid}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+       href=""
        role="button">
         Upload Image
     </a>
-    <!-- TODO deleteWidget -->
     <a class="btn btn-danger btn-block"
-       href="#/user/{{model.uid}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+       ng-click="model.deleteWidget()"
        role="button">
         Delete
     </a>

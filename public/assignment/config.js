@@ -69,19 +69,9 @@
                 controllerAs: "model"
             })
             .when("/user/:uid/website/:wid/page/:pid/widget/:wgid", {
-                // TODO
                 templateUrl: "views/widget/widget-edit.view.client.html",
                 controller: "EditWidgetController",
                 controllerAs: "model"
-            })
-            .when("/widget-header", {
-                templateUrl: "views/widget/widget-header.view.client.html"
-            })
-            .when("/widget-image", {
-                templateUrl: "views/widget/widget-image.view.client.html"
-            })
-            .when("/widget-youtube", {
-                templateUrl: "views/widget/widget-youtube.view.client.html"
             })
             .otherwise({
                 redirectTo: "/login"

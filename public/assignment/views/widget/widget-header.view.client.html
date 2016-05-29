@@ -9,12 +9,11 @@
                 </a>
             </p>
             <a class="navbar-brand"
-               href="#/widget-header">
+               href="#/user/{{model.uid}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}">
                 Widget Edit
             </a>
-            <!-- TODO updateWidget -->
             <p class="navbar-text pull-right">
-                <a href="#/user/{{model.uid}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+                <a ng-click="model.updateWidget()"
                    class="navbar-link">
                         <span class="glyphicon glyphicon-ok">
                         </span>
@@ -24,39 +23,50 @@
     </div>
 </nav>
 <div class="container">
-    <label for="name">
-        Name
-    </label>
-    <input type="text"
-           class="form-control"
-           id="name"
-           placeholder="Header Name"
-           value="">
-    <label for="text">
-        Text
-    </label>
-    <input type="text"
-           class="form-control"
-           id="text"
-           placeholder="Header Text"
-           value="Lorem ipsum text">
-    <label for="size">
-        Size
-    </label>
-    <select class="form-control"
-            id="size">
-        <option selected="selected"
-                disabled="disabled">Choose here</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-    </select>
-    <!-- TODO deleteWidget -->
+    <form>
+        <div class="form-group">
+            <label for="name">
+                Name
+            </label>
+            <input ng-model="model.widget.name"
+                   type="text"
+                   class="form-control"
+                   id="name"
+                   placeholder="Header Name">
+        </div>
+        <div class="form-group">
+            <label for="text">
+                Text
+            </label>
+            <input ng-model="model.widget.text"
+                   type="text"
+                   class="form-control"
+                   id="text"
+                   placeholder="Header Text">
+        </div>
+        <div class="form-group">
+            <!-- TODO -->
+            <label for="size">
+                Size
+            </label>
+            <select ng-model="model.widget.size"
+                    class="form-control"
+                    id="size">
+                <option value="0"
+                        selected="selected"
+                        disabled="disabled">Choose here
+                </option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+        </div>
+    </form>
     <a class="btn btn-danger btn-block"
-       href="#/user/{{model.uid}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+       ng-click="model.deleteWidget()"
        role="button">
         Delete
     </a>
