@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#/widget-list"
+                <a href="#/user/{{model.uid}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
                    class="navbar-link">
                         <span class="glyphicon glyphicon-chevron-left">
                         </span>
@@ -12,8 +12,9 @@
                href="#/widget-youtube">
                 Widget Edit
             </a>
+            <!-- TODO updateWidget -->
             <p class="navbar-text pull-right">
-                <a href="#/widget-list"
+                <a href="#/user/{{model.uid}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
                    class="navbar-link">
                         <span class="glyphicon glyphicon-ok">
                         </span>
@@ -55,8 +56,9 @@
            id="width"
            placeholder="YouTube Width"
            value="">
+    <!-- TODO deleteWidget -->
     <a class="btn btn-danger btn-block"
-       href="#/widget-list"
+       href="#/user/{{model.uid}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
        role="button">
         Delete
     </a>
@@ -65,7 +67,7 @@
     <div class="container">
         <div class="row">
             <p class="navbar-text pull-right">
-                <a href="#/user">
+                <a href="#/user/{{model.uid}}">
                     <span class="glyphicon glyphicon-user">
                     </span>
                 </a>

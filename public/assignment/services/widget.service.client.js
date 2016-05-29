@@ -29,16 +29,19 @@
         return api;
 
         function createWidget(pageId, widget) {
-            
+            widgets.pageId = pageId;
+            widgets.push(widget);
+            return widget;
         }
 
         function findWidgetsByPageId(pageId) {
+            var resultSet = [];
             for (var i in widgets) {
                 if(widgets[i].pageId === pageId) {
-                    return widgets[i];
+                    resultSet.push(widgets[i]);
                 }
             }
-            return null;
+            return resultSet;
         }
 
         function findWidgetById(widgetId) {
@@ -61,7 +64,13 @@
         }
 
         function deleteWidget(widgetId) {
-
+            for (var i in widgets) {
+                if(widgets[i]._id === widgetId) {
+                    widgets.splice(i, 1);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 })();

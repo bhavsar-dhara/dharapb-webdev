@@ -4,15 +4,30 @@
 (function () {
     angular
         .module("WebAppMaker")
-        .controller("PageWidgetController", PageWidgetController);
+        .controller("WidgetListController", WidgetListController);
     
-    function PageWidgetController($routeParams, WidgetService) {
+    function WidgetListController($routeParams, $sce, WidgetService) {
         var vm = this;
         vm.uid = $routeParams.uid;
+        vm.websiteId = $routeParams.wid;
+        vm.pageId = $routeParams.pid;
+        vm.getSafeHtml = getSafeHtml;
+        vm.getSafeUrl = getSafeUrl;
 
         function init() {
-            vm.websites = WebsiteService.findWebsitesByUser(vm.uid);
+            vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
         }
         init();
+
+        function getSafeHtml(widget) {
+            return $sce.trustAsHtml(widget.text);
+        }
+
+        function getSafeUrl(widget) {
+            var urlParts = widget.url.split("/");
+            var id = urlParts[urlParts.length - 1];
+            var url = "https://www.youtube.com/embed/" + id;
+            return $sce.trustAsResourceUrl(url);
+        }
     }
 })();

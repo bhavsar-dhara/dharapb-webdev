@@ -59,14 +59,20 @@
                 controllerAs: "model"
             })
             .when("/user/:uid/website/:wid/page/:pid/widget", {
-                templateUrl: "views/widget/widget-list.view.client.html"
+                templateUrl: "views/widget/widget-list.view.client.html",
+                controller: "WidgetListController",
+                controllerAs: "model"
             })
             .when("/user/:uid/website/:wid/page/:pid/widget/new", {
-                templateUrl: "views/widget/widget-chooser.view.client.html"
+                templateUrl: "views/widget/widget-chooser.view.client.html",
+                controller: "NewWidgetController",
+                controllerAs: "model"
             })
             .when("/user/:uid/website/:wid/page/:pid/widget/:wgid", {
                 // TODO
-                templateUrl: "views/widget/widget-edit.view.client.html"
+                templateUrl: "views/widget/widget-edit.view.client.html",
+                controller: "EditWidgetController",
+                controllerAs: "model"
             })
             .when("/widget-header", {
                 templateUrl: "views/widget/widget-header.view.client.html"
