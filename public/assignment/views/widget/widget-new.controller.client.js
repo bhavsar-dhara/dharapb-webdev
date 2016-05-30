@@ -43,7 +43,6 @@
             var newWidget = WidgetService.createWidget(vm.pageId, vm.widget);
             if (newWidget) {
                 $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+vm.widget._id);
-                // $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page/"+vm.pageId);
             } else {
                 vm.error = "Unable to create website";
             }
