@@ -18,17 +18,14 @@
         return api;
 
         function createUser(user) {
-            users.push(user);
-            return user;
+            return $http.post("/api/user", user);
+            // users.push(user);
+            // return user;
         }
 
         function findUserById(userId) {
-            for (var i in users) {
-                if(users[i]._id === userId) {
-                    return users[i];
-                }
-            }
-            return null;
+            var url = "/api/user/"+userId;
+            return $http.get(url);
         }
 
         function findUserByUsername(username) {
@@ -42,8 +39,7 @@
 
         function findUserByCredentials(username, password) {
             var url = "/api/user?username="+username+"&password="+password;
-            // $http.get(url);
-            return $http.get(url); // promise
+            return $http.get(url);
         }
 
         function updateUser(userId, newUser) {

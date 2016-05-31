@@ -13,7 +13,11 @@
         var uid = $routeParams.uid;
         
         function init() {
-            vm.user = UserService.findUserById(uid);
+            UserService
+                .findUserById(uid)
+                .then(function (response) {
+                    vm.user = response.data;
+                });
         }
         init();
         
