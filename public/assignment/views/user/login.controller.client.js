@@ -10,12 +10,19 @@
         var vm = this; // viewModel = vm
 
         vm.login = function(username, password) {
-            var user = UserService.findUserByCredentials(username, password);
-            if (user) {
-                $location.url("/user/" + user._id);
-            } else {
-                vm.error = "User not found";
-            }
+            // var promise = UserService.findUserByCredentials(username, password);
+            // promise.then(function (response) {
+            UserService
+                .findUserByCredentials(username, password)
+                .then(function (response) {
+                    console.log(response);
+                    var user = response.data;
+                    if (user) {
+                        $location.url("/user/" + user._id);
+                    } else {
+                        vm.error = "User not found";
+                    }
+                });
         }
     }
 })();
