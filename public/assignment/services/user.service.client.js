@@ -43,14 +43,8 @@
         }
 
         function updateUser(userId, newUser) {
-            for (var i in users) {
-                if(users[i]._id === userId) {
-                    users[i].firstName = newUser.firstName;
-                    users[i].lastName = newUser.lastName;
-                    return true;
-                }
-            }
-            return false;
+            var url = "/api/user/" + userId;
+            return $http.put(url, newUser);
         }
 
         function deleteUser(userId) {

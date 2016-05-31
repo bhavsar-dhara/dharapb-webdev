@@ -22,12 +22,15 @@
         init();
         
         function updateUser(newUser) {
-            if (UserService.updateUser(uid, newUser)) {
-                $location.url("/user/"+uid);
-                vm.success = "success";
-            } else {
-                vm.error = "User not found";
-            }
+            UserService
+                .updateUser(uid, newUser)
+                .then(
+                    function (response) {
+                        vm.success = "Updated successfully";
+                    },
+                    function (error) {
+                        vm.error = "User not found";
+                    });
         }
     }
 })();
