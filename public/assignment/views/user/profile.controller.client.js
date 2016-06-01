@@ -9,6 +9,7 @@
     function ProfileController($routeParams, $location, UserService) {
         var vm = this;
         vm.updateUser = updateUser;
+        vm.unRegister = unRegister;
         
         var uid = $routeParams.uid;
         
@@ -29,8 +30,22 @@
                         vm.success = "Updated successfully";
                     },
                     function (error) {
-                        vm.error = "User not found";
-                    });
+                        vm.error = "Unable to update user";
+                    }
+                );
+        }
+        
+        function unRegister() {
+            UserService
+                .deleteUser(uid)
+                .then(
+                    function (response) {
+                        $location.url("/login");
+                    },
+                    function (error) {
+                        vm.error = "Unable to unregister user";
+                    }
+                );
         }
     }
 })();
