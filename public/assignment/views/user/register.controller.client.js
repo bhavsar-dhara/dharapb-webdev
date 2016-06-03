@@ -24,12 +24,6 @@
                             vm.error = "Unable to register user";
                         }
                     });
-                // var newUser = UserService.createUser(user);
-                // if (newUser) {
-                //     $location.url("/user/"+newUser._id);
-                // } else {
-                //     vm.error = "Unable to register user";
-                // }
             } else {
                 vm.error = "Passwords must match";
             }

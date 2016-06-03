@@ -46,7 +46,6 @@ module.exports = function(app) {
         var user = req.body;
         user._id  = (new Date()).getTime()+"";
         users.push(user);
-        console.log(user);
         res.send(user);
     }
 
@@ -87,7 +86,7 @@ module.exports = function(app) {
 
     function findUserByUsername(username, res) {
         for (i in users) {
-            if(users[i].username === usernameg) {
+            if(users[i].username === username) {
                 res.send(users[i]);
                 return;
             }
