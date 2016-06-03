@@ -15,49 +15,60 @@ module.exports = function(app) {
     app.put("/api/page/:pageId", updatePage);
     app.delete("/api/page/:pageId", deletePage);
 
-    function createPage(websiteId, page) {
+    function createPage(req, res) {
+        var websiteId = req.params.websiteId;
+        var page = req.body;
+        page._id = (new Date()).getTime()+"";
         page.websiteId = websiteId;
         pages.push(page);
-        return page;
+        res.send(page);
     }
 
-    function findAllPagesForWebsite(websiteId) {
+    function findAllPagesForWebsite(req, res) {
+        var websiteId = req.params.websiteId;
         var resultSet = [];
         for (var i in pages) {
             if(pages[i].websiteId === websiteId) {
                 resultSet.push(pages[i]);
             }
         }
-        return resultSet;
+        res.send(resultSet);
     }
 
-    function findPageById(pageId) {
+    function findPageById(req, res) {
+        var pageId = req.params.pageId;
         for (var i in pages) {
             if(pages[i]._id === pageId) {
-                return pages[i];
+                res.send(pages[i]);
+                return;
             }
         }
-        return null;
+        res.send(400);
     }
 
-    function updatePage(pageId, page) {
+    function updatePage(req, res) {
+        var pageId = req.params.pageId;
+        var page = req.body;
         for (var i in pages) {
             if(pages[i]._id === pageId) {
                 pages[i].name = page.name;
                 pages[i].title = page.title;
-                return true;
+                res.send(200);
+                return;
             }
         }
-        return false;
+        res.send(400);
     }
 
-    function deletePage(pageId) {
+    function deletePage(req, res) {
+        var pageId = req.params.pageId;
         for (var i in pages) {
             if(pages[i]._id === pageId) {
                 pages.splice(i, 1);
-                return true;
+                res.send(200);
+                return;
             }
         }
-        return false;
+        res.send(400);
     }
 };

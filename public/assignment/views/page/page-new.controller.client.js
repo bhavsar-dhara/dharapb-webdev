@@ -18,12 +18,16 @@
                 name: name,
                 title: title
             };
-            var newPage = PageService.createPage(vm.websiteId, page);
-            if (newPage) {
-                $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page");
-            } else {
-                vm.error = "Unable to create page";
-            }
+            PageService
+                .createPage(vm.websiteId, page)
+                .then(function (response) {
+                    var newPage = response.data;
+                    if (newPage) {
+                        $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page");
+                    } else {
+                        vm.error = "Unable to create page";
+                    }
+                });
         }
     }
 })();

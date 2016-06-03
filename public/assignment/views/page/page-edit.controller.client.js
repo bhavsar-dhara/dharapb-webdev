@@ -15,25 +15,36 @@
         vm.deletePage = deletePage;
 
         function init() {
-            vm.page = PageService.findPageById(vm.pageId);
+            PageService
+                .findPageById(vm.pageId)
+                .then(function (response) {
+                    vm.page = response.data;
+                });
         }
         init();
 
         function updatePage(page) {
-            if (PageService.updatePage(vm.pageId, page)) {
-                $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page");
-            } else {
-                vm.error = "Page not updated";
-            }
+            PageService
+                .updatePage(vm.pageId, page)
+                .then(
+                    function (response) {
+                        $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page");
+                    },
+                    function (error) {
+                        vm.error = "Page not updated";
+                    });
         }
 
         function deletePage() {
-            var newPage = PageService.deletePage(vm.pageId);
-            if (newPage) {
-                $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page");
-            } else {
-                vm.error = "Unable to delete page";
-            }
+            PageService
+                .deletePage(vm.pageId)
+                .then(
+                    function (response) {
+                        $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page");
+                    },
+                    function (error) {
+                        vm.error = "Unable to delete page";
+                    });
         }
     }
 })();

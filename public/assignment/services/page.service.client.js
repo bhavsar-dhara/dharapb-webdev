@@ -17,49 +17,27 @@
         return api;
 
         function createPage(websiteId, page) {
-            page.websiteId = websiteId;
-            pages.push(page);
-            return page;
+            return $http.post("/api/website/" + websiteId + "/page", page);
         }
 
         function findPageByWebsiteId(websiteId) {
-            var resultSet = [];
-            for (var i in pages) {
-                if(pages[i].websiteId === websiteId) {
-                    resultSet.push(pages[i]);
-                }
-            }
-            return resultSet;
+            var url = "/api/website/" + websiteId + "/page";
+            return $http.get(url);
         }
 
         function findPageById(pageId) {
-            for (var i in pages) {
-                if(pages[i]._id === pageId) {
-                    return pages[i];
-                }
-            }
-            return null;
+            var url = "/api/page/" + pageId;
+            return $http.get(url);
         }
 
         function updatePage(pageId, page) {
-            for (var i in pages) {
-                if(pages[i]._id === pageId) {
-                    pages[i].name = page.name;
-                    pages[i].title = page.title;
-                    return true;
-                }
-            }
-            return false;
+            var url = "/api/page/" + pageId;
+            return $http.put(url, page);
         }
 
         function deletePage(pageId) {
-            for (var i in pages) {
-                if(pages[i]._id === pageId) {
-                    pages.splice(i, 1);
-                    return true;
-                }
-            }
-            return false;
+            var url = "/api/page/" + pageId;
+            return $http.delete(url);
         }
     }
 })();
