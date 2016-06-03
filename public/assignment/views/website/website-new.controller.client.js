@@ -17,12 +17,16 @@
                 name: name,
                 description: description
             };
-            var newWebsite = WebsiteService.createWebsite(vm.uid, website);
-            if (newWebsite) {
-                $location.url("/user/"+vm.uid+"/website");
-            } else {
-                vm.error = "Unable to create website";
-            }
+            WebsiteService
+                .createWebsite(vm.uid, website)
+                .then(function (response) {
+                    var newWebsite = response.data;
+                    if (newWebsite) {
+                        $location.url("/user/"+vm.uid+"/website");
+                    } else {
+                        vm.error = "Unable to create website";
+                    }
+                });
         }
     }
 })();

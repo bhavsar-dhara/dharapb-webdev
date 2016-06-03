@@ -18,49 +18,60 @@ module.exports = function(app) {
     app.put("/api/website/:websiteId", updateWebsite);
     app.delete("/api/website/:websiteId", deleteWebsite);
 
-    function createWebsite(userId, website) {
+    function createWebsite(req, res) {
+        var userId = req.params.userId;
+        var website = req.body;
+        website._id  = (new Date()).getTime()+"";
         website.developerId = userId;
         websites.push(website);
-        return website;
+        res.send(website);
     }
 
-    function findAllWebsitesForUser(userId) {
+    function findAllWebsitesForUser(req, res) {
+        var userId = req.params.userId;
         var resultSet = [];
         for (var i in websites) {
             if(websites[i].developerId === userId) {
                 resultSet.push(websites[i]);
             }
         }
-        return resultSet;
+        res.send(resultSet);
     }
 
-    function findWebsiteById(websiteId) {
+    function findWebsiteById(req, res) {
+        var websiteId = req.params.websiteId;
         for (var i in websites) {
             if(websites[i]._id === websiteId) {
-                return websites[i];
+                res.send(websites[i]);
+                return;
             }
         }
-        return null;
+        res.send(400);
     }
 
-    function updateWebsite(websiteId, website) {
+    function updateWebsite(req, res) {
+        var websiteId = req.params.websiteId;
+        var website = req.body;
         for (var i in websites) {
             if(websites[i]._id === websiteId) {
                 websites[i].name = website.name;
                 websites[i].description = website.description;
-                return true;
+                res.send(200);
+                return;
             }
         }
-        return false;
+        res.send(400);
     }
 
-    function deleteWebsite(websiteId) {
+    function deleteWebsite(req, res) {
+        var websiteId = req.params.websiteId;
         for (var i in websites) {
             if(websites[i]._id === websiteId) {
                 websites.splice(i, 1);
-                return true;
+                res.send(200);
+                return;
             }
         }
-        return false;
+        res.send(400);
     }
 };
