@@ -17,65 +17,29 @@
         return api;
 
         function createWidget(pageId, widget) {
-            widgets.pageId = pageId;
-            widgets.push(widget);
-            return widget;
+            // console.log("client wgid = "+widget._id);
+            var url = "/api/page/" + pageId + "/widget";
+            return $http.post(url, widget);
         }
 
         function findWidgetsByPageId(pageId) {
-            var resultSet = [];
-            for (var i in widgets) {
-                if(widgets[i].pageId === pageId && (widgets[i].text != null || widgets[i].url != null)) {
-                    resultSet.push(widgets[i]);
-                }
-            }
-            return resultSet;
+            var url = "/api/page/" + pageId + "/widget";
+            return $http.get(url);
         }
 
         function findWidgetById(widgetId) {
-            for (var i in widgets) {
-                if(widgets[i]._id === widgetId) {
-                    return widgets[i];
-                }
-            }
+            var url = "/api/widget/" + widgetId;
+            return $http.get(url);
         }
 
         function updateWidget(widgetId, widget) {
-            for (var i in widgets) {
-                if(widgets[i]._id === widgetId) {
-                    if (widget.widgetType === "HEADER") {
-                        widgets[i].name = widget.name;
-                        widgets[i].text = widget.text;
-                        widgets[i].size = widget.size;
-                    } else if (widget.widgetType === "IMAGE") {
-                        widgets[i].name = widget.name;
-                        widgets[i].text = widget.text;
-                        widgets[i].url = widget.url;
-                        widgets[i].width = widget.width;
-                        widgets[i].fileName = widget.fileName;
-                    } else if (widget.widgetType === "YOUTUBE") {
-                        widgets[i].name = widget.name;
-                        widgets[i].text = widget.text;
-                        widgets[i].url = widget.url;
-                        widgets[i].width = widget.width;
-                    } else {
-                        widgets[i].name = widget.name;
-                        widgets[i].text = widget.text;
-                    }
-                    return true;
-                }
-            }
-            return false;
+            var url = "/api/widget/" + widgetId;
+            return $http.put(url, widget);
         }
 
         function deleteWidget(widgetId) {
-            for (var i in widgets) {
-                if(widgets[i]._id === widgetId) {
-                    widgets.splice(i, 1);
-                    return true;
-                }
-            }
-            return false;
+            var url = "/api/widget/" + widgetId;
+            return $http.delete(url);
         }
     }
 })();

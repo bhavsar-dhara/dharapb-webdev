@@ -21,31 +21,42 @@ module.exports = function(app) {
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
 
-    function createWidget(pageId, widget) {
+    function createWidget(req, res) {
+        var pageId = req.params.pageId;
+        var widget = req.body;
+        widget._id = (new Date()).getTime()+"";
         widgets.pageId = pageId;
         widgets.push(widget);
-        return widget;
+        res.send(widget);
     }
 
-    function findAllWidgetsForPage(pageId) {
+    function findAllWidgetsForPage(req, res) {
+        var pageId = req.params.pageId;
         var resultSet = [];
         for (var i in widgets) {
             if(widgets[i].pageId === pageId && (widgets[i].text != null || widgets[i].url != null)) {
                 resultSet.push(widgets[i]);
             }
         }
-        return resultSet;
+        res.send(resultSet);
     }
 
-    function findWidgetById(widgetId) {
+    function findWidgetById(req, res) {
+        var widgetId = req.params.widgetId;
+        // console.log(widgetId);
         for (var i in widgets) {
+            // console.log("i = "+i+", "+widgets[i]._id);
             if(widgets[i]._id === widgetId) {
-                return widgets[i];
+                res.send(widgets[i]);
+                return;
             }
         }
+        res.send(400);
     }
 
-    function updateWidget(widgetId, widget) {
+    function updateWidget(req, res) {
+        var widgetId = req.params.widgetId;
+        var widget = req.body;
         for (var i in widgets) {
             if(widgets[i]._id === widgetId) {
                 if (widget.widgetType === "HEADER") {
@@ -67,19 +78,22 @@ module.exports = function(app) {
                     widgets[i].name = widget.name;
                     widgets[i].text = widget.text;
                 }
-                return true;
+                res.send(200);
+                return;
             }
         }
-        return false;
+        res.send(400);
     }
 
-    function deleteWidget(widgetId) {
+    function deleteWidget(req, res) {
+        var widgetId = req.params.widgetId;
         for (var i in widgets) {
             if(widgets[i]._id === widgetId) {
                 widgets.splice(i, 1);
-                return true;
+                res.send(200);
+                return;
             }
         }
-        return false;
+        res.send(400);
     }
 };

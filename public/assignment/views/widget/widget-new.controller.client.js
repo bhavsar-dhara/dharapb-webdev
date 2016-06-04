@@ -40,12 +40,18 @@
                 widgetType: widgetType,
                 pageId: vm.pageId
             };
-            var newWidget = WidgetService.createWidget(vm.pageId, vm.widget);
-            if (newWidget) {
-                $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+vm.widget._id);
-            } else {
-                vm.error = "Unable to create website";
-            }
+            // console.log("controller wgid = "+vm.widget._id);
+            WidgetService
+                .createWidget(vm.pageId, vm.widget)
+                .then(function (response) {
+                    var newWidget = response.data;
+                    // console.log("controller wgid after webservice = "+newWidget._id);
+                    if (newWidget) {
+                        $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+newWidget._id);
+                    } else {
+                        vm.error = "Unable to create website";
+                    }
+                });
         }
     }
 })();
