@@ -14,6 +14,10 @@ module.exports = function(app) {
             "url": "https://youtu.be/AM2Ivdi9c4E" },
         { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
     ];
+    var multer = require('multer'); // npm install multer --save
+    var upload = multer({ dest: __dirname+'/../../public/uploads' });
+
+    app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
     app.post("/api/page/:pageId/widget", createWidget);
     app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
@@ -43,15 +47,13 @@ module.exports = function(app) {
 
     function findWidgetById(req, res) {
         var widgetId = req.params.widgetId;
-        // console.log(widgetId);
         for (var i in widgets) {
-            // console.log("i = "+i+", "+widgets[i]._id);
             if(widgets[i]._id === widgetId) {
                 res.send(widgets[i]);
                 return;
             }
         }
-        res.send(400);
+        res.status(404).send("Unable to find widget with id : " + widgetId);
     }
 
     function updateWidget(req, res) {
@@ -95,5 +97,33 @@ module.exports = function(app) {
             }
         }
         res.send(400);
+    }
+
+    function uploadImage(req, res) {
+
+        var userId = req.body.userId;
+        var websiteId = req.body.websiteId;
+        var pageId = req.body.pageId;
+
+        var widgetId = req.body.widgetId;
+        var width = req.body.width;
+        var myFile = req.file;
+
+        if (myFile != null) {
+            var originalname = myFile.originalname; // file name on user's computer
+            var filename = myFile.filename;     // new file name in upload folder
+            var path = myFile.path;         // full path of uploaded file
+            var destination = myFile.destination;  // folder where file is saved to
+            var size = myFile.size;
+            var mimetype = myFile.mimetype;
+
+            for (var i in widgets) {
+                if (widgets[i]._id === widgetId) {
+                    widgets[i].url = "/uploads/" + filename;
+                }
+            }
+        }
+
+        res.redirect("/assignment/#/user/"+ userId +"/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
     }
 };
