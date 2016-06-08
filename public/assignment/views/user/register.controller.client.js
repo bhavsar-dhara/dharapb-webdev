@@ -8,12 +8,12 @@
 
     function RegisterController($location, UserService) {
         var vm = this;
-        var uid = (new Date()).getTime()+"";
+        // var uid = (new Date()).getTime()+"";
         vm.createUser = createUser;
 
         function createUser(user) {
             if(vm.password2 === user.password) {
-                user._id = uid;
+                // user._id = uid;
                 UserService
                     .createUser(user)
                     .then(function (response) {
