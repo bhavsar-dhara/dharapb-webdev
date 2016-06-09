@@ -16,29 +16,30 @@ module.exports = function () {
     };
     return api;
 
-    function createPage(user) {
-        return Page.create(user);
+    function createPage(websiteId, page) {
+        page._website = websiteId;
+        return Page.create(page);
     }
 
-    function findAllPagesForWebsite(userId) {
-        return Page.findById({_id: userId});
+    function findAllPagesForWebsite(websiteId) {
+        return Page.find({_website: websiteId});
     }
 
-    function findPageById(username, password) {
-        return Page.findOne({username: username, password: password});
+    function findPageById(pageId) {
+        return Page.findById({_id: pageId});
     }
 
-    function updatePage(userId, user) {
+    function updatePage(pageId, page) {
         return Page
-            .update({_id: userId}, {
+            .update({_id: pageId}, {
                 $set: {
-                    firstName: user.firstName,
-                    lastName: user.lastName
+                    name: page.name,
+                    description: page.description
                 }
             });
     }
 
-    function deletePage(userId) {
-        return Page.remove({_id: userId});
+    function deletePage(pageId) {
+        return Page.remove({_id: pageId});
     }
 };

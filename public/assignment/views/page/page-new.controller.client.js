@@ -14,7 +14,7 @@
 
         function createPage(name, title) {
             var page = {
-                _id: (new Date()).getTime()+"",
+                // _id: (new Date()).getTime()+"",
                 name: name,
                 title: title
             };

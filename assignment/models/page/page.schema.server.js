@@ -6,11 +6,9 @@ module.exports = function () {
     var mongoose = require('mongoose');
     
     var PageSchema = mongoose.Schema({
-        username: {type: String, required: true},
-        password: String,
-        firstName: String,
-        lastName: String,
-        dob: Date,
+        _website: {type: mongoose.Schema.ObjectId, ref:"Website"},
+        name: {type: String, required: true},
+        description: String,
         // TODO : widgets of type [Widget] remaining to be added
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "assignment.page"});

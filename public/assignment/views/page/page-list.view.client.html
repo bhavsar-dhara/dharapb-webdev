@@ -23,13 +23,27 @@
     </div>
 </nav>
 <div class="container">
+    <div ng-if="model.error" class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close">
+            <span aria-hidden="true">
+                &times;
+            </span>
+        </button>
+        <strong>
+            Error!
+        </strong>
+        {{model.error}}
+    </div>
     <ul id="page-list"
         class="list-group">
         <li ng-repeat="page in model.pages" class="list-group-item">
-            <a href="#/user/{{model.uid}}/website/{{page.websiteId}}/page/{{page._id}}/widget">
+            <a href="#/user/{{model.uid}}/website/{{page._website}}/page/{{page._id}}/widget">
                 {{page.name}}
             </a>
-            <a href="#/user/{{model.uid}}/website/{{page.websiteId}}/page/{{page._id}}"
+            <a href="#/user/{{model.uid}}/website/{{page._website}}/page/{{page._id}}"
                class="pull-right">
                 <span class="glyphicon glyphicon-cog">
                 </span>
