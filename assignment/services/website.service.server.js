@@ -1,7 +1,9 @@
 /**
  * Created by Dhara on 5/31/2016.
  */
-module.exports = function(app) {
+module.exports = function(app, models) {
+
+    var websiteModel = models.websiteModel;
 
     var websites = [
         { "_id": "123", "name": "Facebook", "developerId": "456" },
@@ -29,13 +31,23 @@ module.exports = function(app) {
 
     function findAllWebsitesForUser(req, res) {
         var userId = req.params.userId;
-        var resultSet = [];
-        for (var i in websites) {
-            if(websites[i].developerId === userId) {
-                resultSet.push(websites[i]);
-            }
-        }
-        res.send(resultSet);
+        websiteModel
+            .findAllWebsitesForUser(userId)
+            .then(
+                function (websites) {
+                    res.json(websites);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
+        // var resultSet = [];
+        // for (var i in websites) {
+        //     if(websites[i].developerId === userId) {
+        //         resultSet.push(websites[i]);
+        //     }
+        // }
+        // res.send(resultSet);
     }
 
     function findWebsiteById(req, res) {

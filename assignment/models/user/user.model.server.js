@@ -4,7 +4,6 @@
 module.exports = function () {
     
     var mongoose = require('mongoose');
-    
     var UserSchema = require('./user.schema.server')();
     var User = mongoose.model('User', UserSchema);
     
@@ -19,13 +18,10 @@ module.exports = function () {
     return api;
 
     function createUser(user) {
-        // console.log("user.model.server.createUser()");
-        // console.log(user);
         return User.create(user);
     }
 
     function findUserById(userId) {
-        // return User.find({_id: userId});   // returns an array with one object
         return User.findById({_id: userId});
     }
 
@@ -38,10 +34,8 @@ module.exports = function () {
     }
 
     function updateUser(userId, user) {
-        // delete user._id;  // remove _id before updating the whole object
         return User
             .update({_id: userId}, {
-                // $set: user   // won't work with older version of mongodb which could be on openshift server
                 $set: {
                     firstName: user.firstName,
                     lastName: user.lastName

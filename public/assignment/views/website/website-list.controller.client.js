@@ -13,9 +13,12 @@
         function init() {
             WebsiteService
                 .findWebsitesByUser(vm.uid)
-                .then(function (response) {
-                    vm.websites = response.data;
-                });
+                .then(
+                    function (response) {
+                        vm.websites = response.data;
+                    }, function (error) {
+                        vm.error("Websites not found");
+                    });
         }
         init();
     }
