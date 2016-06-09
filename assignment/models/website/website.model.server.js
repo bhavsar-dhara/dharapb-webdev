@@ -16,29 +16,30 @@ module.exports = function () {
     };
     return api;
 
-    function createWebsite(user) {
-        return Website.create(user);
+    function createWebsite(userId, website) {
+        website._user = userId;
+        return Website.create(website);
     }
 
     function findAllWebsitesForUser(userId) {
-        return Website.findById({_user: userId});
+        return Website.find({_user: userId});
     }
 
-    function findWebsiteById(username, password) {
-        return Website.findOne({username: username, password: password});
+    function findWebsiteById(websiteId) {
+        return Website.findById({_id: websiteId});
     }
 
-    function updateWebsite(userId, user) {
+    function updateWebsite(websiteId, website) {
         return Website
-            .update({_id: userId}, {
+            .update({_id: websiteId}, {
                 $set: {
-                    firstName: user.firstName,
-                    lastName: user.lastName
+                    name: website.name,
+                    description: website.description
                 }
             });
     }
 
-    function deleteWebsite(userId) {
-        return Website.remove({_id: userId});
+    function deleteWebsite(websiteId) {
+        return Website.remove({_id: websiteId});
     }
 };

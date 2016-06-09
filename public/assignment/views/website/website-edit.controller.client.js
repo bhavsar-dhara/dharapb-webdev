@@ -16,9 +16,13 @@
         function init() {
             WebsiteService
                 .findWebsiteById(vm.websiteId)
-                .then(function (response) {
-                    vm.website = response.data;
-                });
+                .then(
+                    function (response) {
+                        vm.website = response.data;
+                    },
+                    function (error) {
+                        vm.error = "Website not read";
+                    });
         }
         init();
 
