@@ -4,6 +4,7 @@
 module.exports = function () {
     
     var mongoose = require('mongoose');
+    var WebsiteSchema = require("./website.schema.server.js")(mongoose);
     
     var UserSchema = mongoose.Schema({
         username: {type: String, required: true},
@@ -13,9 +14,7 @@ module.exports = function () {
         dob: Date,
         email: String,
         phone: String,
-        // websites: [WebsiteSchema],
-        // websites: [Schema.Types.WebsiteSchema],
-        // TODO : websites of type [Website] remaining to be added
+        websites: [WebsiteSchema],
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "assignment.user"});
     

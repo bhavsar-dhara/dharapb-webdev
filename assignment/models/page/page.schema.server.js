@@ -4,12 +4,13 @@
 module.exports = function () {
     
     var mongoose = require('mongoose');
+    var WidgetSchema = require("./widget.schema.server.js")(mongoose);
     
     var PageSchema = mongoose.Schema({
         _website: {type: mongoose.Schema.ObjectId, ref:"Website"},
         name: {type: String, required: true},
         description: String,
-        // TODO : widgets of type [Widget] remaining to be added
+        widgets: [WidgetSchema],
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "assignment.page"});
     

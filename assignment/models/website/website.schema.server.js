@@ -4,12 +4,13 @@
 module.exports = function () {
 
     var mongoose = require('mongoose');
+    var PageSchema = require("./page.schema.server.js")(mongoose);
     
     var WebsiteSchema = mongoose.Schema({
         _user: {type: mongoose.Schema.ObjectId, ref:"User"},
         name: {type: String, required: true},
         description: String,
-        // TODO : pages of type [Page] remaining to be added
+        pages: [PageSchema],
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "assignment.website"});
     
