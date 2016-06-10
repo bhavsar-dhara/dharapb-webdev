@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {{data}}
+    <table class="table">
+        <thead>
+            <tr>
+                <th ng-repeat="(key, value) in data[0]">
+                    {{key}}
+                </th>
+            </tr>
+            <!--<tr>
+                <th>Priority</th>
+                <th>Title</th>
+                <th>Todo</th>
+            </tr>-->
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in data | orderBy: 'priority'">
+            <!--<tr ng-repeat="row in data">-->
+                <td ng-repeat="(key, value) in row">
+                    {{value}}
+                </td>
+            </tr>
+            <!--<tr ng-repeat="todoObj in data">
+                <td>{{todoObj.priority}}</td>
+                <td>{{todoObj.title}}</td>
+                <td>{{todoObj.todo}}</td>
+            </tr>-->
+            <!--<tr>
+                <td>1</td>
+                <td>CS5610</td>
+                <td>Teach Angular Directives</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>CS5200</td>
+                <td>Teach Database</td>
+            </tr>-->
+        </tbody>
+    </table>
+
+    <!--{{task}}-->
+<!--{{data}}-->
+
+</body>
+</html>

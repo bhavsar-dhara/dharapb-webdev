@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="TodoApp">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          rel="stylesheet" type="text/css">
+    <link rel="stylesheet"
+          href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <title>WAM</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <title>Todo App</title>
+    <script src="app.js"></script>
+    <script src="todos.js"></script>
+    <style>
+        th {
+            text-transform: capitalize;
+        }
+    </style>
+    <!--<script>
+        $(function () {
+            alert("Hello World");
+            $("ul").sortable();
+        });
+    </script>-->
+</head>
+<body>
+    <div class="container" ng-controller="TodosController as model">
+        <h1>Todo App</h1>
+        <!--{{model.data}}-->
+        <todos data="model.data"
+               callback="model.reorderTodos(start, end)"></todos>
+    </div>
+
+<!--<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+</ul>-->
+
+</body>
+</html>
