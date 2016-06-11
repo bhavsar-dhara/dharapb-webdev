@@ -34,7 +34,7 @@ module.exports = function () {
             .update({_id: pageId}, {
                 $set: {
                     name: page.name,
-                    description: page.description
+                    title: page.title
                 }
             });
     }
