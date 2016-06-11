@@ -22,7 +22,10 @@
                     vm.widgets = response.data;
                 });
             $(".container")
-                .sortable({axis: "y"});
+                .sortable({
+                    axis: "y",
+                    connectWith: ".glyphicon-align-justify"
+                });
         }
         init();
 

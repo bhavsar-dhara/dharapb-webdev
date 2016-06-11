@@ -26,6 +26,7 @@ p.navbar-text.pull-left {
     padding-bottom: 5px;
     border-bottom-left-radius: 8px;
     opacity: 0.8;
+    z-index: 1;
 }
 
 .md-scroll-mask {
