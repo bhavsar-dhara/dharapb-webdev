@@ -4,7 +4,7 @@
 module.exports = function () {
     
     var mongoose = require('mongoose');
-    var WidgetSchema = require("./widget.schema.server.js")(mongoose);
+    var WidgetSchema = require("../widget/widget.schema.server.js")(mongoose);
     
     var PageSchema = mongoose.Schema({
         _website: {type: mongoose.Schema.ObjectId, ref:"Website"},
