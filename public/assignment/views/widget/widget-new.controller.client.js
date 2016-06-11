@@ -36,11 +36,11 @@
 
         function createWidget(widgetType) {
             vm.widget = {
-                _id: (new Date()).getTime()+"",
-                widgetType: widgetType,
-                pageId: vm.pageId
+                // _id: (new Date()).getTime()+"",
+                type: widgetType,
+                // _page: vm.pageId
             };
-            // console.log("controller wgid = "+vm.widget._id);
+            // console.log("controller wgid = "+vm.widget.type);
             WidgetService
                 .createWidget(vm.pageId, vm.widget)
                 .then(function (response) {

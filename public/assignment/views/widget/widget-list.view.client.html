@@ -24,13 +24,14 @@
 </nav>
 <div class="container">
     <div ng-repeat="widget in model.widgets" class="jga-widget">
+        <!--TODO jga-wodget-tool not working for youtube widget-->
         <div class="jga-widget-tool">
             <a href="#/user/{{model.uid}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
             <span class="glyphicon glyphicon-align-justify"></span>
         </div>
-        <div ng-switch="widget.widgetType">
+        <div ng-switch="widget.type">
             <div ng-switch-when="HEADER"
                  ng-switch="widget.size">
                 <h1 ng-switch-when="1">{{widget.text}}</h1>
@@ -47,7 +48,7 @@
                 <img ng-src="{{widget.url}}"
                      width="{{widget.width}}"/>
             </div>
-            <div ng-switch-when="YOUTUBE">
+            <div ng-switch-when="YOUTUBE" class="youtube-widget">
                 <iframe width="{{widget.width}}"
                         ng-src="{{model.getSafeUrl(widget)}}"
                         frameborder="0"

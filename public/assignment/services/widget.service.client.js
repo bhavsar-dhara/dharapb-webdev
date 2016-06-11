@@ -17,7 +17,7 @@
         return api;
 
         function createWidget(pageId, widget) {
-            // console.log("client wgid = "+widget._id);
+            // console.log("client wgid = "+widget.type);
             var url = "/api/page/" + pageId + "/widget";
             return $http.post(url, widget);
         }

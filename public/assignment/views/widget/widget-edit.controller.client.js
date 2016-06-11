@@ -22,9 +22,9 @@
                 .findWidgetById(vm.widgetId)
                 .then(function (response) {
                     vm.widget = response.data;
-                    if (vm.widget.widgetType === "HEADER" && vm.widget.size === null) {
-                        vm.widget.size = vm.headers[0];
-                    } else {
+                    // console.log("edit controller wgid init = "+vm.widget._id);
+                    // console.log("edit controller type init = "+vm.widget.type);
+                    if (vm.widget.type === "HEADER" && vm.widget.size != null) {
                         switch (vm.widget.size+"") {
                             case '1':
                                 vm.widget.size = vm.headers[1];
@@ -45,12 +45,15 @@
                                 vm.widget.size = vm.headers[6];
                                 break;
                         }
+                    } else {
+                        vm.widget.size = vm.headers[0];
                     }
                 });            
         }
         init();
 
         function updateWidget() {
+            // console.log("edit controller size init = "+vm.widget.size);
             WidgetService
                 .updateWidget(vm.widgetId, vm.widget)
                 .then(
