@@ -16,8 +16,10 @@ module.exports = function(app) {
             process.env.OPENSHIFT_APP_NAME;
     }
     var mongoose = require("mongoose");
-    // connect to the database
-    mongoose.connect(connectionString);
+    // connect to the database -- OPENSHIFT 
+    // mongoose.connect(connectionString);  // uncomment this line when uploading the code to OpenShift
+
+    mongoose.connect('mongodb://localhost/cs5610summer1');  // comment this line when uploading the code to OpenShift
 
     var models = require("./models/models.server.js")();
     
