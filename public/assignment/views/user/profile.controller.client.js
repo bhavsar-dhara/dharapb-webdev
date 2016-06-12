@@ -27,10 +27,10 @@
                 .updateUser(uid, newUser)
                 .then(
                     function (response) {
-                        vm.success = "Updated successfully";
+                        vm.success = "Updated successfully.";
                     },
                     function (error) {
-                        vm.error = "Unable to update user";
+                        vm.error = "Unable to update user.";
                     }
                 );
         }
@@ -43,7 +43,7 @@
                         $location.url("/login");
                     },
                     function (error) {
-                        vm.error = "Unable to unregister user";
+                        vm.error = "Unable to unregister user.";
                     }
                 );
         }

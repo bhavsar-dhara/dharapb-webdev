@@ -21,11 +21,11 @@
                         if (newUser) {
                             $location.url("/user/"+newUser._id);
                         } else {
-                            vm.error = "Unable to register user";
+                            vm.error = "Unable to register user.";
                         }
                     });
             } else {
-                vm.error = "Passwords must match";
+                vm.error = "Passwords must match.";
             }
         }
     }

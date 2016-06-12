@@ -17,10 +17,10 @@
                 .then(function (response) {
                     // console.log(response);
                     var user = response.data;
-                    if (user._id) {
+                    if (user != null) {
                         $location.url("/user/" + user._id);
                     } else {
-                        vm.error = "User not found";
+                        vm.error = "User not found. Please register first.";
                     }
                 });
         }
