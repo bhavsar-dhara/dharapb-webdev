@@ -23,12 +23,33 @@
     </div>
 </nav>
 <div class="container">
-    <div ng-model="model.widget.text"
-         text-angular
-         ta-toolbar="[['h1','h2','h3','p'],['bold','italics','underline','strikeThrough'],
-        ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
-        ['indent','outdent'],['html']]">
-    </div>
+    <form>
+        <label for="text">
+            Text
+        </label>
+        <input ng-model="model.widget.text"
+               class="form-control"
+               id="text"/>
+        <label for="rows">
+            Rows
+        </label>
+        <input ng-model="model.widget.rows"
+               class="form-control"
+               type="number"
+               id="rows"/>
+        <label for="placeholder">
+            Placeholder
+        </label>
+        <input ng-model="model.widget.placeholder"
+               class="form-control"
+               id="placeholder"/>
+        <label for="formatted">
+            Formatted
+        </label>
+        <input ng-model="model.widget.formatted"
+               type="checkbox"
+               id="formatted"/>
+    </form>
     <a class="btn btn-danger btn-block"
        ng-click="model.deleteWidget()"
        role="button">

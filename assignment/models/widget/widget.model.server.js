@@ -63,6 +63,18 @@ module.exports = function () {
                         width: widget.width
                     }
                 });
+        } else if (widget.type === "TEXT") {
+            // console.log("inside TEXT update id = " + widgetId);
+            // console.log(widget.text + " " + widget.rows + " " + widget.placeholder + " " + widget.formatted);
+            return Widget
+                .update({_id: widgetId}, {
+                    $set: {
+                        text: widget.text,
+                        rows: widget.rows,
+                        placeholder: widget.placeholder,
+                        formatted: widget.formatted
+                    }
+                });
         } else {
             return Widget
                 .update({_id: widgetId}, {

@@ -48,6 +48,9 @@
                     } else {
                         vm.widget.size = vm.headers[0];
                     }
+                    if (vm.widget.type === "TEXT" && vm.widget.rows != null) {
+                        // TODO to populate the rows value on the view
+                    }
                 });            
         }
         init();

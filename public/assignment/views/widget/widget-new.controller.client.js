@@ -16,6 +16,7 @@
         vm.createImage = createImage;
         vm.createYouTube = createYouTube;
         vm.createHtml = createHtml;
+        vm.createText = createText;
 
         function createHeader() {
             createWidget("HEADER");
@@ -34,10 +35,15 @@
             createWidget("HTML");
         }
 
+        function createText() {
+            // console.log("inside TEXT");
+            createWidget("TEXT");
+        }
+
         function createWidget(widgetType) {
             vm.widget = {
                 // _id: (new Date()).getTime()+"",
-                type: widgetType,
+                type: widgetType
                 // _page: vm.pageId
             };
             // console.log("controller wgid = "+vm.widget.type);
@@ -45,6 +51,7 @@
                 .createWidget(vm.pageId, vm.widget)
                 .then(function (response) {
                     var newWidget = response.data;
+                    // console.log("inside newWidget = " + newWidget.type);
                     // console.log("controller wgid after webservice = "+newWidget._id);
                     if (newWidget) {
                         $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+newWidget._id);
