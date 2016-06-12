@@ -1,7 +1,8 @@
 input.form-control,
 textarea.form-control,
 select.form-control,
-button.form-control {
+button.form-control,
+#input-grp.input-group {
     margin-bottom: 5px;
 }
 
@@ -46,4 +47,8 @@ p.navbar-text.pull-left {
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+#formattedText {
+    font-weight: bold;
 }

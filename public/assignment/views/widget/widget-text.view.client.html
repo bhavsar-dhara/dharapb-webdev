@@ -43,12 +43,25 @@
         <input ng-model="model.widget.placeholder"
                class="form-control"
                id="placeholder"/>
-        <label for="formatted">
+        <div class="input-group" id="input-grp">
+            <input type="text"
+                   value="Formatted"
+                   class="form-control"
+                   aria-label="formatted"
+                   id = "formattedText"
+                   readonly>
+            <span class="input-group-addon">
+                <input type="checkbox"
+                       aria-label="formatted"
+                       ng-model="model.widget.formatted">
+            </span>
+        </div>
+        <!--<label for="formatted">
             Formatted
         </label>
         <input ng-model="model.widget.formatted"
                type="checkbox"
-               id="formatted"/>
+               id="formatted"/>-->
     </form>
     <a class="btn btn-danger btn-block"
        ng-click="model.deleteWidget()"
