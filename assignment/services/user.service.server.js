@@ -4,13 +4,6 @@
 module.exports = function(app, models) {
 
     var userModel = models.userModel;
-    
-    var users = [
-        {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
-        {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
-        {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
-        {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
-    ];
 
     app.post("/api/user", createUser);
     app.get("/api/user", findUsers);
@@ -31,14 +24,6 @@ module.exports = function(app, models) {
                     res.statusCode(400).send(error);
                 }
             );
-        // for (var i in users) {
-        //     if(users[i]._id === userId) {
-        //         users.splice(i, 1);
-        //         res.send(200);
-        //         return;
-        //     }
-        // }
-        // res.send(400);
     }
 
     function updateUser(req, res) {
@@ -55,15 +40,6 @@ module.exports = function(app, models) {
                     res.statusCode(400).send(error);
                 }
             );
-        // for (var i in users) {
-        //     if(users[i]._id === userId) {
-        //         users[i].firstName = newUser.firstName;
-        //         users[i].lastName = newUser.lastName;
-        //         res.send(200);
-        //         return;
-        //     }
-        // }
-        // res.send(400);
     }
 
     function createUser(req, res) {
@@ -79,9 +55,6 @@ module.exports = function(app, models) {
                     res.statusCode(400).send(error);
                 }
             );
-        // user._id  = (new Date()).getTime()+"";
-        // users.push(user);
-        // res.send(user);
     }
 
     function findUserById(req, res) {
@@ -89,23 +62,13 @@ module.exports = function(app, models) {
         userModel
             .findUserById(id)
             .then(
-                // function (users) {
                 function (user) {
                     res.json(user);
-                    // res.send(user);
-                    // res.json(users[0]);
                 },
                 function (error) {
                     res.statusCode(404).send(error);
                 }
             );
-        // for (i in users) {
-        //     if(users[i]._id === id) {
-        //         res.send(users[i]);
-        //         return;
-        //     }
-        // }
-        // res.send({});
     }
     
     function findUsers(req, res) {
@@ -118,7 +81,6 @@ module.exports = function(app, models) {
         } else if (username) {
             findUserByUsername(username, res);
         } else {
-            // res.send(users);
             res.json(users);
         }
     }
@@ -134,13 +96,6 @@ module.exports = function(app, models) {
                     res.statusCode(404).send(error);
                 }
             );
-        // for (i in users) {
-        //     if(users[i].username === username && users[i].password === password) {
-        //         res.send(users[i]);
-        //         return;
-        //     }
-        // }
-        // res.send({});
     }
 
     function findUserByUsername(username, res) {
@@ -154,12 +109,5 @@ module.exports = function(app, models) {
                     res.statusCode(404).send(error);
                 }
             );
-        // for (i in users) {
-        //     if(users[i].username === username) {
-        //         res.send(users[i]);
-        //         return;
-        //     }
-        // }
-        // res.send({});
     }
 };

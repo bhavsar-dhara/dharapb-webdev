@@ -28,8 +28,6 @@
                 .findWidgetById(vm.widgetId)
                 .then(function (response) {
                     vm.widget = response.data;
-                    // console.log("edit controller wgid init = "+vm.widget._id);
-                    // console.log("edit controller type init = "+vm.widget.type);
                     if (vm.widget.type === "HEADER" && vm.widget.size != null) {
                         switch (vm.widget.size+"") {
                             case '1':

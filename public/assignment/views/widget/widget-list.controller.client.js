@@ -22,11 +22,6 @@
                 .then(function (response) {
                     vm.widgets = response.data;
                 });
-            // $(".container")
-            //     .sortable({
-            //         axis: "y",
-            //         handle: ".glyphicon-align-justify"
-            //     });
         }
         init();
 
@@ -35,7 +30,6 @@
         }
 
         function getSafeUrl(widget) {
-            // console.log("widget.url = " + widget.url);
             if(widget.url != null) {
                 var urlParts = widget.url.split("/");
                 var id = urlParts[urlParts.length - 1];

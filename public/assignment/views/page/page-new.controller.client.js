@@ -16,10 +16,8 @@
 
         function createPage(name, title) {
             vm.isEmptyName = vm.newPage.name.$error.required;
-
             if(!vm.isEmptyName) {
                 var page = {
-                    // _id: (new Date()).getTime()+"",
                     name: name,
                     title: title
                 };

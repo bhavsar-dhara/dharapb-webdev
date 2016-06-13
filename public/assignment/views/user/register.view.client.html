@@ -22,7 +22,8 @@
                required/>
         <div class="alert alert-danger"
              role="alert"
-             ng-show="model.isEmptyUser || (model.registerForm.username.$touched && model.registerForm.username.$invalid)">
+             ng-show="model.isEmptyUser ||
+                        (model.registerForm.username.$touched && model.registerForm.username.$invalid)">
             <span class="glyphicon glyphicon-exclamation-sign"
                   aria-hidden="true"></span>
             <span class="sr-only">Error:</span>
@@ -36,7 +37,8 @@
                required/>
         <div class="alert alert-danger"
              role="alert"
-             ng-show="model.isEmptyPassword || (model.registerForm.password.$touched && model.registerForm.password.$invalid)">
+             ng-show="model.isEmptyPassword ||
+                        (model.registerForm.password.$touched && model.registerForm.password.$invalid)">
             <span class="glyphicon glyphicon-exclamation-sign"
                   aria-hidden="true"></span>
             <span class="sr-only">Error:</span>
@@ -50,7 +52,8 @@
                required/>
         <div class="alert alert-danger"
              role="alert"
-             ng-show="model.isEmptyPassword2 || (model.registerForm.password2.$touched && model.registerForm.password2.$invalid)">
+             ng-show="model.isEmptyPassword2 ||
+                        (model.registerForm.password2.$touched && model.registerForm.password2.$invalid)">
             <span class="glyphicon glyphicon-exclamation-sign"
                   aria-hidden="true"></span>
             <span class="sr-only">Error:</span>

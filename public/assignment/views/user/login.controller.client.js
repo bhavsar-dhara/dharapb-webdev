@@ -15,13 +15,10 @@
         vm.login = function(username, password) {
             vm.isEmptyUser = vm.loginForm.username.$error.required;
             vm.isEmptyPassword = vm.loginForm.password.$error.required;
-            // var promise = UserService.findUserByCredentials(username, password);
-            // promise.then(function (response) {
             if(!vm.isEmptyUser && !vm.isEmptyPassword) {
                 UserService
                     .findUserByCredentials(username, password)
                     .then(function (response) {
-                        // console.log(response);
                         var user = response.data;
                         if (user != null) {
                             $location.url("/user/" + user._id);

@@ -17,35 +17,31 @@ module.exports = function () {
     };
     return api;
 
+    // Creates a new widget instance for user whose _id is pageId
     function createWidget(pageId, widget) {
-        // console.log("model wgid = "+widget.type);
         widget._page = pageId;
-        // var widgets = Widget.find({_page: pageId});
-        // var priority = widgets.length;
-        // console.log("priority = " + priority);
-        // widget.priority = priority;
-        // return Widget.create(widget);
         return Widget
             .find({_page: pageId})
             .then(
                 function (widgets) {
                     var priority = widgets.length;
-                    // console.log("priority = " + priority);
                     widget.priority = priority;
                     return Widget.create(widget);
                 });
     }
 
+    // Retrieves all widget instances for user whose  _id is pageId
     function findAllWidgetsForPage(pageId) {
         return Widget.find({_page: pageId});
     }
 
+    // Retrieves single widget instance whose _id is widgetId
     function findWidgetById(widgetId) {
         return Widget.findById({_id: widgetId});
     }
 
+    // Updates widget instance whose _id is widgetId
     function updateWidget(widgetId, widget) {
-        // widget.size = parseInt(widget.size);
         if (widget.type === "HEADER") {
             return Widget
                 .update({_id: widgetId}, {
@@ -77,11 +73,10 @@ module.exports = function () {
                     }
                 });
         } else if (widget.type === "TEXT") {
-            // console.log("inside TEXT update id = " + widgetId);
-            // console.log(widget.text + " " + widget.rows + " " + widget.placeholder + " " + widget.formatted);
             return Widget
                 .update({_id: widgetId}, {
                     $set: {
+                        name: widget.name,
                         text: widget.text,
                         rows: widget.rows,
                         placeholder: widget.placeholder,
@@ -99,20 +94,17 @@ module.exports = function () {
         }
     }
 
+    // Removes widget instance whose _id is widgetId
     function deleteWidget(widgetId) {
         return Widget.remove({_id: widgetId});
     }
 
     //    Modifies the order of widget at position start into final position end in page whose _id is pageId
     function reorderWidget(pageId, start, end) {
-        // console.log("inside reorder " + pageId);
-        // console.log("inside reorder " + start);
-        // console.log("inside reorder " + end);
         return Widget
             .find({_page: pageId})
             .then(function (widgets) {
                 widgets.forEach(function (widget) {
-                    // console.log(widget.priority);
                     if (start > end) {
                         if (widget.priority >= end && widget.priority < start) {
                             widget.priority++;

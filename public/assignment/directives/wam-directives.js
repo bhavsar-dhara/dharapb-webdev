@@ -20,9 +20,6 @@
                     },
                     stop: function (event, ui) {
                         endIndex = ui.item.index();
-                        // var reorderedElement = scope.model.widgets.splice(startIndex, 1)[0];
-                        // scope.model.widgets.splice(endIndex, 0, reorderedElement);
-                        // scope.$apply();
                         scope.reorderWidget({start: startIndex, end: endIndex});
                     }
                 });

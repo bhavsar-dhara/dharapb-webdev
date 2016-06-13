@@ -17,7 +17,6 @@
             vm.isEmptyName = vm.newWebsite.name.$error.required;
             if(!vm.isEmptyName) {
                 var website = {
-                    // _id: (new Date()).getTime()+"",
                     name: name,
                     description: description
                 };

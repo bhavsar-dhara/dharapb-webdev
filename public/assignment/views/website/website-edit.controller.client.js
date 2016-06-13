@@ -29,9 +29,7 @@
         init();
 
         function updateWebsite(website) {
-            
             vm.isEmptyName = vm.editWebsite.name.$error.required;
-
             if(!vm.isEmptyName) {
                 WebsiteService
                     .updateWebsite(vm.websiteId, website)

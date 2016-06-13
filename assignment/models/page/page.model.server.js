@@ -16,19 +16,23 @@ module.exports = function () {
     };
     return api;
 
+    // Creates a new page instance for user whose _id is websiteId
     function createPage(websiteId, page) {
         page._website = websiteId;
         return Page.create(page);
     }
 
+    // Retrieves all page instances for user whose  _id is websiteId
     function findAllPagesForWebsite(websiteId) {
         return Page.find({_website: websiteId});
     }
 
+    // Retrieves single page instance whose _id is pageId
     function findPageById(pageId) {
         return Page.findById({_id: pageId});
     }
 
+    // Updates page instance whose _id is pageId
     function updatePage(pageId, page) {
         return Page
             .update({_id: pageId}, {
@@ -39,6 +43,7 @@ module.exports = function () {
             });
     }
 
+    // Removes page instance whose _id is pageId
     function deletePage(pageId) {
         return Page.remove({_id: pageId});
     }

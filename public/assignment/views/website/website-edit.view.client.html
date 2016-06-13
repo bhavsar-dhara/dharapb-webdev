@@ -54,7 +54,8 @@
                    required/>
             <div class="alert alert-danger"
                  role="alert"
-                 ng-show="model.isEmptyName || (model.editWebsite.name.$touched && model.editWebsite.name.$invalid)">
+                 ng-show="model.isEmptyName ||
+                            (model.editWebsite.name.$touched && model.editWebsite.name.$invalid)">
                 <span class="glyphicon glyphicon-exclamation-sign"
                       aria-hidden="true"></span>
                 <span class="sr-only">Error:</span>

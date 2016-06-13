@@ -31,7 +31,6 @@
 
         function updatePage(page) {
             vm.isEmptyName = vm.editPage.name.$error.required;
-
             if(!vm.isEmptyName) {
                 PageService
                     .updatePage(vm.pageId, page)
