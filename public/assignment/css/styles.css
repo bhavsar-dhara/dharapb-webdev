@@ -54,9 +54,15 @@ p.navbar-text.pull-left {
 }
 
 .css-form input.ng-invalid.ng-touched {
-    background-color: #FAB3B0;
+    /*background-color: #FAB3B0;*/
+    border-color: #761c19;
 }
 
 .css-form input.ng-valid.ng-touched {
-    background-color: #83FA91;
+    /*background-color: #83FA91;*/
+    border-color: #83FA91;
 }
+
+/*.error {*/
+    /*border-color: red;*/
+/*}*/

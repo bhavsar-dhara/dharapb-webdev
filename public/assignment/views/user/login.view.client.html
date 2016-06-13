@@ -9,7 +9,7 @@
     </div>
 
     <h1>Login</h1>
-    <form name="loginForm"
+    <form name="model.loginForm"
           class="css-form"
           novalidate>
         <input name="username"
@@ -20,7 +20,7 @@
                required/>
         <div class="alert alert-danger"
              role="alert"
-             ng-show="loginForm.username.$touched && loginForm.username.$invalid">
+             ng-show="model.isEmptyUser || (model.loginForm.username.$touched && model.loginForm.username.$invalid)">
             <span class="glyphicon glyphicon-exclamation-sign"
                   aria-hidden="true"></span>
             <span class="sr-only">Error:</span>
@@ -34,7 +34,7 @@
                required/>
         <div class="alert alert-danger"
              role="alert"
-             ng-show="loginForm.password.$touched && loginForm.password.$invalid">
+             ng-show="model.isEmptyPassword || (model.loginForm.password.$touched && loginForm.password.$invalid)">
             <span class="glyphicon glyphicon-exclamation-sign"
                   aria-hidden="true"></span>
             <span class="sr-only">Error:</span>
