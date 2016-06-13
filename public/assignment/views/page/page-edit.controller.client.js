@@ -13,6 +13,8 @@
         vm.pageId = $routeParams.pid;
         vm.updatePage = updatePage;
         vm.deletePage = deletePage;
+        vm.isEmptyName = false;
+        vm.editPage = undefined;
 
         function init() {
             PageService
@@ -28,15 +30,19 @@
         init();
 
         function updatePage(page) {
-            PageService
-                .updatePage(vm.pageId, page)
-                .then(
-                    function (response) {
-                        $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page");
-                    },
-                    function (error) {
-                        vm.error = "Page not updated";
-                    });
+            vm.isEmptyName = vm.editPage.name.$error.required;
+
+            if(!vm.isEmptyName) {
+                PageService
+                    .updatePage(vm.pageId, page)
+                    .then(
+                        function (response) {
+                            $location.url("/user/" + vm.uid + "/website/" + vm.websiteId + "/page");
+                        },
+                        function (error) {
+                            vm.error = "Page not updated";
+                        });
+            }
         }
 
         function deletePage() {

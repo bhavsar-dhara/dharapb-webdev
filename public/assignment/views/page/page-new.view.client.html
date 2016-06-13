@@ -37,7 +37,7 @@
         </strong>
         {{model.error}}
     </div>
-    <form name="newPage"
+    <form name="model.newPage"
           class="css-form"
           novalidate>
         <div class="form-group">
@@ -51,7 +51,7 @@
                    required/>
             <div class="alert alert-danger"
                  role="alert"
-                 ng-show="newPage.name.$touched && newPage.name.$invalid">
+                 ng-show="model.isEmptyName || (model.newPage.name.$touched && model.newPage.name.$invalid)">
                 <span class="glyphicon glyphicon-exclamation-sign"
                       aria-hidden="true"></span>
                 <span class="sr-only">Error:</span>

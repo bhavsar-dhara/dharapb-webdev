@@ -14,6 +14,12 @@
         vm.widgetId = $routeParams.wgid;
         vm.updateWidget = updateWidget;
         vm.deleteWidget = deleteWidget;
+        vm.isEmptyName = false;
+        vm.youTubeForm = undefined;
+        vm.textForm = undefined;
+        vm.imageForm = undefined;
+        vm.htmlForm = undefined;
+        vm.headerForm = undefined;
         
         vm.headers = ['Please select', '1', '2', '3', '4', '5', '6'];
 
@@ -53,16 +59,28 @@
         init();
 
         function updateWidget() {
-            // console.log("edit controller size init = "+vm.widget.size);
-            WidgetService
-                .updateWidget(vm.widgetId, vm.widget)
-                .then(
-                    function (response) {
-                        $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
-                    }, 
-                    function (error) {
-                        vm.error = "Widget not updated";
-                    });
+            if(vm.headerForm != undefined) {
+                vm.isEmptyName = vm.headerForm.name.$error.required;
+            } else if(vm.imageForm != undefined) {
+                vm.isEmptyName = vm.imageForm.name.$error.required;
+            } else if(vm.youTubeForm != undefined) {
+                vm.isEmptyName = vm.youTubeForm.name.$error.required;
+            } else if(vm.htmlForm != undefined) {
+                vm.isEmptyName = vm.htmlForm.name.$error.required;
+            } else if(vm.textForm != undefined) {
+                vm.isEmptyName = vm.textForm.name.$error.required;
+            }
+            if(!vm.isEmptyName) {
+                WidgetService
+                    .updateWidget(vm.widgetId, vm.widget)
+                    .then(
+                        function (response) {
+                            $location.url("/user/" + vm.uid + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                        },
+                        function (error) {
+                            vm.error = "Widget not updated";
+                        });
+            }
         }
         
         function deleteWidget() {

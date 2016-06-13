@@ -11,23 +11,29 @@
         vm.uid = $routeParams.uid;
         vm.websiteId = $routeParams.wid;
         vm.createPage = createPage;
+        vm.isEmptyName = false;
+        vm.newPage = undefined;
 
         function createPage(name, title) {
-            var page = {
-                // _id: (new Date()).getTime()+"",
-                name: name,
-                title: title
-            };
-            PageService
-                .createPage(vm.websiteId, page)
-                .then(function (response) {
-                    var newPage = response.data;
-                    if (newPage) {
-                        $location.url("/user/"+vm.uid+"/website/"+vm.websiteId+"/page");
-                    } else {
-                        vm.error = "Unable to create page";
-                    }
-                });
+            vm.isEmptyName = vm.newPage.name.$error.required;
+
+            if(!vm.isEmptyName) {
+                var page = {
+                    // _id: (new Date()).getTime()+"",
+                    name: name,
+                    title: title
+                };
+                PageService
+                    .createPage(vm.websiteId, page)
+                    .then(function (response) {
+                        var newPage = response.data;
+                        if (newPage) {
+                            $location.url("/user/" + vm.uid + "/website/" + vm.websiteId + "/page");
+                        } else {
+                            vm.error = "Unable to create page";
+                        }
+                    });
+            }
         }
     }
 })();

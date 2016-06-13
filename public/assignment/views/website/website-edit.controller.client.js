@@ -12,6 +12,8 @@
         vm.websiteId = $routeParams.wid;
         vm.updateWebsite = updateWebsite;
         vm.deleteWebsite = deleteWebsite;
+        vm.isEmptyName = false;
+        vm.editWebsite = undefined;
 
         function init() {
             WebsiteService
@@ -27,15 +29,20 @@
         init();
 
         function updateWebsite(website) {
-            WebsiteService
-                .updateWebsite(vm.websiteId, website)
-                .then(
-                    function (response) {
-                        $location.url("/user/"+vm.uid+"/website");
-                    },
-                    function (error) {
-                        vm.error = "Website not updated";
-                    });
+            
+            vm.isEmptyName = vm.editWebsite.name.$error.required;
+
+            if(!vm.isEmptyName) {
+                WebsiteService
+                    .updateWebsite(vm.websiteId, website)
+                    .then(
+                        function (response) {
+                            $location.url("/user/" + vm.uid + "/website");
+                        },
+                        function (error) {
+                            vm.error = "Website not updated";
+                        });
+            }
         }
 
         function deleteWebsite() {

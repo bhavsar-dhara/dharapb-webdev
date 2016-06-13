@@ -23,7 +23,7 @@
     </div>
 </nav>
 <div class="container">
-    <form name="youTubeForm"
+    <form name="model.youTubeForm"
           class="css-form"
           novalidate>
         <div class="form-group">
@@ -39,7 +39,7 @@
                    required/>
             <div class="alert alert-danger"
                  role="alert"
-                 ng-show="youTubeForm.name.$touched && youTubeForm.name.$invalid">
+                 ng-show="model.isEmptyName || (model.youTubeForm.name.$touched && model.youTubeForm.name.$invalid)">
                 <span class="glyphicon glyphicon-exclamation-sign"
                       aria-hidden="true"></span>
                 <span class="sr-only">Error:</span>

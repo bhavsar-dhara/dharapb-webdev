@@ -23,7 +23,7 @@
     </div>
 </nav>
 <div class="container">
-    <form name="htmlForm"
+    <form name="model.htmlForm"
           class="css-form"
           novalidate>
         <div class="form-group">
@@ -39,7 +39,7 @@
                    required/>
             <div class="alert alert-danger"
                  role="alert"
-                 ng-show="htmlForm.name.$touched && htmlForm.name.$invalid">
+                 ng-show="model.isEmptyName || (model.htmlForm.name.$touched && model.htmlForm.name.$invalid)">
                 <span class="glyphicon glyphicon-exclamation-sign"
                       aria-hidden="true"></span>
                 <span class="sr-only">Error:</span>
