@@ -15,10 +15,9 @@
         vm.login = function(username, password) {
             vm.isEmptyUser = vm.loginForm.username.$error.required;
             vm.isEmptyPassword = vm.loginForm.password.$error.required;
-            console.log(vm.isEmptyUser);
             // var promise = UserService.findUserByCredentials(username, password);
             // promise.then(function (response) {
-            if(!vm.isEmptyUser || !vm.isEmptyPassword) {
+            if(!vm.isEmptyUser && !vm.isEmptyPassword) {
                 UserService
                     .findUserByCredentials(username, password)
                     .then(function (response) {
