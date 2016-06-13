@@ -24,7 +24,7 @@
             $(".container")
                 .sortable({
                     axis: "y",
-                    connectWith: ".glyphicon-align-justify"
+                    handle: ".glyphicon-align-justify"
                 });
         }
         init();
