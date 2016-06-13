@@ -14,6 +14,7 @@
         vm.widgetId = $routeParams.wgid;
         vm.getSafeHtml = getSafeHtml;
         vm.getSafeUrl = getSafeUrl;
+        vm.reorderWidget = reorderWidget;
 
         function init() {
             WidgetService
@@ -21,11 +22,11 @@
                 .then(function (response) {
                     vm.widgets = response.data;
                 });
-            $(".container")
-                .sortable({
-                    axis: "y",
-                    handle: ".glyphicon-align-justify"
-                });
+            // $(".container")
+            //     .sortable({
+            //         axis: "y",
+            //         handle: ".glyphicon-align-justify"
+            //     });
         }
         init();
 
@@ -41,6 +42,19 @@
                 var url = "https://www.youtube.com/embed/" + id;
                 return $sce.trustAsResourceUrl(url);
             }
+        }
+        
+        function reorderWidget(start, end) {
+            WidgetService
+                .reorderWidget(start, end, vm.pageId)
+                .then(
+                    function () {
+                        init()
+                    },
+                    function (error) {
+                        vm.error = error;
+                    }
+                );
         }
     }
 })();

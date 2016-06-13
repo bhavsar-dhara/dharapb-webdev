@@ -20,7 +20,20 @@ module.exports = function () {
     function createWidget(pageId, widget) {
         // console.log("model wgid = "+widget.type);
         widget._page = pageId;
-        return Widget.create(widget);
+        // var widgets = Widget.find({_page: pageId});
+        // var priority = widgets.length;
+        // console.log("priority = " + priority);
+        // widget.priority = priority;
+        // return Widget.create(widget);
+        return Widget
+            .find({_page: pageId})
+            .then(
+                function (widgets) {
+                    var priority = widgets.length;
+                    // console.log("priority = " + priority);
+                    widget.priority = priority;
+                    return Widget.create(widget);
+                });
     }
 
     function findAllWidgetsForPage(pageId) {
@@ -89,8 +102,43 @@ module.exports = function () {
     function deleteWidget(widgetId) {
         return Widget.remove({_id: widgetId});
     }
-    
+
+    //    Modifies the order of widget at position start into final position end in page whose _id is pageId
     function reorderWidget(pageId, start, end) {
-    //    TODO: Modifies the order of widget at position start into final position end in page whose _id is pageId
+        // console.log("inside reorder " + pageId);
+        // console.log("inside reorder " + start);
+        // console.log("inside reorder " + end);
+        return Widget
+            .find({_page: pageId})
+            .then(function (widgets) {
+                widgets.forEach(function (widget) {
+                    // console.log(widget.priority);
+                    if (start > end) {
+                        if (widget.priority >= end && widget.priority < start) {
+                            widget.priority++;
+                            widget.save(function () {
+
+                            });
+                        } else if (widget.priority === start) {
+                            widget.priority = end;
+                            widget.save(function () {
+
+                            });
+                        }
+                    } else {
+                        if (widget.priority > start && widget.priority <= end) {
+                            widget.priority--;
+                            widget.save(function () {
+
+                            });
+                        } else if (widget.priority === start) {
+                            widget.priority = end;
+                            widget.save(function () {
+
+                            });
+                        }
+                    }
+                });
+            });
     }
 };

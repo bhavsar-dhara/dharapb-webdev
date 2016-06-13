@@ -26,6 +26,7 @@ module.exports = function(app, models) {
     app.get("/api/widget/:widgetId", findWidgetById);
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
+    app.put("/api/page/:pageId/widget", reorderWidget);
 
     function createWidget(req, res) {
         var pageId = req.params.pageId;
@@ -178,5 +179,20 @@ module.exports = function(app, models) {
         }
 
         res.redirect("/assignment/#/user/"+ userId +"/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
+    }
+    
+    function reorderWidget(req, res) {
+        var pageId = req.params.pageId;
+        var start = parseInt(req.query.start);
+        var end = parseInt(req.query.end);
+        widgetModel
+            .reorderWidget(pageId, start, end)
+            .then(
+                function () {
+                    res.status(200).send("Success reordering");
+                }, function (error) {
+                    res.statusCode(400).send(error);
+                }
+            );
     }
 };
