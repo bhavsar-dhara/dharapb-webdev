@@ -16,18 +16,20 @@
                 .then(
                     function (response) {
                         vm.data = response.data;
+                        // console.log("get Success");
                     }
                 );
         }
         init();
         
         function reorderTodos(start, end) {
-            console.log("TodosController");
-            console.log(start);
-            console.log(end);
+            // console.log("TodosController");
+            // console.log(start);
+            // console.log(end);
             $http
                 .put("/api/todos?start="+start+"&end="+end)
                 .then(
+                    // console.log("put Success"),
                     init()
                     // function (response) {
                     //     console.log("Success");

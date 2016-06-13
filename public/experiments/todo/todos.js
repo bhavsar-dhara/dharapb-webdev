@@ -28,12 +28,12 @@
                         // console.log(ui);
                         // console.log(ui.item.index());
                         // console.log([startIndex, stopIndex]);
-                        scope.callback({start: startIndex, end: endIndex});
-                        console.log(scope);
-                        // var reorderedElement = scope.data.splice(startIndex, 1);
+                        // console.log("scope = " + scope);
+                        var reorderedElement = scope.data.splice(startIndex, 1);
                         // console.log(reorderedElement);
-                        // scope.data.splice(endIndex, 0, reorderedElement);
-                        // scope.$apply();
+                        scope.data.splice(endIndex, 0, reorderedElement);
+                        scope.$apply();
+                        scope.reorderTodos({start: startIndex, end: endIndex});
                     }
                 });
         }
@@ -43,7 +43,7 @@
             scope: {
                 // data: "=task"
                 data: "=",
-                callback: "&"
+                reorderTodos: "&callback"
             },
             link: linker
         };
