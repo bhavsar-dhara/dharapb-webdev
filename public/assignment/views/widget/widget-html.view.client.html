@@ -23,12 +23,36 @@
     </div>
 </nav>
 <div class="container">
-    <div ng-model="model.widget.text"
-         text-angular
-         ta-toolbar="[['h1','h2','h3','p'],['bold','italics','underline','strikeThrough'],
+    <form name="htmlForm"
+          class="css-form"
+          novalidate>
+        <div class="form-group">
+            <label for="name">
+                Name
+            </label>
+            <input ng-model="model.widget.name"
+                   type="text"
+                   class="form-control"
+                   id="name"
+                   placeholder="HTML Name"
+                   name="name"
+                   required/>
+            <div class="alert alert-danger"
+                 role="alert"
+                 ng-show="htmlForm.name.$touched && htmlForm.name.$invalid">
+                <span class="glyphicon glyphicon-exclamation-sign"
+                      aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                HTML Name is required
+            </div>
+        </div>
+        <div ng-model="model.widget.text"
+             text-angular
+             ta-toolbar="[['h1','h2','h3','p'],['bold','italics','underline','strikeThrough'],
         ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
         ['indent','outdent'],['html']]">
-    </div>
+        </div>
+    </form>
     <a class="btn btn-danger btn-block"
        ng-click="model.deleteWidget()"
        role="button">

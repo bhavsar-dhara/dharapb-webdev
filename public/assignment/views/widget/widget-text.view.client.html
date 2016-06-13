@@ -23,38 +23,66 @@
     </div>
 </nav>
 <div class="container">
-    <form>
-        <label for="text">
-            Text
-        </label>
-        <input ng-model="model.widget.text"
-               class="form-control"
-               id="text"/>
-        <label for="rows">
-            Rows
-        </label>
-        <input ng-model="model.widget.rows"
-               class="form-control"
-               type="number"
-               id="rows"/>
-        <label for="placeholder">
-            Placeholder
-        </label>
-        <input ng-model="model.widget.placeholder"
-               class="form-control"
-               id="placeholder"/>
-        <div class="input-group" id="input-grp">
-            <input type="text"
-                   value="Formatted"
+    <form name="textForm"
+          class="css-form"
+          novalidate>
+        <div class="form-group">
+            <label for="name">
+                Name
+            </label>
+            <input ng-model="model.widget.name"
                    class="form-control"
-                   aria-label="formatted"
-                   id = "formattedText"
-                   readonly>
+                   id="name"
+                   name="name"
+                   required/>
+            <div class="alert alert-danger"
+                 role="alert"
+                 ng-show="textForm.name.$touched && textForm.name.$invalid">
+                <span class="glyphicon glyphicon-exclamation-sign"
+                      aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                Text Name is required
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="text">
+                Text
+            </label>
+            <input ng-model="model.widget.text"
+                   class="form-control"
+                   id="text"/>
+        </div>
+        <div class="form-group">
+            <label for="rows">
+                Rows
+            </label>
+            <input ng-model="model.widget.rows"
+                   class="form-control"
+                   type="number"
+                   id="rows"/>
+        </div>
+        <div class="form-group">
+            <label for="placeholder">
+                Placeholder
+            </label>
+            <input ng-model="model.widget.placeholder"
+                   class="form-control"
+                   id="placeholder"/>
+        </div>
+        <div class="form-group">
+            <div class="input-group" id="input-grp">
+                <input type="text"
+                       value="Formatted"
+                       class="form-control"
+                       aria-label="formatted"
+                       id="formattedText"
+                       readonly>
             <span class="input-group-addon">
                 <input type="checkbox"
                        aria-label="formatted"
                        ng-model="model.widget.formatted">
             </span>
+            </div>
         </div>
         <!--<label for="formatted">
             Formatted

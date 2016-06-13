@@ -23,7 +23,9 @@
     </div>
 </nav>
 <div class="container">
-    <form>
+    <form name="youTubeForm"
+          class="css-form"
+          novalidate>
         <div class="form-group">
             <label for="name">
                 Name
@@ -32,7 +34,17 @@
                    type="text"
                    class="form-control"
                    id="name"
-                   placeholder="YouTube Video Name">
+                   placeholder="YouTube Video Name"
+                   name="name"
+                   required/>
+            <div class="alert alert-danger"
+                 role="alert"
+                 ng-show="youTubeForm.name.$touched && youTubeForm.name.$invalid">
+                <span class="glyphicon glyphicon-exclamation-sign"
+                      aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                YouTube Name is required
+            </div>
         </div>
         <div class="form-group">
             <label for="text">

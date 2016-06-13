@@ -52,3 +52,11 @@ p.navbar-text.pull-left {
 #formattedText {
     font-weight: bold;
 }
+
+.css-form input.ng-invalid.ng-touched {
+    background-color: #FAB3B0;
+}
+
+.css-form input.ng-valid.ng-touched {
+    background-color: #83FA91;
+}
