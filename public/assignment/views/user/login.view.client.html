@@ -2,18 +2,43 @@
 
     <div ng-if="model.error"
          class="alert alert-danger">
+        <span class="glyphicon glyphicon-exclamation-sign"
+              aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
         {{model.error}}
     </div>
 
     <h1>Login</h1>
-    <input ng-model="username"
-           type="text"
-           class="form-control"
-           placeholder="username"/>
-    <input ng-model="password"
-           type="password"
-           class="form-control"
-           placeholder="password"/>
+    <form name="loginForm">
+        <input name="username"
+               ng-model="username"
+               type="text"
+               class="form-control"
+               placeholder="username"
+               required/>
+        <div class="alert alert-danger"
+             role="alert"
+             ng-show="loginForm.username.$touched && loginForm.username.$invalid">
+            <span class="glyphicon glyphicon-exclamation-sign"
+                  aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+                Username is required
+        </div>
+        <input name="password"
+               ng-model="password"
+               type="password"
+               class="form-control"
+               placeholder="password"
+               required/>
+        <div class="alert alert-danger"
+             role="alert"
+             ng-show="loginForm.password.$touched && loginForm.password.$invalid">
+            <span class="glyphicon glyphicon-exclamation-sign"
+                  aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            Password is required
+        </div>
+    </form>
     <a ng-click="model.login(username, password)"
        class="btn btn-primary btn-block"
        role="button">
