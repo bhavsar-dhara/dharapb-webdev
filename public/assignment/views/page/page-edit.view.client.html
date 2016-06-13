@@ -37,7 +37,7 @@
         </strong>
         {{model.error}}
     </div>
-    <form>
+    <form name="editPage">
         <div class="form-group">
             <label for="name">
                 Name
@@ -47,7 +47,17 @@
                    class="form-control"
                    id="name"
                    placeholder="Page Name"
-                   value="Lorem Ipsum Page">
+                   value="Lorem Ipsum Page"
+                   name="name"
+                   required/>
+            <div class="alert alert-danger"
+                 role="alert"
+                 ng-show="editPage.name.$touched && editPage.name.$invalid">
+                <span class="glyphicon glyphicon-exclamation-sign"
+                      aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                Page Name is required
+            </div>
         </div>
         <div class="form-group">
             <label for="title">
