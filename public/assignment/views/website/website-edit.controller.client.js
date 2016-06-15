@@ -48,7 +48,7 @@
                 .deleteWebsite(vm.websiteId)
                 .then(
                     function (response) {
-                        $location.url("/user/"+vm.uid+"/website");
+                        $location.url("/user/" + vm.uid + "/website");
                     },
                     function (error) {
                         vm.error = "Unable to delete website";

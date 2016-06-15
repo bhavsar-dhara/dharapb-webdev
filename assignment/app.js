@@ -22,6 +22,7 @@ module.exports = function(app) {
         // connect to local database
         mongoose.connect('mongodb://localhost/cs5610summer1');
     }
+
     var models = require("./models/models.server.js")();
     
     require("./services/user.service.server.js")(app, models);
