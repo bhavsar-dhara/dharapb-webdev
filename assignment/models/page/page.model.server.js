@@ -38,7 +38,8 @@ module.exports = function () {
             .update({_id: pageId}, {
                 $set: {
                     name: page.name,
-                    title: page.title
+                    title: page.title,
+                    widgets: page.widgets
                 }
             });
     }

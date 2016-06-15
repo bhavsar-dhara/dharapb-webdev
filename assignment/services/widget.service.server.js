@@ -3,7 +3,15 @@
  */
 module.exports = function(app, models) {
 
-    var widgetModel = models.widgetModel; 
+    var widgetModel = models.widgetModel;
+    // var pageModel = models.pageModel;
+    // var websiteModel = models.websiteModel;
+    // var userModel = models.userModel;
+    // var userObj = undefined;
+    // var websiteObj = undefined;
+    // var pageObj = undefined;
+    // var websiteIdObj = undefined;
+    // var widgetObj = undefined;
     
     var multer = require('multer'); // npm install multer --save
     var upload = multer({ dest: __dirname+'/../../public/uploads' });
@@ -19,6 +27,78 @@ module.exports = function(app, models) {
     function createWidget(req, res) {
         var pageId = req.params.pageId;
         var widget = req.body;
+        // pageModel
+        //     .findPageById(pageId)
+        //     .then(
+        //         function (page) {
+        //             pageObj = page;
+        //             return widgetModel
+        //                 .createWidget(pageId, widget);
+        //         }, function (error) {
+        //             res.statusCode(404).send(error);
+        //         }
+        //     )
+        //     .then(
+        //         function (widget) {
+        //             widgetObj = widget;
+        //             pageObj['widgets'].push(widget);
+        //             return pageModel
+        //                 .updatePage(widget._page, pageObj);
+        //         }, function (error) {
+        //             res.statusCode(400).send(error);
+        //         }
+        //     )
+        //     .then(
+        //         function (stats) {
+        //             return  websiteModel
+        //                 .findWebsiteById(pageObj._website);
+        //         }, function (error) {
+        //             res.statusCode(400).send(error);
+        //         }
+        //     )
+        //     .then(
+        //         function (website) {
+        //             websiteObj = website;
+        //             websiteObj['pages'].push(pageObj);
+        //             return websiteModel
+        //                 .updateWebsite(pageObj._website, websiteObj);
+        //         }, function (error) {
+        //             res.statusCode(404).send(error);
+        //         }
+        //     )
+        //     .then(
+        //         function (stats) {
+        //             return userModel
+        //                 .findUserById(websiteObj._user);
+        //         }, function (error) {
+        //             res.statusCode(400).send(error);
+        //         }
+        //     )
+        //     .then(
+        //         function (user) {
+        //             for (var i = 0; i < user.websites.length; i++) {
+        //                 if (user.websites[i] != undefined) {
+        //                     if (user.websites[i]._id == pageObj._website) {
+        //                         delete user.websites[i];
+        //                         user.websites[i] = websiteObj;
+        //                         break;
+        //                     }
+        //                 }
+        //             }
+        //             userObj = user;
+        //             return userModel
+        //                 .updateUser(websiteObj._user, userObj);
+        //         }, function (error) {
+        //             res.statusCode(404).send(error);
+        //         }
+        //     )
+        //     .then(
+        //         function (stats) {
+        //             res.json(widget);
+        //         }, function (error) {
+        //             res.statusCode(400).send(error);
+        //         }
+        //     );
         widgetModel
             .createWidget(pageId, widget)
             .then(
