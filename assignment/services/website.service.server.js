@@ -1,7 +1,7 @@
 /**
  * Created by Dhara on 5/31/2016.
  */
-module.exports = function(app, models) {
+module.exports = function (app, models) {
 
     var websiteModel = models.websiteModel;
     var userModel = models.userModel;
@@ -92,43 +92,20 @@ module.exports = function(app, models) {
                         .updateWebsite(websiteId, website)
                         .then(
                             function (stats) {
-                                console.log(user);
-                                // var userStr = JSON.stringify(user);
-                                // console.log(typeof userStr);
-                                // var userJsonObj = JSON.parse(userStr);
-                                // var userWebsites = userJsonObj.getJSONArray("websites");
-                                // console.log(typeof userWebsites);
-                                // var userWebsites = [];
-                                // userWebsites = user.websites;
-                                // for (var i=0; i<userWebsites.length; i++) {
-                                //     console.log(typeof userWebsites);
-                                //     console.log(userWebsites[i]._id);
-                                //     console.log(website._id);
-                                //     if (userWebsites[i]._id == websiteId) {
-                                //         userWebsites.splice(i, 1);
-                                //         userWebsites.splice(i, 0, website);
-                                //         return;
-                                //     }
-                                // }
-                                for (var i=0; i<user.websites.length; i++) {
-                                    // console.log(user.websites[i]._id);
-                                    // console.log(websiteId);
+                                for (var i = 0; i < user.websites.length; i++) {
                                     if (user.websites[i] != undefined) {
                                         if (user.websites[i]._id == websiteId) {
                                             delete user.websites[i];
                                             user.websites[i] = website;
-                                            // user.websites.splice(i, 1);
-                                            // user.websites.splice(i, 0, website);
                                             break;
                                         }
                                     }
                                 }
-                                console.log(user);
                                 userModel
                                     .updateUser(website._user, user)
                                     .then(
                                         function (stats) {
-                                            res.json(website);
+                                            res.send(stats);
                                         }, function (error) {
                                             res.statusCode(400).send(error);
                                         }
@@ -167,11 +144,10 @@ module.exports = function(app, models) {
                                     .deleteWebsite(websiteId)
                                     .then(
                                         function (stats) {
-                                            for (var i=0; i<user.websites.length; i++) {
+                                            for (var i = 0; i < user.websites.length; i++) {
                                                 if (user.websites[i] != undefined) {
                                                     if (user.websites[i]._id == websiteId) {
                                                         delete user.websites[i];
-                                                        // user.websites[i] = website;
                                                         break;
                                                     }
                                                 }
@@ -180,7 +156,7 @@ module.exports = function(app, models) {
                                                 .updateUser(website._user, user)
                                                 .then(
                                                     function (stats) {
-                                                        res.json(website);
+                                                        res.send(stats);
                                                     }, function (error) {
                                                         res.statusCode(400).send(error);
                                                     }
