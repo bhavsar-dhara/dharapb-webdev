@@ -17,7 +17,7 @@
             vm.isEmptyPassword = vm.loginForm.password.$error.required;
             if(!vm.isEmptyUser && !vm.isEmptyPassword) {
                 UserService
-                    .findUserByCredentials(username, password)
+                    .login(username, password)
                     .then(function (response) {
                         var user = response.data;
                         if (user != null) {

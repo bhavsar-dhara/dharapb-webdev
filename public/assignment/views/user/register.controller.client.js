@@ -21,15 +21,19 @@
             if(!vm.isEmptyUser && !vm.isEmptyPassword && !vm.isEmptyPassword2) {
                 if (vm.password2 === user.password) {
                     UserService
-                        .createUser(user)
-                        .then(function (response) {
-                            var newUser = response.data;
-                            if (newUser) {
-                                $location.url("/user/" + newUser._id);
-                            } else {
-                                vm.error = "Unable to register user.";
-                            }
-                        });
+                        .register(user)
+                        .then(
+                            function (response) {
+                                var newUser = response.data;
+                                if (newUser) {
+                                    $location.url("/user/" + newUser._id);
+                                } else {
+                                    vm.error = "Unable to register user.";
+                                }
+                            },
+                            function (error) {
+                                vm.error = error.data;
+                            });
                 } else {
                     vm.error = "Passwords must match.";
                 }
