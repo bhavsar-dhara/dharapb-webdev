@@ -3,12 +3,19 @@
  */
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
 module.exports = function(app, models) {
 
     var userModel = models.userModel;
 
+    // app.get("/auth/facebook", facebookLogin);
+    app.get("/auth/facebook", passport.authenticate('facebook'));
+    app.get("/auth/facebook/callback", passport.authenticate('facebook', {
+        successRedirect: '/assignment/#/profile',
+        failureRedirect: '/assignment/#/login'
+    }));
     app.post("/api/user", createUser);
     app.post("/api/register", register);
     app.get("/api/loggedIn", loggedIn);
@@ -23,6 +30,13 @@ module.exports = function(app, models) {
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
+    var facebookConfig = {
+        clientID     : process.env.FACEBOOK_CLIENT_ID,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    };
+    passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
+
     function localStrategy(username, password, done) {
         userModel
             .findUserByUsername(username)
@@ -34,7 +48,6 @@ module.exports = function(app, models) {
                     } else {
                         done(null, false);
                     }
-                    res.json(user);
                 },
                 function (error) {
                     done(error);
@@ -55,6 +68,44 @@ module.exports = function(app, models) {
                 },
                 function(err){
                     done(err, null);
+                }
+            );
+    }
+    
+    // function facebookLogin(req, res) {
+    //     res.send(200);
+    // }
+
+    function facebookLogin(token, refreshToken, profile, done) {
+        userModel
+            .findFacebookUser(profile.id)
+            .then(
+                function (facebookUser) {
+                    if(facebookUser) {
+                        return done(null, facebookUser);
+                    } else {
+                        facebookUser = {
+                            username: profile.displayName.replace(/ /g, ''),
+                            facebook: {
+                                token: token,
+                                id: profile.id,
+                                displayName: profile.displayName
+                            }
+                        };
+                        userModel
+                            .createUser(facebookUser)
+                            .then(
+                                function (user) {
+                                    done(null, user);
+                                },
+                                function (error) {
+                                    done(error, null);
+                                }
+                            )
+                    }
+                },
+                function (error) {
+                    done(error, null);
                 }
             );
     }
@@ -99,7 +150,7 @@ module.exports = function(app, models) {
                             }
                         });
                     } else {
-
+                        console.log("Error in register login");
                     }
                 },
                 function (error) {
@@ -184,19 +235,22 @@ module.exports = function(app, models) {
         // console.log(username);
         // console.log(password);
         if (username && password) {
-            findUserByCredentials(username, password, res);
+            findUserByCredentials(username, password, req, res);
         } else if (username) {
-            findUserByUsername(username, res);
+            findUserByUsername(username, req, res);
         } else {
             res.json(users);
         }
     }
 
-    function findUserByCredentials(username, password, res) {
+    function findUserByCredentials(username, password, req, res) {
         userModel
             .findUserByCredentials(username, password)
             .then(
                 function (user) {
+                    console.log(req.session);
+                    //noinspection JSAnnotator
+                    req.session.currentUser = user;
                     res.json(user);
                 },
                 function (error) {

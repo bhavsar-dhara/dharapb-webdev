@@ -6,13 +6,14 @@
         .module("WebAppMaker")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($routeParams, $location, UserService) {
+    function ProfileController($location, UserService, $rootScope) {
         var vm = this;
         vm.updateUser = updateUser;
         vm.unRegister = unRegister;
         vm.logout = logout;
         
-        var uid = $routeParams.uid;
+        // var uid = $routeParams.uid;
+        var uid = $rootScope.currentUser._id;
         
         function init() {
             UserService
