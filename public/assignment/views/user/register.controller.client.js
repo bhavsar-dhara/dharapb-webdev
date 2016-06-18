@@ -6,7 +6,7 @@
         .module("WebAppMaker")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController($location, UserService) {
+    function RegisterController($location, UserService, $rootScope) {
         var vm = this;
         vm.createUser = createUser;
         vm.registerForm = undefined;
@@ -26,6 +26,7 @@
                             function (response) {
                                 var newUser = response.data;
                                 if (newUser) {
+                                    $rootScope.currentUser = user;
                                     $location.url("/user/" + newUser._id);
                                 } else {
                                     vm.error = "Unable to register user.";

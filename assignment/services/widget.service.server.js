@@ -106,14 +106,31 @@ module.exports = function(app, models) {
             var size = myFile.size;
             var mimetype = myFile.mimetype;
 
-            for (var i in widgets) {
-                if (widgets[i]._id === widgetId) {
-                    widgets[i].url = "/uploads/" + filename;
-                }
-            }
+            widgetModel
+                .findAllWidgetsForPage(pageId)
+                .then(
+                    function (widgets) {
+                        for (var i in widgets) {
+                            if (widgets[i]._id == widgetId) {
+                                widgets[i].url = "/uploads/" + filename;
+                                return widgetModel
+                                    .updateWidget(widgetId, widgets[i]);
+                            }
+                        }
+                    },
+                    function (error) {
+                        res.statusCode(404).send(error);
+                    }
+                )
+                .then(
+                    function (stats) {
+                        res.redirect("/assignment/#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
+                    },
+                    function (error) {
+                        res.statusCode(400).send(error);
+                    }
+                );
         }
-
-        res.redirect("/assignment/#/user/"+ userId +"/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
     }
     
     function reorderWidget(req, res) {

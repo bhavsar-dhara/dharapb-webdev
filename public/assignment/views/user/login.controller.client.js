@@ -6,7 +6,7 @@
         .module("WebAppMaker")
         .controller("LoginController", LoginController);
 
-    function LoginController($location, UserService) {
+    function LoginController($location, UserService, $rootScope) {
         var vm = this; // viewModel = vm
         vm.isEmptyUser = false;
         vm.isEmptyPassword = false;
@@ -18,14 +18,19 @@
             if(!vm.isEmptyUser && !vm.isEmptyPassword) {
                 UserService
                     .login(username, password)
-                    .then(function (response) {
-                        var user = response.data;
-                        if (user != null) {
-                            $location.url("/user/" + user._id);
-                        } else {
-                            vm.error = "User not found. Please register first.";
-                        }
-                    });
+                    .then(
+                        function (response) {
+                            var user = response.data;
+                            $rootScope.currentUser = user;
+                            if (user != null) {
+                                $location.url("/user/" + user._id);
+                            } else {
+                                vm.error = "User not found. Please register first.";
+                            }
+                        },
+                        function (error) {
+                            vm.error = "Sorry! Something went wrong.";
+                        });
             }
         }
     }

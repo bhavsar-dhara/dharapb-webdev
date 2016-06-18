@@ -13,7 +13,7 @@ module.exports = function(app, models) {
     // app.get("/auth/facebook", facebookLogin);
     app.get("/auth/facebook", passport.authenticate('facebook'));
     app.get("/auth/facebook/callback", passport.authenticate('facebook', {
-        successRedirect: '/assignment/#/profile',
+        successRedirect: '/assignment/#/user',
         failureRedirect: '/assignment/#/login'
     }));
     app.post("/api/user", createUser);
@@ -44,13 +44,13 @@ module.exports = function(app, models) {
                 function (user) {
                     // TODO
                     if(user && bcrypt.compareSync(password, user.password)) {
-                        done(null, user);
+                        return done(null, user);
                     } else {
-                        done(null, false);
+                        return done(null, false);
                     }
                 },
                 function (error) {
-                    done(error);
+                    return done(error);
                 }
             );
     }
@@ -128,7 +128,6 @@ module.exports = function(app, models) {
                 function (user) {
                     if(user) {
                         res.status(400).send("Username already in use");
-                        return;
                     } else {
                         userObj.password = bcrypt.hashSync(password);
                         return userModel
@@ -160,7 +159,7 @@ module.exports = function(app, models) {
     }
     
     function logout(req, res) {
-        req.logout();
+        req.logOut();
         res.send(200);
     }
 
