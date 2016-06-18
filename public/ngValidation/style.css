@@ -1,0 +1,11 @@
+form {
+    padding: 10px;
+}
+
+form.ng-submitted {
+    border: solid 10px yellow;
+}
+
+form.ng-invalid {
+    background-color: red;
+}
