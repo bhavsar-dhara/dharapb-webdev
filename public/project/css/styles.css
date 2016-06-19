@@ -23,7 +23,15 @@ p.navbar-text.pull-left {
     position: relative;
 }
 
+.right-inner-addon {
+    position: relative;
+}
+
 .sign-in-up .right-inner-addon input {
+    padding-right: 30px;
+}
+
+.right-inner-addon input {
     padding-right: 30px;
 }
 
@@ -34,7 +42,18 @@ p.navbar-text.pull-left {
     pointer-events: none;
 }
 
+.right-inner-addon i {
+    position: absolute;
+    right: 0px;
+    padding: 17px 12px;
+    pointer-events: none;
+}
+
 .sign-in-up .click2select {
     text-align: center;
     margin-top: 1em;
+}
+
+.btn {
+    margin-bottom: 5px;
 }
