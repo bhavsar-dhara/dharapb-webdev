@@ -15,6 +15,7 @@
         vm.updateWidget = updateWidget;
         vm.deleteWidget = deleteWidget;
         vm.isEmptyName = false;
+        vm.isEmptyText = false;
         vm.youTubeForm = undefined;
         vm.textForm = undefined;
         vm.imageForm = undefined;
@@ -59,6 +60,7 @@
         function updateWidget() {
             if(vm.headerForm != undefined) {
                 vm.isEmptyName = vm.headerForm.name.$error.required;
+                vm.isEmptyText = vm.headerForm.text.$error.required;
             } else if(vm.imageForm != undefined) {
                 vm.isEmptyName = vm.imageForm.name.$error.required;
             } else if(vm.youTubeForm != undefined) {
@@ -68,7 +70,7 @@
             } else if(vm.textForm != undefined) {
                 vm.isEmptyName = vm.textForm.name.$error.required;
             }
-            if(!vm.isEmptyName) {
+            if(!vm.isEmptyName || (!vm.isEmptyText && vm.headerForm != undefined)) {
                 WidgetService
                     .updateWidget(vm.widgetId, vm.widget)
                     .then(

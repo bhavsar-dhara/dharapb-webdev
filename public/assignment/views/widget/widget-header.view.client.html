@@ -55,7 +55,18 @@
                    type="text"
                    class="form-control"
                    id="text"
-                   placeholder="Header Text">
+                   placeholder="Header Text"
+                   name="text"
+                   required>
+            <div class="alert alert-danger"
+                 role="alert"
+                 ng-show="model.isEmptyText ||
+                            (model.headerForm.text.$touched && model.headerForm.text.$invalid)">
+                <span class="glyphicon glyphicon-exclamation-sign"
+                      aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                Header Name is required
+            </div>
         </div>
         <div class="form-group">
             <label for="size">
