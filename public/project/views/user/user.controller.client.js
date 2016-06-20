@@ -9,7 +9,7 @@
     
     function LoginRegController($location, UserService) {
         var vm = this;
-        vm.showAlert = false;
+        vm.showSuccess = false;
         vm.showError = false;
         vm.login = login;
         vm.register = register;
@@ -44,7 +44,7 @@
     
     function UserProfileController($location, $routeParams, UserService) {
         var vm = this;
-        vm.showAlert = false;
+        vm.showSuccess = false;
         vm.showError = false;
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
