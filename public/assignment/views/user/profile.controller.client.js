@@ -8,6 +8,8 @@
 
     function ProfileController($location, UserService, $rootScope) {
         var vm = this;
+        vm.showSuccess = false;
+        vm.showError = false;
         vm.updateUser = updateUser;
         vm.unRegister = unRegister;
         vm.logout = logout;
@@ -43,9 +45,11 @@
                 .updateUser(uid, newUser)
                 .then(
                     function (response) {
+                        vm.showSuccess = true;
                         vm.success = "Updated successfully.";
                     },
                     function (error) {
+                        vm.showError = true;
                         vm.error = "Unable to update user.";
                     }
                 );
@@ -59,6 +63,7 @@
                         $location.url("/login");
                     },
                     function (error) {
+                        vm.showError = true;
                         vm.error = "Unable to unregister user.";
                     }
                 );
