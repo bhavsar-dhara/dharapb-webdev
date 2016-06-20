@@ -57,3 +57,15 @@ p.navbar-text.pull-left {
 .btn {
     margin-bottom: 5px;
 }
+
+#map {
+    height: -webkit-calc(100% - 50px);
+    height: -moz-calc(100% - 50px);
+    height: calc(100% - 50px);
+    width: 75%;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 50px;
+}

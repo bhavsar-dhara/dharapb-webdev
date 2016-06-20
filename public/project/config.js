@@ -22,10 +22,14 @@
                 controllerAs: "model"
             })
             .when("/event", {
-                templateUrl: "views/user/event-list.view.client.html"
+                templateUrl: "views/event/event-list.view.client.html",
+                controller: "EventsController",
+                controllerAs: "model"
             })
             .when("/event/:eventId", {
-                templateUrl: "views/user/event-details.view.client.html"
+                templateUrl: "views/event/event-details.view.client.html",
+                controller: "EventDetailController",
+                controllerAs: "model"
             })
             .otherwise({
                 redirectTo: "/login"
