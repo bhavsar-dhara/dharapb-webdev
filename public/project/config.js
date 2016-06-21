@@ -21,12 +21,12 @@
                 controller: "UserProfileController",
                 controllerAs: "model"
             })
-            .when("/event", {
+            .when("/user/:uid/event", {
                 templateUrl: "views/event/event-list.view.client.html",
                 controller: "EventsController",
                 controllerAs: "model"
             })
-            .when("/event/:eventId", {
+            .when("/user/:uid/event/:eventId", {
                 templateUrl: "views/event/event-details.view.client.html",
                 controller: "EventDetailController",
                 controllerAs: "model"

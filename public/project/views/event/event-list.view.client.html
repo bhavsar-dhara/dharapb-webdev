@@ -1,7 +1,43 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a class="navbar-link"
+                   href="#/user/{{model.userId}}">
+                        <span class="fa fa-chevron-left">
+                        </span>
+                </a>
+            </p>
+            <a class="navbar-brand"
+               href="">
+                Music Around Me
+            </a>
+            <p class="navbar-text pull-right">
+                <a class="navbar-link">
+                        <span class="fa fa-navicon">
+                        </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
 <div class="container">
+    <!--<div class="right-inner-addon">-->
+        <!--<i class="fa fa-map-marker"></i>-->
+        <input id="pac-input"
+               class="controls"
+               type="text"
+               placeholder="Enter a location">
+    <!--</div>-->
     <div id="map"></div>
 
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBihcuZF4Dcm2ZuJ4BEU09f62kIreSo-Wk&callback=initMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBihcuZF4Dcm2ZuJ4BEU09f62kIreSo-Wk&libraries=places&callback=initMap"
+            async defer></script>
 
 </div>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="row">
+        </div>
+    </div>
+</nav>

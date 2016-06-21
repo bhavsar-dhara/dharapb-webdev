@@ -7,11 +7,17 @@
         .controller("EventsController", EventsController)
         .controller("EventDetailController", EventDetailController);
     
-    function EventsController() {
-        
+    function EventsController($routeParams) {
+        var vm = this;
+        vm.userId = $routeParams.uid;
+
+
     }
 
-    function EventDetailController() {
+    function EventDetailController($routeParams) {
+        var vm = this;
+        vm.userId = $routeParams.uid;
 
+        
     }
 })();
