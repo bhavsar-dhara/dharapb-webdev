@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          rel="stylesheet" type="text/css">
+    <link href="../public/css/styles.css">
+</head>
+<body>
+    <h2>Hello <%= name %></h2>
+    <div class="container wam-style">
+        <ul>
+            <% for (var s in statements) {
+                var panel = 'panel-' + statements[s].type;
+            %>
+            <!--<div class="panel panel-primary">-->
+                <!--<div class="panel-heading">-->
+                    <!--<%= statements[s].type %> Statement-->
+                <!--</div>-->
+                <!--<div class="panel-body">-->
+                    <!--Panel Content-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<% include panel.ejs %>-->
+            <%- include(panel) %>
+
+            <!--<svg height="50" width="25">-->
+                <!--<line x1="12.5" x2="12.5" y1="0" y2="50" style="stroke: black"></line>-->
+                <!--<line x1="0" x2="12.5" y1="35" y2="50" style="stroke: black"></line>-->
+                <!--<line x1="25" x2="12.5" y1="35" y2="50" style="stroke: black"></line>-->
+            <!--</svg>-->
+
+            <svg height="50" width="25">
+                <line x1="50%" x2="12.5" y1="50%" y2="50" style="stroke: black"></line>
+                <line x1="47%" x2="12.5" y1="50%" y2="50" style="stroke: black"></line>
+                <line x1="53%" x2="12.5" y1="50%" y2="50" style="stroke: black"></line>
+            </svg>
+
+            <!--<li>-->
+            <!--<%= statements[s].type %>-->
+            <!--</li>-->
+            <% } %>
+        </ul>
+    </div>
+    <ul>
+        <% var size = 10;
+            var a = 10;
+            var b = 25;
+            var c = a + b;
+            for(var i=0; i<10; i++) {
+        %>
+            <li>EJS ROCKS</li>
+        <%  } %>
+    </ul>
+
+    <%= size
+    %>
+    &nbsp;
+    <%= c
+    %>
+</body>
+</html>
