@@ -12,7 +12,7 @@ p.navbar-text.pull-left {
 }
 
 .navbar {
-    background-color: #8cee7a;
+    background-color: #14EEDA;
     color: black;
     border-color: transparent;
 }
@@ -82,8 +82,8 @@ p.navbar-text.pull-left {
 }
 
 #pac-input {
-    background-color: #fff;
-    font-family: Roboto;
+    background-color: #FFF;
+    font-family: Roboto, serif;
     font-size: 15px;
     font-weight: 300;
     margin-left: 12px;
@@ -93,25 +93,93 @@ p.navbar-text.pull-left {
 }
 
 #pac-input:focus {
-    border-color: #4d90fe;
+    border-color: #4D90FE;
 }
 
 .pac-container {
-    font-family: Roboto;
+    font-family: Roboto, serif;
 }
 
 #type-selector {
-    color: #fff;
-    background-color: #4d90fe;
+    color: #FFF;
+    background-color: #4D90FE;
     padding: 5px 11px 0px 11px;
 }
 
 #type-selector label {
-    font-family: Roboto;
+    font-family: Roboto, serif;
     font-size: 13px;
     font-weight: 300;
 }
 
 #target {
     width: 345px;
+}
+
+@media (min-width: 768px) {
+    #map {
+        width: 75%;
+    }
+}
+
+@media (max-width: 767px) {
+    #map {
+        width: 100%;
+    }
+}
+
+.eventList {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: white;
+    width: 25%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: -webkit-calc(100% - 50px);
+    height: -moz-calc(100% - 50px);
+    height: calc(100% - 50px);
+    overflow: auto;
+}
+
+.eventList ul {
+    list-style: none;
+    padding: 0;
+}
+
+.eventList li {
+    padding: 10px;
+    background: rgba(155, 155, 155, 0.5);
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+}
+
+.eventList li img {
+    float: left;
+    position: relative;
+    margin: 0 15px 0 0;
+    max-height: 100%;
+}
+
+.eventList li p {
+    width: 100%;
+    font-weight: 200;
+    font-size: 12px;
+    line-height: 1.5 ;
+    font-family: Roboto, serif;
+}
+
+.eventList li:hover {
+    background: #90D1F3;
+    cursor: pointer;
+}
+
+.logo {
+    max-height: 100px;
+    max-width: 100px;
+}
+
+p.capitalize {
+    text-transform: capitalize;
 }
