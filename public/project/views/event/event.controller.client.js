@@ -26,6 +26,8 @@
                         // data = JSON.parse(data);
                         // console.log("data = " + data);
                         vm.events = data.events;
+                        // console.log("date = " + vm.events.event[0].start_time);
+                        // console.log("date = " + moment(vm.events.event[0].start_time, moment.ISO_8601).format("dddd, MMMM Do YYYY"));
                     },
                     function (error) {
                         console.log("Something went wrong..." + error);

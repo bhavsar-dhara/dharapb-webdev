@@ -32,13 +32,13 @@
     <div id="map"></div>
 
     <div class="col-xs-8 col-xs-offset-4 eventList">
-        <ul ng-repeat="event in model.events.event"
+        <ul ng-repeat="event in model.events.event | orderBy:'start_time'"
             class="list-group">
             <li class="list-group-item">
                 <img src="{{event.image.medium.url}}" class="logo">
                 <p class="capitalize"><strong>{{event.title.toLowerCase()}}</strong></p>
-                <p>{{event.start_time}}</p>
-                <!--<p>{{moment(event.start_time, moment.ISO_8601).format("dddd, MMMM Do YYYY, h:mm:ss a")}}</p>-->
+                <p>{{event.start_time | cmdate:'MMMM dd, yyyy'}}</p>
+                <!--<p>{{moment(new Date(event.start_time), moment.ISO_8601).format("dddd, MMMM Do YYYY, h:mm:ss a")}}</p>-->
                 <!--<p>{{moment(event.start_time).format('LLL')}}()</p>-->
                 <!--<p>{{event.id}}</p>-->
                 <!--<p>{{event.url}}</p>-->
