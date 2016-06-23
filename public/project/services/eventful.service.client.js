@@ -6,9 +6,6 @@
         .module("MusicAroundMe")
         .factory("EventfulService", EventfulService);
 
-    // API to be used
-    // http://api.eventful.com/json/events/search?app_key=TjLhBLhJm4SCTsMx&keywords=books&location=San+Diego&date=Future
-    // var key = "Pc55hFFcncSQH6qW";
     var key = "TjLhBLhJm4SCTsMx";
     var urlBaseInit = "http://api.eventful.com/json/events/search?app_key=API_KEY&category=music&location=LOCATION&date=This Week&sort_order=popularity&sort_direction=ascending&callback=JSON_CALLBACK";
     var urlBase = "http://api.eventful.com/json/events/search?app_key=API_KEY&category=music&keywords=TEXT&location=LOCATION&date=This Week&sort_order=popularity&sort_direction=ascending&callback=JSON_CALLBACK";
@@ -34,7 +31,6 @@
                     .replace("TEXT", searchText)
                     .replace("LOCATION", location);
             }
-            // return $http.get(url);
             return $http.jsonp(url);
         }
     }
