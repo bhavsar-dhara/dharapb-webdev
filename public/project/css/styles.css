@@ -12,7 +12,7 @@ p.navbar-text.pull-left {
 }
 
 .navbar {
-    background-color: #14EEDA;
+    background-color: #EBEBEB;
     color: black;
     border-color: transparent;
 }
@@ -120,11 +120,25 @@ p.navbar-text.pull-left {
     #map {
         width: 75%;
     }
+
+    .eventList {
+        width: 25%;
+        display: block;
+    }
 }
 
 @media (max-width: 767px) {
     #map {
         width: 100%;
+    }
+
+    .eventList {
+        width: 50%;
+        display: none;
+    }
+
+    .navbar-collapse {
+        overflow-x: hidden;
     }
 }
 
@@ -132,7 +146,6 @@ p.navbar-text.pull-left {
     padding-top: 60px;
     padding-bottom: 60px;
     background-color: white;
-    width: 25%;
     position: absolute;
     top: 0;
     right: 0;
@@ -157,7 +170,6 @@ p.navbar-text.pull-left {
 
 .eventList li img {
     float: left;
-    position: relative;
     margin: 0 15px 0 0;
     max-height: 100%;
 }
@@ -182,4 +194,16 @@ p.navbar-text.pull-left {
 
 p.capitalize {
     text-transform: capitalize;
+}
+
+.navbar-default {
+    max-height: 50px;
+}
+
+.navbar-default li>a:hover,.navbar-default li>a:focus {
+    background-color: #49bfff;
+}
+
+.navbar-default a {
+    color:#777;
 }
