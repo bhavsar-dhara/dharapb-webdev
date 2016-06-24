@@ -45,6 +45,9 @@ module.exports = function (app, models) {
     }
 
     function scriptListController(req, res) {
-        res.render('wam/script/script-list.view.server.ejs');
+        var scope = {
+            scriptId: req.params.scriptId
+        };
+        res.render('wam/script/script-list.view.server.ejs', scope);
     }
 };
