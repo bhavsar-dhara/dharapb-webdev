@@ -1,0 +1,48 @@
+.fa-navicon,
+.fa-music,
+.fa-envelope-square,
+.fa-phone-square,
+#brand {
+    color: steelblue;
+}
+
+#brand {
+    font-family: 'Monoton', cursive;
+    font-size-adjust: inherit;
+}
+
+.carousel,
+.item,
+.active {
+    height: 100%;
+}
+
+.carousel-inner {
+    height: 100%;
+}
+
+.custom-caption {
+    color: darkcyan;
+    font-family: 'Monofett', cursive;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+#discover {
+    margin-top: 15px;
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (max-width: 767px) {
+
+}
+
+#contact,
+#login {
+    color: steelblue;
+}
