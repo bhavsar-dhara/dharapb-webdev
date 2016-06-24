@@ -44,7 +44,7 @@ module.exports = function (models) {
                 function (script) {
                     var statement = script.statements.id(statementId);
                     statement.name = statementName;
-                    return 3script.save();
+                    return script.save();
                 }
             );
     }
