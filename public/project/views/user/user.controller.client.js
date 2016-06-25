@@ -15,26 +15,31 @@
         vm.register = register;
 
         function login(username, password) {
-            var user = UserService.findUserByCredentials(username, password);
-            if (user) {
-                $location.url("/user/" + user._id);
-            } else {
-                vm.showError = true;
-                vm.error = "User not found";
-            }
+            UserService
+                .findUserByCredentials(username, password)
+                .then(function (response) {
+                    var user = response.data;
+                    if (user) {
+                        $location.url("/user/" + user._id);
+                    } else {
+                        vm.error = "User not found";
+                    }
+                });
         }   
         
         function register(user) {
-            var uid = (new Date()).getTime()+"";
             if(vm.password2 === user.password) {
-                user._id = uid;
-                var newUser = UserService.createUser(user);
-                if (newUser) {
-                    $location.url("/user/"+newUser._id);
-                } else {
-                    vm.showError = true;
-                    vm.error = "Unable to register user";
-                }
+                UserService
+                    .createUser(user)
+                    .then(function (response) {
+                        var user = response.data;
+                        if (user) {
+                            $location.url("/user/" + user._id);
+                        } else {
+                            vm.showError = true;
+                            vm.error = "Unable to register user";
+                        }
+                    });
             } else {
                 vm.showError = true;
                 vm.error = "Passwords don't match";
@@ -53,29 +58,41 @@
         vm.userId = uid;
 
         function init() {
-            vm.user = UserService.findUserById(uid);
+            UserService
+                .findUserById(uid)
+                .then(function (response) {
+                    vm.user = response.data;
+                });
         }
         init();
 
         function updateUser(user) {
-            if (UserService.updateUser(uid, user)) {
-                console.log("updated..");
-                vm.showSuccess = true;
-                $location.url("/user/"+uid);
-                vm.success = "User details updated successfully";
-            } else {
-                vm.showError = true;
-                vm.error = "User not found";
-            }
+            UserService
+                .updateUser(uid, user)
+                .then(
+                    function (response) {
+                        vm.showSuccess = true;
+                        $location.url("/user/"+uid);
+                        vm.success = "User details updated successfully";
+                    },
+                    function (error) {
+                        vm.showError = true;
+                        vm.error = "User not found";
+                    });
         }
         
         function deleteUser() {
-            if (UserService.deleteUser(uid)) {
-                $location.url("/login");
-                vm.success = "User successfully unregistered";
-            } else {
-                vm.error = "User not deleted";
-            }
+            UserService
+                .deleteUser(uid)
+                .then(
+                    function (response) {
+                        $location.url("/login");
+                        vm.success = "User successfully unregistered";
+                    },
+                    function (error) {
+                        vm.error = "User not deleted";
+                    }
+                );
         }
     }
     
