@@ -73,12 +73,12 @@
                 .then(
                     function (response) {
                         vm.showSuccess = true;
-                        $location.url("/user/"+uid);
+                        $location.url("/user/" + uid);
                         vm.success = "User details updated successfully";
                     },
                     function (error) {
                         vm.showError = true;
-                        vm.error = "User not found";
+                        vm.error = "User not updated";
                     });
         }
         
@@ -87,10 +87,12 @@
                 .deleteUser(uid)
                 .then(
                     function (response) {
+                        vm.showSuccess = true;
                         $location.url("/login");
                         vm.success = "User successfully unregistered";
                     },
                     function (error) {
+                        vm.showError = true;
                         vm.error = "User not deleted";
                     }
                 );

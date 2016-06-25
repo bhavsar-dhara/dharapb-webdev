@@ -38,7 +38,7 @@
 
         function updateUser(userId, user) {
             var url = "/api/project/user/" + userId;
-            return $http.put(url, newUser);
+            return $http.put(url, user);
         }
         
         function deleteUser(userId) {
