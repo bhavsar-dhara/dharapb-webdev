@@ -34,11 +34,11 @@ require ("./assignment/app.js")(app);
 /*var assignment = require ("./assignment/app.js");
 assignment(app);*/
 
-// require ("./project/app.js")(app);
+require ("./project/app.js")(app);
  
-require("./experiments/todos.server.js")(app);
+// require("./experiments/todos.server.js")(app);
 
-require('./lectures/ejs/hello/app.js')(app);
-require('./wam/app.js')(app);
+// require('./lectures/ejs/hello/app.js')(app);
+// require('./wam/app.js')(app);
 
 app.listen(port, ipaddress);

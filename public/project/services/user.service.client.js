@@ -18,31 +18,31 @@
         return api;
 
         function createUser(user) {
-            return $http.post("/api/user", user);
+            return $http.post("/api/project/user", user);
         }
 
         function findUserById(userId) {
-            var url = "/api/user/"+userId;
+            var url = "/api/project/user/"+userId;
             return $http.get(url);
         }
 
         function findUserByUsername(username) {
-            var url = "/api/user/?username="+username;
+            var url = "/api/project/user/?username="+username;
             return $http.get(url);
         }
 
         function findUserByCredentials(username, password) {
-            var url = "/api/user?username="+username+"&password="+password;
+            var url = "/api/project/user?username="+username+"&password="+password;
             return $http.get(url);
         }
 
         function updateUser(userId, user) {
-            var url = "/api/user/" + userId;
+            var url = "/api/project/user/" + userId;
             return $http.put(url, newUser);
         }
         
         function deleteUser(userId) {
-            var url = "/api/user/" + userId;
+            var url = "/api/project/user/" + userId;
             return $http.delete(url);
         }
     }

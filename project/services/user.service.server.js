@@ -10,11 +10,11 @@ module.exports = function(app) {
         {_id:"456", username:"jannunzi", password:"jannunzi", firstName:"Jose", lastName:"Annunziato"}
     ];
 
-    app.post("/api/user", createUser);
-    app.get("/api/user", findUsers);
-    app.get("/api/user/:userId", findUserById);
-    app.put("/api/user/:userId", updateUser);
-    app.delete("/api/user/:userId", deleteUser);
+    app.post("/api/project/user", createUser);
+    app.get("/api/project/user", findUsers);
+    app.get("/api/project/user/:userId", findUserById);
+    app.put("/api/project/user/:userId", updateUser);
+    app.delete("/api/project/user/:userId", deleteUser);
 
     function deleteUser(req, res) {
         var userId = req.params.userId;
@@ -46,14 +46,14 @@ module.exports = function(app) {
         var user = req.body;
         user._id = (new Date().getTime()+"");
         users.push(user);
-        res.send(user);
+        res.json(user);
     }
 
     function findUserById(req, res) {
         var id = req.params.userId;
         for (i in users) {
             if (users[i]._id === id) {
-                res.send(users[i]);
+                res.json(users[i]);
                 return;
             }
         }
@@ -72,20 +72,20 @@ module.exports = function(app) {
         }
     }
 
-    function findUserByCredentials(username, password, res) {
+    function findUserByCredentials(username, password, req, res) {
         for (i in users) {
             if (users[i].username === username && users[i].password === password) {
-                res.send(users[i]);
+                res.json(users[i]);
                 return;
             }
         }
         res.send({});
     }
 
-    function findUserByUsername(username, res) {
+    function findUserByUsername(username, req, res) {
         for (i in users) {
             if (users[i].username === username) {
-                res.send(users[i]);
+                res.json(users[i]);
                 return;
             }
         }
