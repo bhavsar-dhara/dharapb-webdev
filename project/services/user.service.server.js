@@ -11,7 +11,7 @@ module.exports = function (app, models) {
 
     var userModel = models.userModel;
 
-    app.get("/project/auth/google", passport.authenticate('google'));
+    app.get("/project/auth/google", passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/plus.login']}));
     app.get("/project/oauth2callback", passport.authenticate('google', {
         successRedirect: '/project/#/user',
         failureRedirect: '/project/#/login'
@@ -212,7 +212,7 @@ module.exports = function (app, models) {
 
     function logout(req, res) {
         req.logOut();
-        res.send(200);
+        res.sendStatus(200);
     }
 
     function login(req, res) {

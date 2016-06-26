@@ -14,6 +14,7 @@ module.exports = function () {
         email: String,
         phone: String,
         google: {
+            token: String,
             id: String,
             displayName: String,
             name: String,
@@ -21,6 +22,7 @@ module.exports = function () {
             email: String
         },
         twitter: {
+            token: String,
             id: String,
             twitterHandle: String,
             name: String,
