@@ -30,6 +30,10 @@
            placeholder="Enter a location">
     <!--</div>-->
     <div id="map"></div>
+    <div id="repeat" ng-repeat="marker in markers | orderBy : 'title'">
+        <a id="country_container" href="#" ng-click="openInfoWindow($event, marker)">
+            <label id="names">{{marker.title}}</label></a>
+    </div>
 
     <div class="col-xs-8 col-xs-offset-4 eventList">
         <ul ng-repeat="event in model.events.event | orderBy:'start_time'"
@@ -45,10 +49,6 @@
             </li>
         </ul>
     </div>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBihcuZF4Dcm2ZuJ4BEU09f62kIreSo-Wk&libraries=places&callback=initMap"
-            async defer></script>
-
 
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container-fluid">
