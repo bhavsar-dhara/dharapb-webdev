@@ -205,9 +205,16 @@
             var marker = new google.maps.Marker({
                 map: vm.map,
                 position: new google.maps.LatLng(info.latitude, info.longitude),
-                title: info.title
+                title: info.title,
+                startTime: info.start_time,
+                venueName: info.venue_name,
+                venueAddress: info.venue_address,
+                imgUrl: (info.image != null ? info.image.medium.url : ""),
+                url: info.url,
+                id: info.id,
+                desc: info.description
             });
-            marker.content = '<div class="infoWindowContent">' + info.venue_name + '</div>';
+            marker.content = '<div class="infoWindowContent">' + marker.venueName + '</div>';
 
             google.maps.event.addListener(marker, 'click', function(){
                 infoWindow.setContent('<div class="capitalize"><strong>' + marker.title.toLowerCase() + '</strong><br>' + marker.content);
@@ -216,7 +223,6 @@
             marker.setMap(map);
 
             vm.markers.push(marker);
-
         }
 
 

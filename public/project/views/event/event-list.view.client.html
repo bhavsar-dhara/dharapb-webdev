@@ -36,17 +36,17 @@
     <!--</div>-->
 
     <div class="col-xs-8 col-xs-offset-4 eventList">
-        <ul ng-repeat="event in model.events.event | orderBy:'start_time'"
+        <ul ng-repeat="marker in model.markers | orderBy:'startTime'"
             class="list-group">
-            <li class="list-group-item">
-                <img src="{{event.image.medium.url}}" class="logo">
-                <a id="country_container" ng-click="model.openInfoWindow($event, event)">
-                    <p class="capitalize" id="names"><strong>{{event.title.toLowerCase()}}</strong></p>
-                </a>
-                <p>{{event.start_time | cmdate:'MMMM dd, yyyy h:mm a'}}</p>
+            <li class="list-group-item" ng-click="model.openInfoWindow($event, marker)">
+                <img src="{{marker.imgUrl}}" class="logo">
+                <!--<a id="country_container" ng-click="model.openInfoWindow($event, marker)">-->
+                    <p class="capitalize" id="names"><strong>{{marker.title.toLowerCase()}}</strong></p>
+                <!--</a>-->
+                <p>{{marker.startTime | cmdate:'MMMM dd, yyyy h:mm a'}}</p>
                 <!--<p>{{event.id}}</p>-->
-                <a target="_blank" href="{{event.url}}">Get Tickets</a>
-                <p>{{event.venue_address}}</p>
+                <a target="_blank" href="{{marker.url}}">Get Tickets</a>
+                <p>{{marker.venueAddress}}</p>
                 <!--<p>{{model.getSafeHtml(event.description)}}</p>-->
             </li>
         </ul>
