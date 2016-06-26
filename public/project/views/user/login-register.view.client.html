@@ -5,15 +5,6 @@
             <div class="text-center">
                 <div class="btn-group">
                     <a show-tab=""
-                       href="#register"
-                       ng-click="model.showError = false; model.showSuccess = false"
-                       role="tab"
-                       data-toggle="tab"
-                       class="big btn btn-primary">
-                        <i class="fa fa-plus"></i>
-                        New User
-                    </a>
-                    <a show-tab=""
                        href="#login"
                        ng-click="model.showError = false; model.showSuccess = false"
                        role="tab"
@@ -21,6 +12,15 @@
                        class="big btn btn-danger">
                         <i class="fa fa-user"></i>
                         I have an account
+                    </a>
+                    <a show-tab=""
+                       href="#register"
+                       ng-click="model.showError = false; model.showSuccess = false"
+                       role="tab"
+                       data-toggle="tab"
+                       class="big btn btn-primary">
+                        <i class="fa fa-plus"></i>
+                        New User
                     </a>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                 {{model.error}}
             </div>
             <div class="tab-content">
-                <div class="tab-pane fade in active" id="register">
+                <div class="tab-pane fade" id="register">
                     <br>
                     <fieldset>
                         <div class="form-group">
@@ -95,11 +95,12 @@
                         <a ng-click="model.register(model.user)"
                            class="btn btn-success btn-block"
                            role="button">
+                            <span class="fa fa-unlock-alt"></span>
                             Register
                         </a>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="login">
+                <div class="tab-pane fade in active" id="login">
                     <br>
                     <fieldset>
                         <div class="form-group">
@@ -124,11 +125,29 @@
                         </div>
                     </fieldset>
                     <br>
-                    <div class=" text-center">
+                    <div class="text-center">
                         <a ng-click="model.login(username, password)"
                            class="btn btn-primary btn-block"
                            role="button">
+                            <span class="fa fa-unlock-alt"></span>
                             Login
+                        </a>
+                    </div>
+                    <br>
+                    <p class="click2select">or</p>
+                    <h4 class="click2select">Login using Existing accounts</h4>
+                    <div class="form-group">
+                        <a href="/project/auth/google"
+                           class="btn btn-warning btn-block"
+                           role="button">
+                            <span class="fa fa-google"></span> Google
+                        </a>
+                    </div>
+                    <div class="form-group">
+                        <a href="/project/auth/twitter"
+                           class="btn btn-info btn-block"
+                           role="button">
+                            <span class="fa fa-twitter"></span> Twitter
                         </a>
                     </div>
                 </div>

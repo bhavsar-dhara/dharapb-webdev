@@ -13,6 +13,11 @@ module.exports = function () {
         eventImgUrl: String,
         eventVenueAddr: String,
         eventVenueUrl: String,
+        comments: [{
+            dateCreated: {type: Date, default: Date.now},
+            _user: String,
+            text: String
+        }],
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "project.event"});
     

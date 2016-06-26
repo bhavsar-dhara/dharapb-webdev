@@ -11,15 +11,16 @@ app.set('view engine', 'ejs');
 // configure a public directory to host static content
 app.use(express.static(__dirname + '/public'));
 
+app.use(cookieParser());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cookieParser());
 // app.use(session({ secret: process.env.SESSION_SECRET }));
 app.use(session({
     secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    resave: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -30,7 +31,7 @@ var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
 var port      = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 // 2 different ways of instantiating assignment
-require ("./assignment/app.js")(app);
+// require ("./assignment/app.js")(app);
 /*var assignment = require ("./assignment/app.js");
 assignment(app);*/
 

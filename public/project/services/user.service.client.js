@@ -13,15 +13,37 @@
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
             updateUser: updateUser,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            login: login,
+            logout: logout,
+            loggedIn: loggedIn,
+            register: register
         };
         return api;
+        
+        function loggedIn() {
+            return $http.get("/api/project/loggedIn");
+        }
 
+        function register(user) {
+            console.log("in client reg");
+            return $http.post("/api/project/register", user);
+        }
+
+        function logout() {
+            return $http.post("/api/project/logout");
+        }
+        
+        function login(user) {
+            return $http.post("/api/project/login", user);
+        }
+        
         function createUser(user) {
             return $http.post("/api/project/user", user);
         }
 
         function findUserById(userId) {
+            console.log("in find user by id");
             var url = "/api/project/user/"+userId;
             return $http.get(url);
         }

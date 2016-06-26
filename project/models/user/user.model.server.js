@@ -13,12 +13,23 @@ module.exports = function () {
         findUserByCredentials: findUserByCredentials,
         findUserByUsername: findUserByUsername,
         updateUser: updateUser,
-        deleteUser: deleteUser
+        deleteUser: deleteUser,
+        findUserByGoogleId: findUserByGoogleId,
+        findUserByTwitterId: findUserByTwitterId
     };
     return api;
 
+    function findUserByTwitterId(twitterId) {
+        return ProjectUser.findOne({"twitter.id": twitterId});
+    }
+        
+    function findUserByGoogleId(googleId) {
+        return ProjectUser.findOne({"google.id": googleId});
+    }
+
     // Creates a new user instance
     function createUser(user) {
+        console.log("in model create");
         return ProjectUser.create(user);
     }
 

@@ -13,6 +13,20 @@ module.exports = function () {
         dob: Date,
         email: String,
         phone: String,
+        google: {
+            id: String,
+            displayName: String,
+            name: String,
+            gender: String,
+            email: String
+        },
+        twitter: {
+            id: String,
+            twitterHandle: String,
+            name: String,
+            gender: String,
+            email: String
+        },
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "project.user"});
     
