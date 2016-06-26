@@ -30,21 +30,23 @@
            placeholder="Enter a location">
     <!--</div>-->
     <div id="map"></div>
-    <div id="repeat" ng-repeat="marker in markers | orderBy : 'start_time'">
-        <a id="country_container" href="#" ng-click="openInfoWindow($event, marker)">
-            <label id="names">{{marker.title}}</label></a>
-    </div>
+    <!--<div id="repeat" ng-repeat="marker in markers">-->
+        <!--<a id="country_container" href="#" ng-click="openInfoWindow($event, marker)">-->
+            <!--<label id="names">{{marker.title}}</label></a>-->
+    <!--</div>-->
 
     <div class="col-xs-8 col-xs-offset-4 eventList">
         <ul ng-repeat="event in model.events.event | orderBy:'start_time'"
             class="list-group">
             <li class="list-group-item">
                 <img src="{{event.image.medium.url}}" class="logo">
-                <p class="capitalize"><strong>{{event.title.toLowerCase()}}</strong></p>
+                <a id="country_container" ng-click="model.openInfoWindow($event, event)">
+                    <p class="capitalize" id="names"><strong>{{event.title.toLowerCase()}}</strong></p>
+                </a>
                 <p>{{event.start_time | cmdate:'MMMM dd, yyyy h:mm a'}}</p>
                 <!--<p>{{event.id}}</p>-->
-                <!--<p>{{event.url}}</p>-->
-                <!--<p>{{event.venue_address}}</p>-->
+                <a target="_blank" href="{{event.url}}">Get Tickets</a>
+                <p>{{event.venue_address}}</p>
                 <!--<p>{{model.getSafeHtml(event.description)}}</p>-->
             </li>
         </ul>

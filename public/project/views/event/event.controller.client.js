@@ -34,11 +34,11 @@
 
                         map = new google.maps.Map(document.getElementById('map'), {
                             center: {lat: 38.9072, lng: -77.0369},
-                            zoom: 13,
+                            zoom: 10,
                             disableDefaultUI: true
                         });
 
-                        var infoWindowGeo = new google.maps.InfoWindow({map: map});
+                        var infoWindowGeo = new google.maps.InfoWindow();
 
                         // Try HTML5 geolocation.
                         if (navigator.geolocation) {
@@ -48,11 +48,14 @@
                                     lng: position.coords.longitude
                                 };
 
-                                console.log(navigator.geolocation);
-                                getCityName(pos.lat, pos.lng);
+                                vm.lat = pos.lat;
+                                vm.lng = pos.lng;
+                                searchEvents();
+                                // console.log(navigator.geolocation);
+                                // getCityName(pos.lat, pos.lng);
 
-                                infoWindowGeo.setPosition(pos);
-                                infoWindowGeo.setContent('Location found.');
+                                // infoWindowGeo.setPosition(pos);
+                                // infoWindowGeo.setContent('Location found.');
                                 map.setCenter(pos);
                             }, function () {
                                 handleLocationError(true, infoWindowGeo, map.getCenter());
@@ -69,7 +72,7 @@
                                 'Error: Your browser doesn\'t support geolocation.');
                         }
 
-                        getEvents();
+                        // getEvents();
 
                         var input = /** @type {!HTMLInputElement} */(
                             document.getElementById('pac-input'));
@@ -78,16 +81,8 @@
                         var autocomplete = new google.maps.places.Autocomplete(input, {types: ['geocode']});
                         autocomplete.bindTo('bounds', map);
 
-                        var infowindow = new google.maps.InfoWindow();
-                        var marker = new google.maps.Marker({
-                            map: map,
-                            anchorPoint: new google.maps.Point(0, -29)
-                        });
-
                         autocomplete.addListener('place_changed', function() {
                             document.getElementById('pac-input').focus();
-                            infowindow.close();
-                            marker.setVisible(false);
                             var place = autocomplete.getPlace();
                             if (!place.geometry) {
                                 window.alert("Autocomplete's returned place contains no geometry");
@@ -105,17 +100,8 @@
                                 map.fitBounds(place.geometry.viewport);
                             } else {
                                 map.setCenter(place.geometry.location);
-                                map.setZoom(17);  // Why 17? Because it looks good.
+                                map.setZoom(10);  // Why 17? Because it looks good.
                             }
-                            marker.setIcon(/** @type {google.maps.Icon} */({
-                                url: place.icon,
-                                size: new google.maps.Size(71, 71),
-                                origin: new google.maps.Point(0, 0),
-                                anchor: new google.maps.Point(17, 34),
-                                scaledSize: new google.maps.Size(35, 35)
-                            }));
-                            marker.setPosition(place.geometry.location);
-                            marker.setVisible(true);
 
                             var address = '';
                             if (place.address_components) {
@@ -125,12 +111,15 @@
                                     (place.address_components[2] && place.address_components[2].short_name || '')
                                 ].join(' ');
                             }
-
-                            infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-                            infowindow.open(map, marker);
                         });
 
                         infoWindow = new google.maps.InfoWindow();
+
+                        vm.openInfoWindow = function(e, selectedMarker){
+                            console.log("click");
+                            e.preventDefault();
+                            google.maps.event.trigger(selectedMarker, 'click');
+                        }
                     }
                 );
         }
@@ -175,6 +164,10 @@
                         data = response.data;
                         // console.log("data = " + JSON.stringify(data));
                         vm.events = data.events;
+
+                        for (var i = 0; i < vm.events.event.length; i++){
+                            createMarker(vm.events.event[i]);
+                        }
                     },
                     function (error) {
                         console.log("Something went wrong..." + error);
@@ -183,6 +176,8 @@
         }
 
         function searchEvents() {
+            console.log(vm.lat);
+            console.log(vm.lng);
             EventfulService
                 .searchEventsOnLatLng(vm.searchText, vm.lat, vm.lng)
                 .then(
@@ -191,8 +186,9 @@
                         // console.log("data = " + JSON.stringify(data));
                         vm.events = data.events;
 
-                        for (i = 0; i < vm.events.event.length; i++){
-                            createMarker(vm.events.event);
+                        // console.log(vm.events.event.length);
+                        for (var i = 0; i < vm.events.event.length; i++){
+                            createMarker(vm.events.event[i]);
                         }
                     },
                     function (error) {
@@ -202,25 +198,25 @@
         }
 
         function createMarker(info){
-            console.log("in createMarker");
+            // console.log("in createMarker" + info.city_name);
+            // console.log("in createMarker" + info.latitude);
+            // console.log("in createMarker" + info.longitude);
+            // console.log("in createMarker" + info.venue_name);
             var marker = new google.maps.Marker({
                 map: vm.map,
-                position: new google.maps.LatLng(info.lat, info.long),
-                title: info.city
+                position: new google.maps.LatLng(info.latitude, info.longitude),
+                title: info.title
             });
-            marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
+            marker.content = '<div class="infoWindowContent">' + info.venue_name + '</div>';
 
             google.maps.event.addListener(marker, 'click', function(){
-                infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+                infoWindow.setContent('<div class="capitalize"><strong>' + marker.title.toLowerCase() + '</strong><br>' + marker.content);
                 infoWindow.open(vm.map, marker);
             });
+            marker.setMap(map);
 
             vm.markers.push(marker);
 
-            vm.openInfoWindow = function(e, selectedMarker){
-                e.preventDefault();
-                google.maps.event.trigger(selectedMarker, 'click');
-            }
         }
 
 

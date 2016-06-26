@@ -197,6 +197,10 @@ p.capitalize {
     text-transform: capitalize;
 }
 
+div.capitalize {
+    text-transform: capitalize;
+}
+
 .navbar-default {
     max-height: 50px;
 }

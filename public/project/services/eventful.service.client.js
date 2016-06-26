@@ -7,8 +7,8 @@
         .factory("EventfulService", EventfulService);
 
     var key = "TjLhBLhJm4SCTsMx";
-    var urlBaseInit = "//api.eventful.com/json/events/search?app_key=API_KEY&category=music&location=LOCATION&date=This Week&sort_order=popularity&sort_direction=ascending&callback=JSON_CALLBACK";
-    var urlBase = "//api.eventful.com/json/events/search?app_key=API_KEY&category=music&keywords=TEXT&location=LOCATION&date=This Week&sort_order=popularity&sort_direction=ascending&callback=JSON_CALLBACK";
+    var urlBaseInit = "//api.eventful.com/json/events/search?app_key=API_KEY&category=music&location=LOCATION&within=15&date=This Week&sort_order=popularity&sort_direction=ascending&callback=JSON_CALLBACK";
+    var urlBase = "//api.eventful.com/json/events/search?app_key=API_KEY&category=music&keywords=TEXT&location=LOCATION&within=15&date=This Week&sort_order=popularity&sort_direction=ascending&callback=JSON_CALLBACK";
     var urlBaseInitLatLng = "//api.eventful.com/json/events/search?app_key=API_KEY&category=music&where=LAT,LNG&within=15&date=This Week&sort_order=popularity&sort_direction=ascending&callback=JSON_CALLBACK";
     var urlBaseLatLng = "//api.eventful.com/json/events/search?app_key=API_KEY&category=music&keywords=TEXT&where=LAT,LNG&within=15&date=This Week&sort_order=popularity&sort_direction=ascending&callback=JSON_CALLBACK";
 
@@ -35,6 +35,7 @@
                     .replace("TEXT", searchText)
                     .replace("LOCATION", location);
             }
+            console.log("url = " + url);
             return $http.jsonp(url);
         }
 
