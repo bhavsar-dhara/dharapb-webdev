@@ -7,39 +7,6 @@
         .controller("EventsController", EventsController)
         .controller("EventDetailController", EventDetailController);
 
-    var cities = [
-        {
-            city : 'Toronto',
-            desc : 'This is the best city in the world!',
-            lat : 43.7000,
-            long : -79.4000
-        },
-        {
-            city : 'New York',
-            desc : 'This city is aiiiiite!',
-            lat : 40.6700,
-            long : -73.9400
-        },
-        {
-            city : 'Chicago',
-            desc : 'This is the second best city in the world!',
-            lat : 41.8819,
-            long : -87.6278
-        },
-        {
-            city : 'Los Angeles',
-            desc : 'This city is live!',
-            lat : 34.0500,
-            long : -118.2500
-        },
-        {
-            city : 'Las Vegas',
-            desc : 'Sin City...\'nuff said!',
-            lat : 36.0800,
-            long : -115.1522
-        }
-    ];
-    
     function EventsController($routeParams, EventfulService, $sce, GoogleMapService) {
         var vm = this;
         vm.userId = $routeParams.uid;
@@ -53,23 +20,14 @@
         var state;
         var city;
         var map;
+        vm.lat = undefined;
+        vm.lng = undefined;
+        vm.markers = [];
+        var infoWindow = undefined;
 
         function init() {
-            EventfulService
-                .searchEvents(vm.searchText, vm.location)
-                .then(
-                    function (response) {
-                        data = response.data;
-                        // console.log("data = " + JSON.stringify(data));
-                        vm.events = data.events;
-                    },
-                    function (error) {
-                        console.log("Something went wrong..." + error);
-                    }
-                );
-
             GoogleMapService
-                .loadGMap("Boston")
+                .loadGMap()
                 .then(
                     function (response) {
                         console.log(response);
@@ -111,35 +69,7 @@
                                 'Error: Your browser doesn\'t support geolocation.');
                         }
 
-                        function getCityName(latitude, longitude) {
-                            var geocoder;
-                            geocoder = new google.maps.Geocoder();
-                            var latlng = new google.maps.LatLng(latitude, longitude);
-
-                            geocoder.geocode(
-                                {'latLng': latlng},
-                                function(results, status) {
-                                    if (status == google.maps.GeocoderStatus.OK) {
-                                        if (results[0]) {
-                                            var add= results[0].formatted_address ;
-                                            var  value=add.split(",");
-
-                                            count=value.length;
-                                            country=value[count-1];
-                                            state=value[count-2];
-                                            city=value[count-3];
-                                            console.log("city name is: " + city);
-                                        }
-                                        else  {
-                                            console.log("address not found");
-                                        }
-                                    }
-                                    else {
-                                        console.log("Geocoder failed due to: " + status);
-                                    }
-                                }
-                            );
-                        }
+                        getEvents();
 
                         var input = /** @type {!HTMLInputElement} */(
                             document.getElementById('pac-input'));
@@ -163,6 +93,12 @@
                                 window.alert("Autocomplete's returned place contains no geometry");
                                 return;
                             }
+                            console.log(place);
+                            vm.location = place.name;
+                            console.log(vm.location);
+                            vm.lat = place.geometry.location.lat;
+                            vm.lng = place.geometry.location.lng;
+                            searchEvents();
 
                             // If the place has a geometry, then present it on a map.
                             if (place.geometry.viewport) {
@@ -194,49 +130,99 @@
                             infowindow.open(map, marker);
                         });
 
-                        // var mapOptions = {
-                        //     zoom: 4,
-                        //     center: new google.maps.LatLng(40.0000, -98.0000),
-                        //     mapTypeId: google.maps.MapTypeId.TERRAIN
-                        // };
-                        //
-                        // vm.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-                        //
-                        // vm.markers = [];
-                        //
-                        // var infoWindow = new google.maps.InfoWindow();
-                        //
-                        // var createMarker = function (info){
-                        //
-                        //     var marker = new google.maps.Marker({
-                        //         map: vm.map,
-                        //         position: new google.maps.LatLng(info.lat, info.long),
-                        //         title: info.city
-                        //     });
-                        //     marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
-                        //
-                        //     google.maps.event.addListener(marker, 'click', function(){
-                        //         infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
-                        //         infoWindow.open(vm.map, marker);
-                        //     });
-                        //
-                        //     vm.markers.push(marker);
-                        //
-                        // };
-                        //
-                        // for (i = 0; i < cities.length; i++){
-                        //     createMarker(cities[i]);
-                        // }
-                        //
-                        // vm.openInfoWindow = function(e, selectedMarker){
-                        //     e.preventDefault();
-                        //     google.maps.event.trigger(selectedMarker, 'click');
-                        // }
-
+                        infoWindow = new google.maps.InfoWindow();
                     }
                 );
         }
         init();
+
+        function getCityName(latitude, longitude) {
+            var geocoder;
+            geocoder = new google.maps.Geocoder();
+            var latlng = new google.maps.LatLng(latitude, longitude);
+
+            geocoder.geocode(
+                {'latLng': latlng},
+                function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[0]) {
+                            var add = results[0].formatted_address ;
+                            var value = add.split(",");
+
+                            count = value.length;
+                            country = value[count-1];
+                            state = value[count-2];
+                            city = value[count-3];
+                            vm.location = city;
+                            console.log("city name is: " + city);
+                        }
+                        else  {
+                            console.log("address not found");
+                        }
+                    }
+                    else {
+                        console.log("Geocoder failed due to: " + status);
+                    }
+                }
+            );
+        }
+
+        function getEvents() {
+            EventfulService
+                .searchEvents(vm.searchText, vm.location)
+                .then(
+                    function (response) {
+                        data = response.data;
+                        // console.log("data = " + JSON.stringify(data));
+                        vm.events = data.events;
+                    },
+                    function (error) {
+                        console.log("Something went wrong..." + error);
+                    }
+                );
+        }
+
+        function searchEvents() {
+            EventfulService
+                .searchEventsOnLatLng(vm.searchText, vm.lat, vm.lng)
+                .then(
+                    function (response) {
+                        data = response.data;
+                        // console.log("data = " + JSON.stringify(data));
+                        vm.events = data.events;
+
+                        for (i = 0; i < vm.events.event.length; i++){
+                            createMarker(vm.events.event);
+                        }
+                    },
+                    function (error) {
+                        console.log("Something went wrong..." + error);
+                    }
+                );
+        }
+
+        function createMarker(info){
+            console.log("in createMarker");
+            var marker = new google.maps.Marker({
+                map: vm.map,
+                position: new google.maps.LatLng(info.lat, info.long),
+                title: info.city
+            });
+            marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
+
+            google.maps.event.addListener(marker, 'click', function(){
+                infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+                infoWindow.open(vm.map, marker);
+            });
+
+            vm.markers.push(marker);
+
+            vm.openInfoWindow = function(e, selectedMarker){
+                e.preventDefault();
+                google.maps.event.trigger(selectedMarker, 'click');
+            }
+        }
+
 
         function getSafeHtml(description) {
             if(description != null) {

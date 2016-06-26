@@ -20,7 +20,7 @@
         };
         return api;
 
-        function loadGMap(location) {
+        function loadGMap() {
 
             var url = urlBase
                 .replace("API_KEY", key);
