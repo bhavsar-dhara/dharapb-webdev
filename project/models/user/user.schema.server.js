@@ -29,6 +29,13 @@ module.exports = function () {
             gender: String,
             email: String
         },
+        roles: String,
+        invites: [{
+            _eid: String,
+            _user: String,
+            eventUrl: String,
+            eventTitle: String
+        }],
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "project.user"});
     

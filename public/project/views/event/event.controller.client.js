@@ -5,7 +5,8 @@
     angular
         .module("MusicAroundMe")
         .controller("EventsController", EventsController)
-        .controller("EventDetailController", EventDetailController);
+        .controller("EventDetailController", EventDetailController)
+        .controller("InviteController", InviteController);
 
     function EventsController($routeParams, EventfulService, $sce, GoogleMapService, EventService) {
         var vm = this;
@@ -279,5 +280,13 @@
                 return $sce.trustAsHtml(description);
             }
         }
+    }
+
+    function InviteController($routeParams, EventService) {
+        var vm = this;
+        vm.userid = $routeParams.uid;
+        vm.eid = $routeParams.eventId;
+
+
     }
 })();
