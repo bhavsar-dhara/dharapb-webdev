@@ -7,7 +7,7 @@
         .controller("EventsController", EventsController)
         .controller("EventDetailController", EventDetailController);
 
-    function EventsController($routeParams, EventfulService, $sce, GoogleMapService) {
+    function EventsController($routeParams, EventfulService, $sce, GoogleMapService, EventService) {
         var vm = this;
         vm.userId = $routeParams.uid;
         vm.searchText = undefined;
@@ -215,22 +215,49 @@
                 venueName: info.venue_name,
                 venueAddress: info.venue_address,
                 imgUrl: (info.image != null ? info.image.medium.url : ""),
-                url: info.url,
-                id: info.id,
-                desc: info.description
+                eventId: info.id
             });
+
+            var event = {
+                eventId: info.id,
+                eventTitle: info.title,
+                eventStartTime: info.start_time,
+                eventUrl: info.url,
+                eventDesc: info.description,
+                eventImgUrl: (info.image != null ? info.image.medium.url : ""),
+                eventVenueName: info.venue_name,
+                eventVenueAddr: info.venue_address,
+                eventVenueUrl: info.venue_url
+            };
+
             marker.content = '<div class="infoWindowContent">'
                 + marker.venueName 
                 + '<p>' + marker.venueAddress + '</p>'
-                + '<p> <a target="_blank" href="'
-                + marker.url
+                + '<p> <a target="_blank" href="#/user/'
+                + vm.userId
+                + '/event/'
+                + marker.eventId
                 + '">Event Details</a> </p> </div>';
 
             google.maps.event.addListener(marker, 'click', function(){
                 infoWindow.setContent('<div class="capitalize"><strong>' + marker.title.toLowerCase() + '</strong><br>' + marker.content);
                 infoWindow.open(vm.map, marker);
             });
+
             marker.setMap(map);
+
+            EventService
+                .createEvent(event)
+                .then(function (response) {
+                    var event = response.data;
+                    if (event) {
+                    //    do nothing
+                        console.log("saved event..");
+                    } else {
+                        vm.showError = true;
+                        vm.error = "Unable to create event";
+                    }
+                });
 
             vm.markers.push(marker);
         }
@@ -250,7 +277,7 @@
 
     }
 
-    function EventDetailController($routeParams) {
+    function EventDetailController($routeParams, EventService) {
         var vm = this;
         vm.userId = $routeParams.uid;
 

@@ -30,11 +30,7 @@ module.exports = function () {
         return Event
             .update({_id: eventId}, {
                 $set: {
-                    firstName: event.firstName,
-                    lastName: event.lastName,
-                    email: event.email,
-                    phone: event.phone,
-                    websites: event.websites
+                    comments: event.comments
                 }
             });
     }

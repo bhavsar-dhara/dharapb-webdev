@@ -8,9 +8,11 @@ module.exports = function () {
     var EventSchema = mongoose.Schema({
         eventId: String,
         eventTitle: String,
+        eventStartTime: Date,
         eventUrl: String,
         eventDesc: String,
         eventImgUrl: String,
+        eventVenueName: String,
         eventVenueAddr: String,
         eventVenueUrl: String,
         comments: [{
