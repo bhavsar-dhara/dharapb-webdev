@@ -214,7 +214,11 @@
                 id: info.id,
                 desc: info.description
             });
-            marker.content = '<div class="infoWindowContent">' + marker.venueName + '</div>';
+            marker.content = '<div class="infoWindowContent">'
+                + marker.venueName
+                + '<p> <a target="_blank" href="'
+                + marker.url
+                + '">Get Tickets</a> </p> </div>';
 
             google.maps.event.addListener(marker, 'click', function(){
                 infoWindow.setContent('<div class="capitalize"><strong>' + marker.title.toLowerCase() + '</strong><br>' + marker.content);
