@@ -8,12 +8,30 @@
 
     function EventService($http) {
         var api = {
-            createEvent: createEvent
+            createEvent: createEvent,
+            findEventById: findEventById,
+            updateEvent: updateEvent,
+            deleteEvent: deleteEvent
         };
         return api;
         
         function createEvent(event) {
             return $http.post("/api/project/event", event);
+        }
+
+        function findEventById(eventId) {
+            var url = "/api/project/event/"+eventId;
+            return $http.get(url);
+        }
+        
+        function updateEvent(eventId, event) {
+            var url = "/api/project/event/" + eventId;
+            return $http.put(url, event);
+        }
+
+        function deleteEvent(eventId) {
+            var url = "/api/project/event/" + eventId;
+            return $http.delete(url);
         }
     }
 })();
