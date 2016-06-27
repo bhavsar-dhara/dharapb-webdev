@@ -220,10 +220,11 @@
                 desc: info.description
             });
             marker.content = '<div class="infoWindowContent">'
-                + marker.venueName
+                + marker.venueName 
+                + '<p>' + marker.venueAddress + '</p>'
                 + '<p> <a target="_blank" href="'
                 + marker.url
-                + '">Get Tickets</a> </p> </div>';
+                + '">Event Details</a> </p> </div>';
 
             google.maps.event.addListener(marker, 'click', function(){
                 infoWindow.setContent('<div class="capitalize"><strong>' + marker.title.toLowerCase() + '</strong><br>' + marker.content);
