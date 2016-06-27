@@ -3,21 +3,21 @@
         <p class="navbar-text pull-left">
             <a class="navbar-link"
                href="#/user/{{model.userId}}/event">
-                        <span class="fa fa-chevron-left fa-lg">
-                        </span>
+                <span class="fa fa-chevron-left fa-lg">
+                </span>
             </a>
         </p>
         <a class="navbar-brand"
            href="">
-            Music Around Me
+            Event Details
         </a>
-        <a class="navbar-toggle" data-toggle="collapse" data-target=".eventList">
-                <span class="fa fa-navicon fa-lg">
+        <p class="navbar-text pull-right">
+            <a class="navbar-link"
+               href="#">
+                <span class="fa fa-mail-forward fa-lg">
                 </span>
-        </a>
-    </div>
-    <div class="collapse navbar-collapse">
-        <!-- Search Event options to be added -->
+            </a>
+        </p>
     </div>
 </div>
 
@@ -42,6 +42,15 @@
             <li class="list-group-item">
                 <span class="fa fa-info-circle"></span>
                 Get more <a href="{{model.event.eventUrl}}"> details and ticket information </a> from Eventful website.
+            </li>
+        </ul>
+    </div>
+    <div>
+        <ul class="list-unstyled">
+            <li>
+                <a href="#" class="btn btn-primary btn-block">
+                    Add comment
+                </a>
             </li>
         </ul>
     </div>
