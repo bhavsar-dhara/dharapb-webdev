@@ -22,7 +22,28 @@
 </div>
 
 <div class="container">
-
+    <div class="panel panel-primary">
+        <!-- Default panel contents -->
+        <div class="panel-heading">{{model.event.eventTitle}}</div>
+        <div class="panel-body">
+            <div>{{model.event.imgUrl}}</div>
+            <div ng-bind-html="model.getSafeHtml(model.event.eventDesc)"></div>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                {{model.event.eventStartTime | cmdate:'MMMM dd, yyyy h:mm a'}}
+            </li>
+            <li class="list-group-item">
+                <span class="fa fa-map-marker"></span>
+                <a href="{{model.event.eventVenueUrl}}">{{model.event.eventVenueName}}</a><br/>&nbsp;&nbsp;
+                {{model.event.eventVenueAddr}}
+            </li>
+            <li class="list-group-item">
+                <span class="fa fa-info-circle"></span>
+                Get more <a href="{{model.event.eventUrl}}"> details and ticket information </a> from Eventful website.
+            </li>
+        </ul>
+    </div>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

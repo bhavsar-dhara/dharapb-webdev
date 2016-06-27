@@ -278,10 +278,60 @@
 
     }
 
-    function EventDetailController($routeParams, EventService) {
+    function EventDetailController($routeParams, EventService, $sce) {
         var vm = this;
         vm.userId = $routeParams.uid;
+        vm.eId = $routeParams.eventId;
+        vm.updateEvent = updateEvent;
+        vm.deleteEvent = deleteEvent;
+        vm.getSafeHtml = getSafeHtml;
 
+        function init() {
+            console.log(vm.eId);
+            EventService
+                .findEventById(vm.eId)
+                .then(
+                    function (response) {
+                        vm.event = response.data;
+                    },
+                    function (error) {
+                        console.log(error);
+                    }
+                );
+        }
+        init();
+        
+        function updateEvent() {
+            EventService
+                .updateEvent(vm.eId, event)
+                .then(
+                    function (response) {
+                        vm.event = response.data;
+                        console.log("event updated");
+                    },
+                    function (error) {
+                        console.log(error);
+                    }
+                );
+        }
 
+        function deleteEvent() {
+            EventService
+                .deleteEvent(vm.eId)
+                .then(
+                    function (response) {
+                        console.log("event deleted");
+                    },
+                    function (error) {
+                        console.log(error);
+                    }
+                );
+        }
+
+        function getSafeHtml(description) {
+            if(description != null) {
+                return $sce.trustAsHtml(description);
+            }
+        }
     }
 })();
