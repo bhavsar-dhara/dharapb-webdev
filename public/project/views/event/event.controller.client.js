@@ -72,8 +72,6 @@
                                 'Error: Your browser doesn\'t support geolocation.');
                         }
 
-                        // getEvents();
-
                         var input = /** @type {!HTMLInputElement} */(
                             document.getElementById('pac-input'));
                         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -88,13 +86,11 @@
                                 window.alert("Autocomplete's returned place contains no geometry");
                                 return;
                             }
-                            console.log(place);
+                            // console.log(place);
                             vm.location = place.name;
-                            console.log(vm.location);
+                            // console.log(vm.location);
                             vm.lat = place.geometry.location.lat;
                             vm.lng = place.geometry.location.lng;
-                            console.log(".."+vm.lat);
-                            console.log(".."+vm.lng);
                             searchEvents();
 
                             // If the place has a geometry, then present it on a map.
@@ -118,7 +114,7 @@
                         infoWindow = new google.maps.InfoWindow();
 
                         vm.openInfoWindow = function(e, selectedMarker){
-                            console.log("click");
+                            // console.log("click");
                             e.preventDefault();
                             google.maps.event.trigger(selectedMarker, 'click');
                         }
@@ -127,59 +123,9 @@
         }
         init();
 
-        function getCityName(latitude, longitude) {
-            var geocoder;
-            geocoder = new google.maps.Geocoder();
-            var latlng = new google.maps.LatLng(latitude, longitude);
-
-            geocoder.geocode(
-                {'latLng': latlng},
-                function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        if (results[0]) {
-                            var add = results[0].formatted_address ;
-                            var value = add.split(",");
-
-                            count = value.length;
-                            country = value[count-1];
-                            state = value[count-2];
-                            city = value[count-3];
-                            vm.location = city;
-                            console.log("city name is: " + city);
-                        }
-                        else  {
-                            console.log("address not found");
-                        }
-                    }
-                    else {
-                        console.log("Geocoder failed due to: " + status);
-                    }
-                }
-            );
-        }
-
-        function getEvents() {
-            EventfulService
-                .searchEvents(vm.searchText, vm.location)
-                .then(
-                    function (response) {
-                        data = response.data;
-                        // console.log("data = " + JSON.stringify(data));
-                        vm.events = data.events;
-
-                        for (var i = 0; i < vm.events.event.length; i++){
-                            createMarker(vm.events.event[i]);
-                        }
-                    },
-                    function (error) {
-                        console.log("Something went wrong..." + error);
-                    }
-                );
-        }
-
         function searchEvents() {
-            console.log(vm.lat);
-            console.log(vm.lng);
+            // console.log(vm.lat);
+            // console.log(vm.lng);
             EventfulService
                 .searchEventsOnLatLng(vm.searchText, vm.lat, vm.lng)
                 .then(
@@ -231,14 +177,14 @@
                 eventVenueAddr: info.venue_address,
                 eventVenueUrl: info.venue_url
             };
-            // console.log("in createMarker .. " + event.eventId);
+            // console.log("in eventId .. " + event.eventId);
             EventService
                 .createEvent(event)
                 .then(function (response) {
                     // console.log("back in controller.. " + response);
                     var eventRes = response.data;
                     if (eventRes) {
-                        console.log(eventRes._id);
+                        // console.log(eventRes._id);
                         marker.content = '<div class="infoWindowContent">'
                             + marker.venueName
                             + '<p>' + marker.venueAddress + '</p>'
@@ -287,7 +233,7 @@
         vm.getSafeHtml = getSafeHtml;
 
         function init() {
-            console.log(vm.eId);
+            // console.log(vm.eId);
             EventService
                 .findEventById(vm.eId)
                 .then(

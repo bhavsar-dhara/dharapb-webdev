@@ -26,7 +26,7 @@
         }
 
         function register(user) {
-            console.log("in client reg");
+            // console.log("in client reg");
             return $http.post("/api/project/register", user);
         }
 
@@ -43,7 +43,7 @@
         }
 
         function findUserById(userId) {
-            console.log("in find user by id");
+            // console.log("in find user by id");
             var url = "/api/project/user/"+userId;
             return $http.get(url);
         }

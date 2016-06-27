@@ -18,6 +18,7 @@ module.exports = function () {
 
     // Creates a new event instance
     function createEvent(event) {
+        // console.log("in model");
         return Event.create(event);
     }
 

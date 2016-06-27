@@ -15,17 +15,18 @@ module.exports = function (app, models) {
         eventModel
             .findEventByEventId(event.eventId)
             .then(
-                function (event) {
-                    if(event) {
+                function (response) {
+                    // console.log(response);
+                    if(response) {
                         // console.log("event exists");
-                        res.json(event);
+                        res.json(response);
                     } else {
                         eventModel
                             .createEvent(event)
                             .then(
-                                function (event) {
+                                function (response) {
                                     // console.log("event created");
-                                    res.json(event);
+                                    res.json(response);
                                 },
                                 function (error) {
                                     // console.log("in server err");
