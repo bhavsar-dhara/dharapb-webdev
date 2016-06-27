@@ -18,10 +18,7 @@ module.exports = function () {
 
     // Creates a new event instance
     function createEvent(event) {
-        if(!findEventByEventId(event.eventId))
-            return Event.create(event);
-        else
-            return findEventByEventId(event.eventId);
+        return Event.create(event);
     }
 
     // Retrieves a event instance whose _id is equal to parameter eventId

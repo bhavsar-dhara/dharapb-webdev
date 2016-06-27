@@ -30,7 +30,7 @@
                 .loadGMap()
                 .then(
                     function (response) {
-                        console.log(response);
+                        // console.log(response);
 
                         map = new google.maps.Map(document.getElementById('map'), {
                             center: {lat: 42.3601, lng: -71.0589},
@@ -93,6 +93,8 @@
                             console.log(vm.location);
                             vm.lat = place.geometry.location.lat;
                             vm.lng = place.geometry.location.lng;
+                            console.log(".."+vm.lat);
+                            console.log(".."+vm.lng);
                             searchEvents();
 
                             // If the place has a geometry, then present it on a map.
@@ -191,7 +193,7 @@
                         }
                         vm.markers = [];
 
-                        // console.log(vm.events.event.length);
+                        // console.log("len = "+vm.events.event.length);
                         for (var i = 0; i < vm.events.event.length; i++){
                             createMarker(vm.events.event[i]);
                         }
@@ -203,7 +205,7 @@
         }
 
         function createMarker(info){
-            // console.log("in createMarker" + info.city_name);
+            // console.log("in createMarker " + info.city_name);
             // console.log("in createMarker" + info.latitude);
             // console.log("in createMarker" + info.longitude);
             // console.log("in createMarker" + info.venue_name);
@@ -217,7 +219,7 @@
                 imgUrl: (info.image != null ? info.image.medium.url : ""),
                 eventId: info.id
             });
-
+            // console.log("in createMarker " + marker.title);
             var event = {
                 eventId: info.id,
                 eventTitle: info.title,
@@ -229,11 +231,14 @@
                 eventVenueAddr: info.venue_address,
                 eventVenueUrl: info.venue_url
             };
+            // console.log("in createMarker .. " + event.eventId);
             EventService
                 .createEvent(event)
                 .then(function (response) {
+                    // console.log("back in controller.. " + response);
                     var eventRes = response.data;
                     if (eventRes) {
+                        console.log(eventRes._id);
                         marker.content = '<div class="infoWindowContent">'
                             + marker.venueName
                             + '<p>' + marker.venueAddress + '</p>'

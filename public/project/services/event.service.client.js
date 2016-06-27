@@ -16,6 +16,7 @@
         return api;
         
         function createEvent(event) {
+            // console.log("in client");
             return $http.post("/api/project/event", event);
         }
 

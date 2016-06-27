@@ -13,13 +13,30 @@ module.exports = function (app, models) {
     function createEvent(req, res) {
         var event = req.body;
         eventModel
-            .createEvent(event)
+            .findEventByEventId(event.eventId)
             .then(
                 function (event) {
-                    res.json(event);
+                    if(event) {
+                        // console.log("event exists");
+                        res.json(event);
+                    } else {
+                        eventModel
+                            .createEvent(event)
+                            .then(
+                                function (event) {
+                                    // console.log("event created");
+                                    res.json(event);
+                                },
+                                function (error) {
+                                    // console.log("in server err");
+                                    res.statusCode(400).send(error);
+                                }
+                            );
+                    }
                 },
                 function (error) {
-                    res.statusCode(400).send(error);
+                    // console.log("in server err");
+                    res.statusCode(404).send(error);
                 }
             );
     }

@@ -25,7 +25,7 @@
             var url = urlBase
                 .replace("API_KEY", key);
 
-            console.log("gmap url = " + url);
+            // console.log("gmap url = " + url);
             return $http.jsonp(url);
         }
     }

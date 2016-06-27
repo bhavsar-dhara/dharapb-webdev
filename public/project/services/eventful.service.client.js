@@ -40,6 +40,7 @@
         }
 
         function searchEventsOnLatLng(searchText, latitude, longitude) {
+            var url = "";
             if(searchText == null) {
                 url = urlBaseInitLatLng
                     .replace("API_KEY", key)
@@ -52,6 +53,7 @@
                     .replace("LAT", latitude)
                     .replace("LNG", longitude);
             }
+            console.log("url = " + url);
             return $http.jsonp(url);
         }
     }
