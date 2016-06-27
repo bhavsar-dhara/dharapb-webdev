@@ -35,7 +35,7 @@
         
         function register(user) {
             if(vm.password2 === user.password) {
-                console.log("in controller reg");
+                // console.log("in controller reg");
                 UserService
                     .register(user)
                     .then(function (response) {

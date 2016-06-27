@@ -29,7 +29,7 @@ module.exports = function () {
 
     // Creates a new user instance
     function createUser(user) {
-        console.log("in model create");
+        // console.log("in model create");
         return ProjectUser.create(user);
     }
 

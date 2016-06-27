@@ -53,10 +53,10 @@ module.exports = function (app, models) {
             .findUserByUsername(username)
             .then(
                 function (user) {
-                    console.log("in local strategy");
+                    // console.log("in local strategy");
                     // TODO
                     if (user && bcrypt.compareSync(password, user.password)) {
-                        console.log("in local strategy", user);
+                        // console.log("in local strategy", user);
                         return done(null, user);
                     } else {
                         return done(null, false);
@@ -70,18 +70,18 @@ module.exports = function (app, models) {
 
     function serializeUser(user, done) {
         delete user.password;
-        console.log("serializeUSer = " + user);
+        // console.log("serializeUSer = " + user);
         done(null, user);
     }
 
     function deserializeUser(user, done) {
-        console.log("deserializeUSer = " + user);
+        // console.log("deserializeUSer = " + user);
         userModel
             .findUserById(user._id)
             .then(
                 function (user) {
                     delete user.password;
-                    console.log("serializeUSer = " + user);
+                    // console.log("serializeUSer = " + user);
                     done(null, user);
                 },
                 function (err) {
@@ -159,7 +159,7 @@ module.exports = function (app, models) {
     }
 
     function loggedIn(req, res) {
-        console.log("in logged = " + req.isAuthenticated());
+        // console.log("in logged = " + req.isAuthenticated());
         if (req.isAuthenticated()) {
             res.json(req.user);
         } else {
@@ -171,7 +171,7 @@ module.exports = function (app, models) {
         var userObj = req.body;
         var username = userObj.username;
         var password = userObj.password;
-        console.log("in server reg");
+        // console.log("in server reg");
         userModel
             .findUserByUsername(username)
             .then(
@@ -184,7 +184,7 @@ module.exports = function (app, models) {
                             .createUser(userObj)
                             .then(
                                 function (user) {
-                                    console.log("user = " + user);
+                                    // console.log("user = " + user);
                                     if (user) {
                                         req.login(user, function (err) {
                                             if (err) {
@@ -204,7 +204,7 @@ module.exports = function (app, models) {
                     }
                 },
                 function (error) {
-                    console.log("error = " + error);
+                    // console.log("error = " + error);
                     res.status(400).send(error);
                 }
             );
@@ -218,7 +218,7 @@ module.exports = function (app, models) {
     function login(req, res) {
         var user = req.user;
         delete user.password;
-        console.log("in login = " + user);
+        // console.log("in login = " + user);
         res.json(user);
     }
 
