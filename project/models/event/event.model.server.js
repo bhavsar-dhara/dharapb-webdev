@@ -10,6 +10,7 @@ module.exports = function () {
     var api = {
         createEvent: createEvent,
         findEventById: findEventById,
+        findEventByEventId: findEventByEventId,
         updateEvent: updateEvent,
         deleteEvent: deleteEvent
     };
@@ -17,12 +18,19 @@ module.exports = function () {
 
     // Creates a new event instance
     function createEvent(event) {
-        return Event.create(event);
+        if(!findEventByEventId(event.eventId))
+            return Event.create(event);
+        else
+            return findEventByEventId(event.eventId);
     }
 
     // Retrieves a event instance whose _id is equal to parameter eventId
     function findEventById(eventId) {
         return Event.findById({_id: eventId});
+    }
+
+    function findEventByEventId(eventId) {
+        return Event.findOne({eventId: eventId});
     }
 
     // Updates event instance whose _id is equal to parameter eventId
