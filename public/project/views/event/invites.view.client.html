@@ -15,22 +15,36 @@
 </div>
 
 <div class="container">
-    <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle"
-                type="button"
-                id="dropdownMenu1"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="true">
-            Select User
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu"
-            aria-labelledby="dropdownMenu1">
-            <li ng-repeat="user in model.users">{{user.username}}</li>
-            <!--| unique: 'user.username'-->
-        </ul>
+    <div class="form-group col-xs-6 col-sm-4">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle btn-block"
+                    type="button"
+                    id="dropdownMenu1"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="true">
+                Select User
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu"
+                aria-labelledby="dropdownMenu1">
+                <li ng-repeat="user in model.users | unique: 'username'">
+                    <a href="">
+                        <!--<div ng-repeat="user in model.users">-->
+                        {{user.username}}
+                        <!--</div>-->
+                    </a>
+                </li>
+                <!--| unique: 'user.username'-->
+            </ul>
+        </div>
     </div>
+    <div class="form-group col-xs-6 col-sm-4">
+        <a href="" class="btn btn-primary btn-block form-control">
+            Send Invite
+        </a>
+    </div>
+    <div class="form-group col-xs-6 col-sm-4"></div>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
