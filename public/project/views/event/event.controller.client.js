@@ -332,7 +332,7 @@
                 .addInvite(invite.inviteeId, invite)
                 .then(
                     function (response) {
-                        console.log(response);
+                        // console.log(response);
                         $location.url("/user/" + vm.userid + "/event/" + vm.eid);
                     },
                     function (error) {
