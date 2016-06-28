@@ -21,7 +21,7 @@ module.exports = function () {
     return api;
     
     function findAllUsers() {
-        return ProjectUser.find();
+        return ProjectUser.find({role: "user"});
     }
 
     function findUserByTwitterId(twitterId) {
@@ -64,8 +64,7 @@ module.exports = function () {
                     firstName: user.firstName,
                     lastName: user.lastName,
                     email: user.email,
-                    phone: user.phone,
-                    websites: user.websites
+                    phone: user.phone
                 }
             });
     }

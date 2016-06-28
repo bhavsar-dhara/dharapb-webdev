@@ -34,7 +34,8 @@ module.exports = function () {
             _eid: String,
             _user: String,
             eventUrl: String,
-            eventTitle: String
+            eventTitle: String,
+            dateCreated: {type: Date, default: Date.now}
         }],
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "project.user"});
