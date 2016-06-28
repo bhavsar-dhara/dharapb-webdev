@@ -23,13 +23,18 @@
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="true">
-                Select User
-                <span class="caret"></span>
+                <div ng-if="model.inviteeUser === undefined">
+                    Select User
+                    <span class="caret"></span>
+                </div>
+                <div ng-if="model.inviteeUser">
+                    {{model.inviteeUser.username}}
+                </div>
             </button>
             <ul class="dropdown-menu"
                 aria-labelledby="dropdownMenu1">
                 <li ng-repeat="user in model.users | unique: 'username'">
-                    <a href="">
+                    <a ng-click="model.dropdownSelected(user)">
                         <!--<div ng-repeat="user in model.users">-->
                         {{user.username}}
                         <!--</div>-->

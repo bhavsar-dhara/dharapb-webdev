@@ -285,6 +285,8 @@
         var vm = this;
         vm.userid = $routeParams.uid;
         vm.eid = $routeParams.eventId;
+        vm.dropdownSelected = dropdownSelected;
+        vm.inviteeUser = undefined;
 
         function init() {
             UserService
@@ -299,6 +301,11 @@
             );
         }
         init();
+
+        function dropdownSelected(user) {
+            vm.inviteeUser = user;
+            // console.log(vm.inviteeUser.username);
+        }
 
     }
 })();
