@@ -18,9 +18,15 @@
             login: login,
             logout: logout,
             loggedIn: loggedIn,
-            register: register
+            register: register,
+            addInvite: addInvite
         };
         return api;
+
+        function addInvite(userId, invite) {
+            var url = "/api/project/user/addInvite/" + userId;
+            return $http.put(url, invite);
+        }
         
         function findAllUsers() {
             return $http.get("/api/project/users");

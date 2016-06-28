@@ -35,17 +35,14 @@
                 aria-labelledby="dropdownMenu1">
                 <li ng-repeat="user in model.users | unique: 'username'">
                     <a ng-click="model.dropdownSelected(user)">
-                        <!--<div ng-repeat="user in model.users">-->
                         {{user.username}}
-                        <!--</div>-->
                     </a>
                 </li>
-                <!--| unique: 'user.username'-->
             </ul>
         </div>
     </div>
     <div class="form-group col-xs-6 col-sm-4">
-        <a href="" class="btn btn-primary btn-block form-control">
+        <a ng-click="model.sendInvite()" class="btn btn-primary btn-block form-control">
             Send Invite
         </a>
     </div>

@@ -281,24 +281,36 @@
         }
     }
 
-    function InviteController($routeParams, UserService, EventService) {
+    function InviteController($routeParams, UserService, EventService, $location) {
         var vm = this;
         vm.userid = $routeParams.uid;
         vm.eid = $routeParams.eventId;
         vm.dropdownSelected = dropdownSelected;
         vm.inviteeUser = undefined;
+        vm.sendInvite = sendInvite;
+        var eventDetails = undefined;
 
         function init() {
             UserService
                 .findAllUsers()
                 .then(
-                function (response) {
-                    vm.users = response.data;
-                },
-                function (error) {
-                    console.log(error);
-                }
-            );
+                    function (response) {
+                        vm.users = response.data;
+                    },
+                    function (error) {
+                        console.log(error);
+                    }
+                );
+            EventService
+                .findEventById(vm.eid)
+                .then(
+                    function (response) {
+                        eventDetails = response.data;
+                    },
+                    function (error) {
+                        console.log(error);
+                    }
+                );
         }
         init();
 
@@ -307,5 +319,26 @@
             // console.log(vm.inviteeUser.username);
         }
 
+        function sendInvite() {
+            var invite = {
+                inviteeId: vm.inviteeUser._id,
+                _eid: vm.eid,
+                _user: vm.userid,
+                eventUrl: eventDetails.eventUrl,
+                eventTitle: eventDetails.eventTitle
+            };
+            // console.log(JSON.stringify(invite));
+            UserService
+                .addInvite(invite.inviteeId, invite)
+                .then(
+                    function (response) {
+                        console.log(response);
+                        $location.url("/user/" + vm.userid + "/event/" + vm.eid);
+                    },
+                    function (error) {
+                        console.log(error);
+                    }
+                );
+        }
     }
 })();

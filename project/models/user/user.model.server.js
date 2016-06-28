@@ -16,9 +16,21 @@ module.exports = function () {
         deleteUser: deleteUser,
         findUserByGoogleId: findUserByGoogleId,
         findUserByTwitterId: findUserByTwitterId,
-        findAllUsers: findAllUsers
+        findAllUsers: findAllUsers,
+        addInvite: addInvite
     };
     return api;
+
+    function addInvite(userId, invite) {
+        delete invite.inviteeId;
+        // console.log(JSON.stringify(invite));
+        return ProjectUser
+            .update({_id: userId}, {
+                $push: {
+                    invites: invite
+                }
+            });
+    }
     
     function findAllUsers() {
         return ProjectUser.find({role: "user"});

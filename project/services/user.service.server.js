@@ -31,6 +31,7 @@ module.exports = function (app, models) {
     app.put("/api/project/user/:userId", updateUser);
     app.delete("/api/project/user/:userId", deleteUser);
     app.get("/api/project/users", findAllUsers);
+    app.put("/api/project/user/addInvite/:userId", addInvite);
 
     passport.use('project', new LocalStrategy(localStrategy));
     var googleConfig = {
@@ -155,6 +156,21 @@ module.exports = function (app, models) {
                 },
                 function (error) {
                     done(error, null);
+                }
+            );
+    }
+    
+    function addInvite(req, res) {
+        var userId = req.params.userId;
+        var invite = req.body;
+        userModel
+            .addInvite(userId, invite)
+            .then(
+                function (stats) {
+                    res.send(stats);
+                },
+                function (error) {
+                    res.statusCode(400).send(error);
                 }
             );
     }
