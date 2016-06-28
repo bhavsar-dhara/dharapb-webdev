@@ -12,6 +12,7 @@
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
+            findAllUsers: findAllUsers,
             updateUser: updateUser,
             deleteUser: deleteUser,
             login: login,
@@ -20,6 +21,10 @@
             register: register
         };
         return api;
+        
+        function findAllUsers() {
+            return $http.get("/api/project/users");
+        }
         
         function loggedIn() {
             return $http.get("/api/project/loggedIn");

@@ -30,6 +30,7 @@ module.exports = function (app, models) {
     app.get("/api/project/user/:userId", findUserById);
     app.put("/api/project/user/:userId", updateUser);
     app.delete("/api/project/user/:userId", deleteUser);
+    app.get("/api/project/users", findAllUsers);
 
     passport.use('project', new LocalStrategy(localStrategy));
     var googleConfig = {
@@ -158,6 +159,20 @@ module.exports = function (app, models) {
             );
     }
 
+    function findAllUsers(req, res) {
+        var id = req.params.userId;
+        userModel
+            .findAllUsers()
+            .then(
+                function (users) {
+                    res.json(users);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
+    }
+    
     function loggedIn(req, res) {
         // console.log("in logged = " + req.isAuthenticated());
         if (req.isAuthenticated()) {

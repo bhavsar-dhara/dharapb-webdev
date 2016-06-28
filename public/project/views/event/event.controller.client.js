@@ -210,7 +210,6 @@
                 });
         }
 
-
         function getSafeHtml(description) {
             if(description != null) {
                 return $sce.trustAsHtml(description);
@@ -282,11 +281,24 @@
         }
     }
 
-    function InviteController($routeParams, EventService) {
+    function InviteController($routeParams, UserService, EventService) {
         var vm = this;
         vm.userid = $routeParams.uid;
         vm.eid = $routeParams.eventId;
 
+        function init() {
+            UserService
+                .findAllUsers()
+                .then(
+                function (response) {
+                    vm.users = response.data;
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        }
+        init();
 
     }
 })();

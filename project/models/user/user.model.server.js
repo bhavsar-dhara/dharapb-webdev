@@ -15,9 +15,14 @@ module.exports = function () {
         updateUser: updateUser,
         deleteUser: deleteUser,
         findUserByGoogleId: findUserByGoogleId,
-        findUserByTwitterId: findUserByTwitterId
+        findUserByTwitterId: findUserByTwitterId,
+        findAllUsers: findAllUsers
     };
     return api;
+    
+    function findAllUsers() {
+        return ProjectUser.find();
+    }
 
     function findUserByTwitterId(twitterId) {
         return ProjectUser.findOne({"twitter.id": twitterId});

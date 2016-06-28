@@ -15,7 +15,22 @@
 </div>
 
 <div class="container">
-
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle"
+                type="button"
+                id="dropdownMenu1"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="true">
+            Select User
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu"
+            aria-labelledby="dropdownMenu1">
+            <li ng-repeat="user in model.users">{{user.username}}</li>
+            <!--| unique: 'user.username'-->
+        </ul>
+    </div>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
