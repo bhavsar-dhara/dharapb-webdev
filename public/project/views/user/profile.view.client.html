@@ -102,6 +102,7 @@
         <a class="btn btn-primary btn-block"
            role="button"
            href="#/user/{{model.userId}}/event">
+            <span class="fa fa-list-alt"></span>
             Event List
         </a>
     </div>
@@ -110,13 +111,24 @@
         <a ng-click="model.adminPage()"
            class="btn btn-info btn-block"
            role="button">
+            <span class="fa fa-cogs"></span>
             Admin Page
+        </a>
+    </div>
+    <div class="text-center">
+        <a href="#/user/{{model.userId}}/invites"
+           class="btn btn-warning btn-block"
+           role="button">
+            <span class="fa fa-inbox"></span>
+            Invites
+            <span class="badge">{{model.user.invites.length}}</span>
         </a>
     </div>
     <div class="text-center">
         <a ng-click="model.logout()"
            class="btn btn-default btn-block"
            role="button">
+            <span class="fa fa-lock"></span>
             Logout
         </a>
     </div>
@@ -124,6 +136,7 @@
         <a ng-click="model.deleteUser()"
            class="btn btn-danger btn-block"
            role="button">
+            <span class="fa fa-trash"></span>
             Unregister
         </a>
     </div>

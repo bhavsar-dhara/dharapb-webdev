@@ -1,0 +1,37 @@
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar-header">
+        <p class="navbar-text pull-left">
+            <a class="navbar-link"
+               href="#/user/{{model.userId}}">
+                    <span class="fa fa-chevron-left fa-lg">
+                    </span>
+            </a>
+        </p>
+        <a class="navbar-brand"
+           href="">
+            Invites Received
+        </a>
+    </div>
+</div>
+<div class="container">
+    <ul class="list-group list-unstyled">
+        <li ng-repeat="invite in model.user.invites">
+            <div class="panel panel-info">
+                <!--<div class="panel-heading">-->
+                    <!--<a href="#/{{model.userId}}/event/{{invite._eid}}">{{invite.eventTitle}}</a>-->
+                <!--</div>-->
+                <div class="panel-body">
+                    <a href="#/user/{{model.userid}}/event/{{invite._eid}}">{{invite.eventTitle}}</a>
+                    <br/>
+                    <!--Invited by: {{invite._user}}-->
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="row">
+        </div>
+    </div>
+</nav>

@@ -77,6 +77,14 @@
                     loggedIn: checkLoggedIn
                 }
             })
+            .when("/user/:uid/invites", {
+                templateUrl: "views/event/invite-list.view.client.html",
+                controller: "InviteListController",
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
+            })
             .otherwise({
                 redirectTo: "/"
             });

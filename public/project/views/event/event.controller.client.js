@@ -6,7 +6,8 @@
         .module("MusicAroundMe")
         .controller("EventsController", EventsController)
         .controller("EventDetailController", EventDetailController)
-        .controller("InviteController", InviteController);
+        .controller("InviteController", InviteController)
+        .controller("InviteListController", InviteListController);
 
     function EventsController($routeParams, EventfulService, $sce, GoogleMapService, EventService) {
         var vm = this;
@@ -340,5 +341,24 @@
                     }
                 );
         }
+    }
+
+    function InviteListController($routeParams, UserService, EventService, $location) {
+        var vm = this;
+        vm.userid = $routeParams.uid;
+        
+        function init() {
+            UserService
+                .findUserById(vm.userid)
+                .then(
+                    function (response) {
+                        vm.user = response.data;
+                    },
+                    function (error) {
+                        console.log(error);
+                    });
+        }
+        init();
+        
     }
 })();
