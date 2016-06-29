@@ -14,20 +14,29 @@
     </div>
 </div>
 <div class="container">
-    <ul class="list-group list-unstyled">
-        <li ng-repeat="invite in model.user.invites">
-            <div class="panel panel-info">
-                <!--<div class="panel-heading">-->
+    <div ng-show="model.user.invites.length">
+        <ul class="list-group list-unstyled">
+            <li ng-repeat="invite in model.user.invites">
+                <div class="panel panel-info">
+                    <!--<div class="panel-heading">-->
                     <!--<a href="#/{{model.userId}}/event/{{invite._eid}}">{{invite.eventTitle}}</a>-->
-                <!--</div>-->
-                <div class="panel-body">
-                    <a href="#/user/{{model.userid}}/event/{{invite._eid}}">{{invite.eventTitle}}</a>
-                    <br/>
-                    <!--Invited by: {{invite._user}}-->
+                    <!--</div>-->
+                    <div class="panel-body">
+                        <a href="#/user/{{model.userid}}/event/{{invite._eid}}">{{invite.eventTitle}}</a>
+                        <br/>
+                        <!--Invited by: {{invite._user}}-->
+                    </div>
                 </div>
+            </li>
+        </ul>
+    </div>
+    <div ng-show="model.user.invites.length === 0">
+        <div class="panel panel-info">
+            <div class="panel-body">
+                No invites received yet.
             </div>
-        </li>
-    </ul>
+        </div>
+    </div>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
