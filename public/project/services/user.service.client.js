@@ -19,9 +19,40 @@
             logout: logout,
             loggedIn: loggedIn,
             register: register,
-            addInvite: addInvite
+            addInvite: addInvite,
+            createUserByAdmin: createUserByAdmin,
+            findUserByAdmin: findUserByAdmin,
+            findAllUsersByAdmin: findAllUsersByAdmin,
+            updateUserByAdmin: updateUserByAdmin,
+            deleteUserByAdmin: deleteUserByAdmin
         };
         return api;
+
+        function createUserByAdmin(user) {
+            var url = "/api/project/user/admin/";
+            return $http.post(url, user);
+        }
+
+        function findUserByAdmin(userId) {
+            var url = "/api/project/user/admin/" + userId;
+            return $http.get(url);
+        }
+        
+        function findAllUsersByAdmin() {
+            var url = "/api/project/user/admin/";
+            return $http.get(url);
+        }
+
+        function updateUserByAdmin(userId, newUser) {
+            var url = "/api/project/user/admin/" + userId;
+            console.log(url);
+            return $http.put(url, newUser);
+        }
+
+        function deleteUserByAdmin(userId) {
+            var url = "/api/project/user/admin/" + userId;
+            return $http.delete(url);
+        }
 
         function addInvite(userId, invite) {
             var url = "/api/project/user/addInvite/" + userId;

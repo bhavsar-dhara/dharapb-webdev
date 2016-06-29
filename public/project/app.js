@@ -2,5 +2,5 @@
  * Created by Dhara on 6/19/2016.
  */
 (function () {
-    angular.module('MusicAroundMe', ['ngRoute', 'core', 'eventDirectives']);
+    angular.module('MusicAroundMe', ['ngRoute', 'core', 'eventDirectives', 'ui.bootstrap', 'ui.sortable']);
 })();

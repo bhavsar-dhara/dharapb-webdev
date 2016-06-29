@@ -16,6 +16,22 @@
                 controller: "EventsController",
                 controllerAs: "model"
             })
+            .when("/:uid/admin", {
+                templateUrl: "views/admin/admin.view.client.html",
+                controller: "AdminController",
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkAdmin
+                }
+            })
+            .when("/:uid/admin/users", {
+                templateUrl: "views/admin/admin-user.view.client.html",
+                controller: "AdminController",
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkAdmin
+                }
+            })
             .when("/login", {
                 templateUrl: "views/user/login-register.view.client.html",
                 controller: "LoginRegController",
@@ -86,6 +102,34 @@
                         $location.url("/login");
                     }
                 );
+            return deferred.promise;
+        }
+
+        function checkAdmin(UserService, $location, $q, $rootScope)
+        {
+            var deferred = $q.defer();
+            // console.log("in checkAdmin config");
+
+            UserService
+                .loggedIn()
+                .then(
+                    function(response) {
+                        var user = response.data;
+                        $rootScope.errorMessage = null;
+                        // User is Authenticated
+                        if (user !== '0' && user.roles.indexOf("admin") > -1) {
+                            $rootScope.user = user;
+                            deferred.resolve();
+                        }
+                        else if (user == '0') {
+                            alert("You need to log in.");
+                            deferred.reject();
+                            $location.url('/login');
+                        }
+                        else {
+                            $location.url('/');
+                        }
+                    });
             return deferred.promise;
         }
     }

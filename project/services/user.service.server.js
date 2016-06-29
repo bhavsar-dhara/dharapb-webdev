@@ -33,6 +33,13 @@ module.exports = function (app, models) {
     app.get("/api/project/users", findAllUsers);
     app.put("/api/project/user/addInvite/:userId", addInvite);
 
+    var checkIfAdmin = isAdmin;
+    app.get("/api/project/user/admin/:userId", checkIfAdmin, findUserById);
+    app.get("/api/project/user/admin/", checkIfAdmin, findUsers);
+    app.post("/api/project/user/admin/", checkIfAdmin, createUser);
+    app.put("/api/project/user/admin/:userId", checkIfAdmin, updateUser);
+    app.delete("/api/project/user/admin/:userId", checkIfAdmin, deleteUser);
+
     passport.use('project', new LocalStrategy(localStrategy));
     var googleConfig = {
         clientID: process.env.GOOGLE_CLIENT_ID,
@@ -159,6 +166,17 @@ module.exports = function (app, models) {
                 }
             );
     }
+
+    function isAdmin(req, res, next) {
+        console.log("isAdmin");
+        if (req.isAuthenticated() && req.user.roles.indexOf("admin") > -1) {
+            console.log("user is admin");
+            next();
+        } else {
+            console.log("user is not admin");
+            res.status(403).send("user is not admin");
+        }
+    }
     
     function addInvite(req, res) {
         var userId = req.params.userId;
@@ -176,7 +194,6 @@ module.exports = function (app, models) {
     }
 
     function findAllUsers(req, res) {
-        var id = req.params.userId;
         userModel
             .findAllUsers()
             .then(
@@ -318,7 +335,7 @@ module.exports = function (app, models) {
         } else if (username) {
             findUserByUsername(username, res);
         } else {
-            res.json(users);
+            findAllUsers(req, res);
         }
     }
 

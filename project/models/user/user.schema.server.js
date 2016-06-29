@@ -29,7 +29,7 @@ module.exports = function () {
             gender: String,
             email: String
         },
-        roles: String,
+        roles: [String],
         invites: [{
             _eid: String,
             _user: String,

@@ -62,6 +62,7 @@
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
         vm.logout = logout;
+        vm.adminPage = adminPage;
         
         // var uid = $routeParams.uid;
         var uid = $rootScope.currentUser._id;
@@ -116,6 +117,11 @@
                         $location.url("/");
                     }
                 )
+        }
+        
+        function adminPage() {
+            // console.log("You will be redirected to your Admin Page");
+            $location.url("/"+ uid + "/admin");
         }
     }
     

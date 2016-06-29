@@ -4,7 +4,8 @@
 (function () {
     angular
         .module("eventDirectives", [])
-        .directive("showTab", showTab);
+        .directive("showTab", showTab)
+        .directive('tooltip', tooltip);
 
     function showTab() {
         return {
@@ -15,6 +16,21 @@
                         $(element).tab('show');
                     }
                 );
+            }
+        };
+    }
+
+    function tooltip() {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attributes) {
+                $(element).hover(function () {
+                    // on mouseenter
+                    $(element).tooltip('show');
+                }, function () {
+                    // on mouseleave
+                    $(element).tooltip('hide');
+                });
             }
         };
     }

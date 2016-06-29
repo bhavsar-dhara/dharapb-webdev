@@ -33,7 +33,7 @@ module.exports = function () {
     }
     
     function findAllUsers() {
-        return ProjectUser.find({role: "user"});
+        return ProjectUser.find({});
     }
 
     function findUserByTwitterId(twitterId) {

@@ -105,6 +105,14 @@
             Event List
         </a>
     </div>
+    <!-- TODO : change to users -->
+    <div ng-if="model.user.role === 'admin'" class="text-center">
+        <a ng-click="model.adminPage()"
+           class="btn btn-info btn-block"
+           role="button">
+            Admin Page
+        </a>
+    </div>
     <div class="text-center">
         <a ng-click="model.logout()"
            class="btn btn-default btn-block"
