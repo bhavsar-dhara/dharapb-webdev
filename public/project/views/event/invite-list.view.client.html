@@ -16,7 +16,7 @@
 <div class="container">
     <div ng-show="model.user.invites.length">
         <ul class="list-group list-unstyled">
-            <li ng-repeat="invite in model.user.invites">
+            <li ng-repeat="invite in model.user.invites | unique: '_eid,_user'">
                 <div class="panel panel-info">
                     <!--<div class="panel-heading">-->
                     <!--<a href="#/{{model.userId}}/event/{{invite._eid}}">{{invite.eventTitle}}</a>-->
