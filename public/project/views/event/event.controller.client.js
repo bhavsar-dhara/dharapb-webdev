@@ -235,6 +235,12 @@
         vm.addComment = addComment;
         vm.eventComment = undefined;
         var user = undefined;
+        vm.selectComment = selectComment;
+        vm.editComment = editComment;
+        vm.deleteComment = deleteComment;
+        vm.isEdit = false;
+        vm.cancelEditComment = cancelEditComment;
+        vm.commentId = undefined;
 
         function init() {
             // console.log(vm.eId);
@@ -260,6 +266,58 @@
         }
         init();
 
+        function cancelEditComment() {
+            vm.eventComment = "";
+            vm.commentId = "";
+            vm.isEdit = false;
+        }
+
+        function selectComment(comment) {
+            vm.eventComment = comment.text;
+            vm.commentId = comment._id;
+            vm.isEdit = true;
+        }
+
+        function editComment() {
+            console.log("in edit");
+            var updatedList = [];
+            var jsonArray = vm.event.comments;
+            var len = jsonArray.length;
+            if (jsonArray != null) {
+                for (var i = 0; i < len; i++)
+                {
+                    if (jsonArray[i]._id === vm.commentId) {
+                        jsonArray[i].text = vm.eventComment;
+                        updatedList.push(jsonArray[i]);
+                    } else {
+                        updatedList.push(jsonArray[i]);
+                    }
+                }
+            }
+            vm.event.comments = updatedList;
+            vm.isEdit = false;
+            updateEvent();
+        }
+
+        function deleteComment(comment) {
+            // console.log(comment);
+            var updatedList = [];
+            var jsonArray = vm.event.comments;
+            var len = jsonArray.length;
+            if (jsonArray != null) {
+                for (var i = 0; i < len; i++)
+                {
+                    if (jsonArray[i]._id !== comment._id)
+                    {
+                        updatedList.push(jsonArray[i]);
+                    }
+                }
+            }
+            // console.log(updatedList);
+            vm.event.comments = updatedList;
+            updateEvent();
+        }
+
         function addComment() {
             var comment = {
                 text: vm.eventComment,
@@ -275,17 +333,21 @@
                 .updateEvent(vm.eId, vm.event)
                 .then(
                     function (response) {
-                        EventService
-                            .findEventById(vm.eId)
-                            .then(
-                                function (response) {
-                                    vm.event = response.data;
-                                    vm.eventComment = "";
-                                },
-                                function (error) {
-                                    console.log(error);
-                                }
-                            );
+                        fetchEventDetails();
+                    },
+                    function (error) {
+                        console.log(error);
+                    }
+                );
+        }
+
+        function fetchEventDetails() {
+            EventService
+                .findEventById(vm.eId)
+                .then(
+                    function (response) {
+                        vm.event = response.data;
+                        vm.eventComment = "";
                     },
                     function (error) {
                         console.log(error);
