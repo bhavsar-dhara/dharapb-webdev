@@ -29,7 +29,7 @@
                         <span ng-show="model.sortField=='username' && model.order"
                               class="glyphicon glyphicon-triangle-bottom"
                               aria-hidden="true"></span>
-                            Username
+                            Username&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </th>
                         <th>Password</th>
                         <th ng-click="model.sortField='firstName'; model.order=!model.order">
@@ -53,13 +53,20 @@
                         <th>E-mail</th>
                         <th>Phone Number</th>
                         <th>Role</th>
-                        <th>Action</th>
+                        <th>Action&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <form class="form-inline">
-                            <td><input data-title="Username"
+                            <td class="no-wrap" style="display: flex">
+                                <a ng-click="model.cancelEdit()"
+                                   class="btn btn-link"
+                                   title="Cancel Edit"
+                                   tooltip>
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </a>
+                                <input data-title="Username"
                                        type="text"
                                        class="form-control"
                                        placeholder="Username"

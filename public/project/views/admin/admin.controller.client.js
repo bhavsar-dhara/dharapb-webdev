@@ -18,6 +18,7 @@
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
         vm.selectUser = selectUser;
+        vm.cancelEdit = cancelEdit;
         vm.new_user = {
             '_id': '',
             'username': '',
@@ -154,6 +155,18 @@
                 user.roles = user.roles.split(",");
             }
             return user;
+        }
+        
+        function cancelEdit() {
+            vm.new_user = {
+                '_id': '',
+                'username': '',
+                'password': '',
+                'firstName': '',
+                'lastName': '',
+                'roles': ''
+            };
+            // populateUsers();
         }
     }
 })();
