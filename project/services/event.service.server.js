@@ -11,32 +11,36 @@ module.exports = function (app, models) {
     app.delete("/api/project/event/:eventId", deleteEvent);
 
     function createEvent(req, res) {
-        var event = req.body;
+        // console.log("in server");
+        var eventObj = req.body;
         eventModel
-            .findEventByEventId(event.eventId)
+            .findEventByEventId(eventObj.eventId)
             .then(
-                function (response) {
-                    // console.log(response);
-                    if(response) {
-                        // console.log("event exists");
-                        res.json(response);
+                function (event) {
+                    if(event) {
+                        console.log("event exists..."+event.eventId);
+                        res.json(event);
                     } else {
                         eventModel
-                            .createEvent(event)
+                            .createEvent(eventObj)
                             .then(
-                                function (response) {
-                                    // console.log("event created");
-                                    res.json(response);
+                                function (event) {
+                                    if(event) {
+                                        console.log("event created..." + event.eventId);
+                                        res.json(event);
+                                    } else {
+                                        console.log("Error in create Event");
+                                    }
                                 },
                                 function (error) {
-                                    // console.log("in server err");
+                                    // console.log("in server err 400");
                                     res.statusCode(400).send(error);
                                 }
                             );
                     }
                 },
                 function (error) {
-                    // console.log("in server err");
+                    // console.log("in server err 404");
                     res.statusCode(404).send(error);
                 }
             );

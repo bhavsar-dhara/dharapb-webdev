@@ -183,7 +183,7 @@
             EventService
                 .createEvent(event)
                 .then(function (response) {
-                    // console.log("back in controller.. " + response);
+                    // console.log("back in controller.. res = " + response);
                     var eventRes = response.data;
                     if (eventRes) {
                         // console.log(eventRes._id);

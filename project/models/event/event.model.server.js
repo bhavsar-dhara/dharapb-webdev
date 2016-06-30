@@ -18,7 +18,7 @@ module.exports = function () {
 
     // Creates a new event instance
     function createEvent(event) {
-        // console.log("in model");
+        // console.log("in model createEvent ... " + event.eventId);
         return Event.create(event);
     }
 
@@ -28,6 +28,7 @@ module.exports = function () {
     }
 
     function findEventByEventId(eventId) {
+        // console.log("in model find by eventId ... " + eventId);
         return Event.findOne({eventId: eventId});
     }
 
