@@ -52,25 +52,30 @@
                         </th>
                         <th>E-mail</th>
                         <th>Phone Number</th>
-                        <th>Role</th>
+                        <th>Role&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                         <th>Action&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <form class="form-inline">
-                            <td class="no-wrap" style="display: flex">
-                                <a ng-click="model.cancelEdit()"
-                                   class="btn btn-link"
-                                   title="Cancel Edit"
-                                   tooltip>
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </a>
+                            <td class="input-group">
+                                <span class="input-group-btn">
+                                    <a ng-click="model.cancelEdit()"
+                                       class="btn btn-default btn-group-sm"
+                                       title="Cancel Edit"
+                                       tooltip>
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </a>
+                                </span>
                                 <input data-title="Username"
                                        type="text"
                                        class="form-control"
                                        placeholder="Username"
-                                       ng-model="model.new_user.username"/></td>
+                                       ng-model="model.new_user.username"
+                                       title="Username"
+                                       tooltip/>
+                            </td>
                             <td><input data-title="Password"
                                        type="password"
                                        class="form-control"
@@ -82,27 +87,37 @@
                                        type="text"
                                        class="form-control"
                                        placeholder="First Name"
-                                       ng-model="model.new_user.firstName"/></td>
+                                       ng-model="model.new_user.firstName"
+                                       title="First Name"
+                                       tooltip/></td>
                             <td><input data-title="Last Name"
                                        type="text"
                                        class="form-control"
                                        placeholder="Last Name"
-                                       ng-model="model.new_user.lastName"/></td>
+                                       ng-model="model.new_user.lastName"
+                                       title="Last Name"
+                                       tooltip/></td>
                             <td><input data-title="E-mail"
                                        type="text"
                                        class="form-control"
                                        placeholder="E-mail"
-                                       ng-model="model.new_user.email"/></td>
+                                       ng-model="model.new_user.email"
+                                       title="E-mail"
+                                       tooltip/></td>
                             <td><input data-title="Phone Number"
                                        type="text"
                                        class="form-control"
                                        placeholder="Phone Number"
-                                       ng-model="model.new_user.phone"/></td>
+                                       ng-model="model.new_user.phone"
+                                       title="Phone Number"
+                                       tooltip/></td>
                             <td><input data-title="Role"
                                        type="text"
                                        class="form-control"
                                        placeholder="Role"
-                                       ng-model="model.new_user.roles"/></td>
+                                       ng-model="model.new_user.roles"
+                                       title="Role"
+                                       tooltip/></td>
                             <td data-title="Action"
                                 class="no-wrap">
                                 <a ng-click="model.addNewUser(model.new_user)"
