@@ -45,26 +45,51 @@
             </li>
         </ul>
     </div>
+    <br/>
+    <h3>Comments Section</h3>
     <div>
-        <ul class="list-unstyled">
+        <ul class="list-unstyled list-group">
             <li>
                 <div class="input-group">
-                    <input class="form-control" ng-model="{{model.event.eventComment}}">
+                    <input class="form-control"
+                           ng-model="model.eventComment"
+                           type="text"
+                           placeholder="Add your comment here..">
                     <span class="input-group-btn">
-                        <a href="" class="btn btn-primary btn-group-sm" title="Add Comment" tooltip>
+                        <a ng-click="model.addComment()"
+                           class="btn btn-primary btn-group-sm"
+                           title="Add Comment"
+                           tooltip>
                             <span class="fa fa-plus fa-lg"></span>
                         </a>
                     </span>
                 </div>
             </li>
-            <li ng-repeat="comment in model.event.comments">
-                {{comment.text}}
-                <a href="" class="btn btn-warning btn-sm" title="Edit Comment" tooltip>
-                    <span class="fa fa-pencil fa-lg"></span>
-                </a>
-                <a href="" class="btn btn-danger btn-sm" title="Delete Comment" tooltip>
-                    <span class="fa fa-trash fa-lg"></span>
-                </a>
+        </ul>
+    </div>
+    <div ng-if="model.event.comments.length > 0"
+         class="panel panel-default">
+        <ul class="list-unstyled list-group">
+            <li class="list-group-item"
+                ng-repeat="comment in model.event.comments">
+                <div>
+                    <p>{{comment.text}}</p>
+                    <strong>Comment by:</strong> {{comment.username}}
+                </div>
+                <div ng-if="comment._user === model.userId">
+                    <a href=""
+                       class="btn btn-warning btn-sm"
+                       title="Edit Comment"
+                       tooltip>
+                        <span class="fa fa-pencil fa-lg"></span>
+                    </a>
+                    <a href=""
+                       class="btn btn-danger btn-sm"
+                       title="Delete Comment"
+                       tooltip>
+                        <span class="fa fa-trash fa-lg"></span>
+                    </a>
+                </div>
             </li>
         </ul>
     </div>

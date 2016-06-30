@@ -18,7 +18,8 @@ module.exports = function () {
         comments: [{
             dateCreated: {type: Date, default: Date.now},
             _user: String,
-            text: String
+            text: String,
+            username: String
         }],
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "project.event"});

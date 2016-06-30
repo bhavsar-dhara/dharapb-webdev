@@ -225,13 +225,16 @@
 
     }
 
-    function EventDetailController($routeParams, EventService, $sce) {
+    function EventDetailController($routeParams, EventService, $sce, UserService) {
         var vm = this;
         vm.userId = $routeParams.uid;
         vm.eId = $routeParams.eventId;
         vm.updateEvent = updateEvent;
         vm.deleteEvent = deleteEvent;
         vm.getSafeHtml = getSafeHtml;
+        vm.addComment = addComment;
+        vm.eventComment = undefined;
+        var user = undefined;
 
         function init() {
             // console.log(vm.eId);
@@ -245,16 +248,44 @@
                         console.log(error);
                     }
                 );
-        }
-        init();
-        
-        function updateEvent() {
-            EventService
-                .updateEvent(vm.eId, event)
+            UserService
+                .findUserById(vm.userId)
                 .then(
                     function (response) {
-                        vm.event = response.data;
-                        console.log("event updated");
+                        user = response.data;
+                    },
+                    function (error) {
+                        console.log(error);
+                    });
+        }
+        init();
+
+        function addComment() {
+            var comment = {
+                text: vm.eventComment,
+                _user: vm.userId,
+                username: user.username
+            };
+            vm.event.comments.push(comment);
+            updateEvent();
+        }
+
+        function updateEvent() {
+            EventService
+                .updateEvent(vm.eId, vm.event)
+                .then(
+                    function (response) {
+                        EventService
+                            .findEventById(vm.eId)
+                            .then(
+                                function (response) {
+                                    vm.event = response.data;
+                                    vm.eventComment = "";
+                                },
+                                function (error) {
+                                    console.log(error);
+                                }
+                            );
                     },
                     function (error) {
                         console.log(error);
