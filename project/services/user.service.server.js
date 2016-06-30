@@ -28,16 +28,15 @@ module.exports = function (app, models) {
     app.post("/api/project/login", passport.authenticate('project'), login);
     app.get("/api/project/user", findUsers);
     app.get("/api/project/user/:userId", findUserById);
-    app.put("/api/project/user/:userId", updateUser);
+    app.put("/api/project/user/:userId", updateUserByAdmin);
     app.delete("/api/project/user/:userId", deleteUser);
     app.get("/api/project/users", findAllUsers);
     app.put("/api/project/user/addInvite/:userId", addInvite);
 
-    var checkIfAdmin = isAdmin;
     app.get("/api/project/user/admin/:userId", checkIfAdmin, findUserById);
     app.get("/api/project/user/admin/", checkIfAdmin, findUsers);
     app.post("/api/project/user/admin/", checkIfAdmin, createUser);
-    app.put("/api/project/user/admin/:userId", checkIfAdmin, updateUser);
+    app.put("/api/project/user/admin/:userId", checkIfAdmin, updateUserByAdmin);
     app.delete("/api/project/user/admin/:userId", checkIfAdmin, deleteUser);
 
     passport.use('project', new LocalStrategy(localStrategy));
@@ -167,7 +166,22 @@ module.exports = function (app, models) {
             );
     }
 
-    function isAdmin(req, res, next) {
+    function updateUserByAdmin(req, res) {
+        var userId = req.params.userId;
+        var newUser = req.body;
+        userModel
+            .updateUserByAdmin(userId, newUser)
+            .then(
+                function (stats) {
+                    res.send(stats);
+                },
+                function (error) {
+                    res.statusCode(400).send(error);
+                }
+            );
+    }
+
+    function checkIfAdmin(req, res, next) {
         console.log("isAdmin");
         if (req.isAuthenticated() && req.user.roles.indexOf("admin") > -1) {
             console.log("user is admin");
@@ -253,7 +267,7 @@ module.exports = function (app, models) {
                 },
                 function (error) {
                     // console.log("error = " + error);
-                    res.status(400).send(error);
+                    res.status(404).send(error);
                 }
             );
     }
@@ -300,15 +314,32 @@ module.exports = function (app, models) {
     }
 
     function createUser(req, res) {
-        var user = req.body;
+        var userObj = req.body;
+        var username = userObj.username;
+        var password = userObj.password;
+        // console.log("in server reg");
         userModel
-            .createUser(user)
+            .findUserByUsername(username)
             .then(
                 function (user) {
-                    res.json(user);
+                    if (user) {
+                        res.status(400).send("Username already in use");
+                    } else {
+                        userObj.password = bcrypt.hashSync(password);
+                        userModel
+                            .createUser(userObj)
+                            .then(
+                                function (user) {
+                                    res.json(user);
+                                },
+                                function (error) {
+                                    res.statusCode(400).send(error);
+                                }
+                            );
+                    }
                 },
                 function (error) {
-                    res.statusCode(400).send(error);
+                    res.status(404).send(error);
                 }
             );
     }

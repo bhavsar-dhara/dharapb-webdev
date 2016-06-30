@@ -18,9 +18,9 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 no-left-padding">
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered top-margin-15">
-                    <thead>
+            <div class="no-more-tables">
+                <table class="col-md-12 table-bordered table-hover table-condensed cf">
+                    <thead class="cf">
                     <tr>
                         <th ng-click="model.sortField='username'; model.order=!model.order">
                         <span ng-show="model.sortField=='username' && !model.order"
@@ -31,7 +31,7 @@
                               aria-hidden="true"></span>
                             Username
                         </th>
-                        <th> Password</th>
+                        <th>Password</th>
                         <th ng-click="model.sortField='firstName'; model.order=!model.order">
                         <span ng-show="model.sortField=='firstName' && !model.order"
                               class="glyphicon glyphicon-triangle-top"
@@ -50,34 +50,53 @@
                               aria-hidden="true"></span>
                             Last Name
                         </th>
-                        <th> Role</th>
-                        <th> Action</th>
+                        <th>E-mail</th>
+                        <th>Phone Number</th>
+                        <th>Role</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <form class="form-inline">
-                            <td><input type="text"
+                            <td><input data-title="Username"
+                                       type="text"
                                        class="form-control"
                                        placeholder="Username"
                                        ng-model="model.new_user.username"/></td>
-                            <td><input type="password"
+                            <td><input data-title="Password"
+                                       type="password"
                                        class="form-control"
                                        placeholder="Password"
+                                       disabled
                                        ng-model="model.new_user.password"/></td>
-                            <td><input type="text"
+                            <td><input data-title="First Name"
+                                       type="text"
                                        class="form-control"
                                        placeholder="First Name"
                                        ng-model="model.new_user.firstName"/></td>
-                            <td><input type="text"
+                            <td><input data-title="Last Name"
+                                       type="text"
                                        class="form-control"
                                        placeholder="Last Name"
                                        ng-model="model.new_user.lastName"/></td>
-                            <td><input type="text"
+                            <td><input data-title="E-mail"
+                                       type="text"
+                                       class="form-control"
+                                       placeholder="E-mail"
+                                       ng-model="model.new_user.email"/></td>
+                            <td><input data-title="Phone Number"
+                                       type="text"
+                                       class="form-control"
+                                       placeholder="Phone Number"
+                                       ng-model="model.new_user.phone"/></td>
+                            <td><input data-title="Role"
+                                       type="text"
                                        class="form-control"
                                        placeholder="Role"
                                        ng-model="model.new_user.roles"/></td>
-                            <td class="no-wrap">
+                            <td data-title="Action"
+                                class="no-wrap">
                                 <a ng-click="model.addNewUser(model.new_user)"
                                    class="btn btn-warning btn-sm"
                                    title="Add New User"
@@ -94,12 +113,15 @@
                         </form>
                     </tr>
                     <tr ng-repeat="user in model.users | orderBy:model.sortField: model.order">
-                        <td>{{user.username}}</td>
-                        <td></td>
-                        <td>{{user.firstName}}</td>
-                        <td>{{user.lastName}}</td>
-                        <td>{{user.roles.join(' | ')}}</td>
-                        <td class="no-wrap">
+                        <td data-title="Username">{{user.username}}</td>
+                        <td data-title="Password">{{user.password}}</td>
+                        <td data-title="First Name">{{user.firstName}}</td>
+                        <td data-title="Last Name">{{user.lastName}}</td>
+                        <td data-title="E-mail">{{user.email}}</td>
+                        <td data-title="Phone Number">{{user.phone}}</td>
+                        <td data-title="Role">{{user.roles.join(' | ')}}</td>
+                        <td data-title="Action"
+                            class="no-wrap">
                             <a ng-click="model.deleteUser(user._id)"
                                class="btn btn-danger btn-sm"
                                title="Delete User"

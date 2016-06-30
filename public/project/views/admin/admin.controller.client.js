@@ -124,7 +124,9 @@
                 'password': selectedUser.password,
                 'roles': selectedUser.roles,
                 'firstName': selectedUser.firstName,
-                'lastName': selectedUser.lastName
+                'lastName': selectedUser.lastName,
+                'email': selectedUser.email,
+                'phone': selectedUser.phone
             };
         }
 

@@ -17,9 +17,25 @@ module.exports = function () {
         findUserByGoogleId: findUserByGoogleId,
         findUserByTwitterId: findUserByTwitterId,
         findAllUsers: findAllUsers,
-        addInvite: addInvite
+        addInvite: addInvite,
+        updateUserByAdmin: updateUserByAdmin
     };
     return api;
+
+    function updateUserByAdmin(userId, user) {
+        return ProjectUser
+            .update({_id: userId}, {
+                $set: {
+                    username: user.username,
+                    password: user.password,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    email: user.email,
+                    phone: user.phone,
+                    roles: user.roles
+                }
+            });
+    }
 
     function addInvite(userId, invite) {
         delete invite.inviteeId;
