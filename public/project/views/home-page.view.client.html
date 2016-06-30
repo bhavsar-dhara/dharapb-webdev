@@ -18,10 +18,19 @@
         <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a id="contact" class="scroll-link" href="#contactDetails">Contact Us</a>
+                    <a class="btn btn-link btn-block scroll-link"
+                       id="contact"
+                       data-id="contactDetails"
+                       href="">
+                        Contact Us
+                    </a>
                 </li>
                 <li>
-                    <a id="login" href="#/login">Login</a>
+                    <a class="btn btn-link btn-block"
+                       id="login"
+                       href="#/login">
+                        Login
+                    </a>
                 </li>
             </ul>
         </div>
@@ -112,7 +121,19 @@
         $('.scroll-link').on('click', function(event){
             event.preventDefault();
             var sectionID = $(this).attr("data-id");
+//            console.log(sectionID);
             scrollToID('#' + sectionID, 750);
         });
+
+        function scrollToID(id, speed){
+            var offSet = 50;
+            var targetOffset = $(id).offset().top - offSet;
+            var mainNav = $('#main-nav');
+            $('html,body').animate({scrollTop:targetOffset}, speed);
+            if (mainNav.hasClass("open")) {
+                mainNav.css("height", "1px").removeClass("in").addClass("collapse");
+                mainNav.removeClass("open");
+            }
+        }
     });
 </script>

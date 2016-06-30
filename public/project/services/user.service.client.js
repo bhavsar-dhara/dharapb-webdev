@@ -68,7 +68,7 @@
         }
 
         function register(user) {
-            // console.log("in client reg");
+            // console.log("in client reg.." + JSON.stringify(user));
             return $http.post("/api/project/register", user);
         }
 

@@ -109,6 +109,7 @@ module.exports = function (app, models) {
                     } else {
                         googleUser = {
                             username: profile.displayName.replace(/ /g, ''),
+                            roles: ["user"],
                             google: {
                                 id: profile.id,
                                 displayName: profile.displayName
@@ -143,6 +144,7 @@ module.exports = function (app, models) {
                     } else {
                         twitterUser = {
                             username: profile.displayName.replace(/ /g, ''),
+                            roles: ["user"],
                             twitter: {
                                 id: profile.id,
                                 displayName: profile.displayName
@@ -233,7 +235,7 @@ module.exports = function (app, models) {
         var userObj = req.body;
         var username = userObj.username;
         var password = userObj.password;
-        // console.log("in server reg");
+        // console.log("in server reg.." + JSON.stringify(userObj));
         userModel
             .findUserByUsername(username)
             .then(

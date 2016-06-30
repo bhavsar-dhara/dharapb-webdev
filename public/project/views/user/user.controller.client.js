@@ -35,9 +35,10 @@
         
         function register(user) {
             if(vm.password2 === user.password) {
-                // console.log("in controller reg");
+                user.roles = "user";
+                // console.log("in controller reg.." + JSON.stringify(user));
                 UserService
-                    .register(user)
+                    .register(rolesToArray(user))
                     .then(function (response) {
                         var user = response.data;
                         if (user) {
@@ -52,6 +53,13 @@
                 vm.showError = true;
                 vm.error = "Passwords don't match";
             }
+        }
+
+        function rolesToArray(user) {
+            if (user.roles) {
+                user.roles = user.roles.split(",");
+            }
+            return user;
         }
     }
     
