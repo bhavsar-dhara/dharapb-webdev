@@ -33,6 +33,7 @@ module.exports = function () {
         invites: [{
             _eid: String,
             _user: String,
+            inviterName: String,
             eventUrl: String,
             eventTitle: String,
             dateCreated: {type: Date, default: Date.now}

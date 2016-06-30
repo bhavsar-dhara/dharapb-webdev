@@ -24,7 +24,9 @@
                     <div class="panel-body">
                         <a href="#/user/{{model.userid}}/event/{{invite._eid}}">{{invite.eventTitle}}</a>
                         <br/>
-                        <!--Invited by: {{invite._user}}-->
+                        <div ng-show="invite.inviterName">
+                            Invited by: {{invite.inviterName}}
+                        </div>
                     </div>
                 </div>
             </li>

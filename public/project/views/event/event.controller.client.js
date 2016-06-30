@@ -290,6 +290,7 @@
         vm.inviteeUser = undefined;
         vm.sendInvite = sendInvite;
         var eventDetails = undefined;
+        var user = undefined;
 
         function init() {
             UserService
@@ -312,6 +313,16 @@
                         console.log(error);
                     }
                 );
+            UserService
+                .findUserById(vm.userid)
+                .then(
+                    function (response) {
+                        user = response.data;
+                    },
+                    function (error) {
+                        console.log(error);
+                    }
+                );
         }
         init();
 
@@ -325,6 +336,7 @@
                 inviteeId: vm.inviteeUser._id,
                 _eid: vm.eid,
                 _user: vm.userid,
+                inviterName: user.username,
                 eventUrl: eventDetails.eventUrl,
                 eventTitle: eventDetails.eventTitle
             };
