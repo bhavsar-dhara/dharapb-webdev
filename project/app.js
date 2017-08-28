@@ -17,7 +17,7 @@ module.exports = function (app) {
             process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
             process.env.OPENSHIFT_APP_NAME;
         // connect to the database -- on OPENSHIFT
-        if (connectionString == null && process.env.DATABASE_SERVICE_NAME) {
+        if (process.env.DATABASE_SERVICE_NAME) {
             var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
                 mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
                 mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
@@ -34,10 +34,8 @@ module.exports = function (app) {
                 connectionString += mongoHost + ':' +  mongoPort + '/' + mongoDatabase;
 
             }
-
-            if (connectionString == null) {
-                connectionString = process.env.MONGO_URL;
-            }
+        } else {
+            connectionString = process.env.MONGO_URL;
         }
         mongoose.connect(connectionString);
     } else {
