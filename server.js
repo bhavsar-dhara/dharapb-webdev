@@ -27,8 +27,8 @@ app.use(passport.session());
 
 // require ("./test/app.js")(app);
 
-var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
-var port      = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
+var port      = process.env.OPENSHIFT_NODEJS_PORT || 3000 || 8080;
 
 // 2 different ways of instantiating assignment
 // require ("./assignment/app.js")(app);
